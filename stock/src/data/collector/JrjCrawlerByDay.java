@@ -5,8 +5,11 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -44,36 +47,59 @@ public class JrjCrawlerByDay {
 		}
 
 		ExecutorService executor = Executors.newFixedThreadPool(MAX_CONNECTION);
+		ArrayList<Future<String>> future = new ArrayList<Future<String>>();
 
 		for (File file : dir.listFiles()) {
 			String stockId = file.getName();
 			stockId = stockId.substring(2, 8);
+
+			future.add(executor.submit(new GetStockInfoThread(stockId)));
+
+		}
+		// retry failed stocks.
+		System.out.println("retry failed stocks !!!");
+
+		for (Future<String> f : future) {
+			String stockId = null;
 			try {
-				executor.execute(new GetStockInfoThread(stockId));
-			} catch (Exception e) {
+				stockId = f.get();
+			} catch (InterruptedException e) {
 				System.out.println(e.getMessage());
-				System.out.println("Downloading " + stockId + " failed.");
+			} catch (ExecutionException e) {
+				System.out.println(e.getMessage());
+			}
+
+			if (stockId != null) {
+				try {
+					executor.submit(new GetStockInfoThread(stockId));
+					System.out.println("Final retrying " + stockId
+							+ " succeed.");
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					System.out.println("Downloading " + stockId + " failed.");
+				}
 			}
 		}
 		executor.shutdown();
 	}
 
-	static class GetStockInfoThread extends Thread {
+	static class GetStockInfoThread implements Callable<String> {
 		String stockId;
 
 		public GetStockInfoThread(String stockId) {
 			this.stockId = stockId;
 		}
 
-		public void run() {
+		public String call() {
 			try {
 				tryGetStockByID(stockId);
+				return null;
 			} catch (Exception e) {
-				System.out.println(e.getMessage());
-				System.out.println("Downloading " + stockId + " failed.");
+				return stockId;
 			}
 		}
 
+		// try twice.
 		private void tryGetStockByID(String stockId) throws Exception {
 			try {
 				getStockByID(stockId);
