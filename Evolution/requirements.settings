@@ -1,0 +1,264 @@
+[Buildings]
+Metal Mine
+  
+Crystal Mine  
+
+Deuterium Synthesizer  
+
+Solar Plant  
+
+Fusion Reactor Deuterium 
+Requirements
+Synthesizer(level 5)
+Energy Technology(level 3)
+ 
+Robotics Factory
+  
+Nanite Factory 
+Requirements
+Robotics Factory(level 10)
+Computer Technology(level 10)
+ 
+Shipyard 
+Requirements
+Robotics Factory(level 2)
+ 
+Metal Storage  
+
+Crystal Storage  
+
+Deuterium Tank  
+
+Research Lab  
+
+Terraformer 
+Requirements
+Nanite Factory(level 1)
+Energy Technology(level 12)
+ 
+Alliance Depot  
+
+Missile Silo
+
+  
+[Research]
+Espionage Technology
+Requirements
+Research Lab(level 3)
+ 
+Computer Technology 
+Requirements
+Research Lab(level 1)
+ 
+Weapons Technology 
+Requirements
+Research Lab(level 4)
+ 
+Shielding Technology
+Requirements 
+Energy Technology(level 3)
+Research Lab(level 6)
+ 
+Armour Technology 
+Requirements
+Research Lab(level 2)
+ 
+Energy Technology 
+Requirements
+Research Lab(level 1)
+ 
+Hyperspace Technology 
+Requirements
+Energy Technology(level 5)
+Shielding Technology(level 5)
+Research Lab(level 7)
+ 
+Combustion Drive 
+Requirements
+Energy Technology(level 1)
+Research Lab(level 1)
+ 
+Impulse Drive 
+Requirements
+Energy Technology(level 1)
+Research Lab(level 2)
+ 
+Hyperspace Drive 
+Requirements
+Hyperspace Technology(level 3)
+Research Lab(level 7)
+ 
+Laser Technology 
+Requirements
+Research Lab(level 1)
+Energy Technology(level 2)
+ 
+Ion Technology 
+Requirements
+Research Lab(level 4)
+Laser Technology(level 5)
+Energy Technology(level 4)
+ 
+Plasma Technology 
+Requirements
+Research Lab(level 4)
+Energy Technology(level 8)
+Laser Technology(level 10)
+Ion Technology(level 5)
+ 
+Intergalactic Research Network 
+Requirements
+Research Lab(level 10)
+Computer Technology(level 8)
+Hyperspace Technology(level 8)
+ 
+Graviton Technology 
+Requirements
+Research Lab(level 12)
+ 
+[Ships]
+Small Cargo 
+Requirements
+Shipyard(level 2)
+Combustion Drive(level 2)
+ 
+Large Cargo 
+Requirements
+Shipyard(level 4)
+Combustion Drive(level 6)
+ 
+Light Fighter 
+Requirements
+Shipyard(level 1)
+Combustion Drive(level 1)
+ 
+Heavy Fighter 
+Requirements
+Shipyard(level 3)
+Armour Technology(level 2)
+Impulse Drive(level 2)
+ 
+Cruiser 
+Requirements
+Shipyard(level 5)
+Impulse Drive(level 4)
+Ion Technology(level 2)
+ 
+Battleship 
+Requirements
+Shipyard(level 7)
+Hyperspace Drive(level 4)
+ 
+Colony Ship 
+Requirements
+Shipyard(level 4)
+Impulse Drive(level 3)
+ 
+Recycler 
+Requirements
+Shipyard(level 4)
+Combustion Drive(level 6)
+Shielding Technology(level 2)
+ 
+Espionage Probe 
+Requirements
+Shipyard(level 3)
+Combustion Drive(level 3)
+Espionage Technology(level 2)
+ 
+Bomber 
+Requirements
+Impulse Drive(level 6)
+Shipyard(level 8)
+Plasma Technology(level 5)
+ 
+Solar Satellite 
+Requirements
+Shipyard(level 1)
+ 
+Destroyer 
+Requirements
+Shipyard(level 9)
+Hyperspace Drive(level 6)
+Hyperspace Technology(level 5)
+ 
+Deathstar 
+Requirements
+Shipyard(level 12)
+Hyperspace Drive(level 7)
+Hyperspace Technology(level 6)
+Graviton Technology(level 1)
+ 
+Battlecruiser 
+Requirements
+Hyperspace Technology(level 5)
+Laser Technology(level 12)
+Hyperspace Drive(level 5)
+Shipyard(level 8)
+ 
+[Defense]
+Rocket Launcher 
+Requirements
+Shipyard(level 1)
+ 
+Light Laser 
+Requirements
+Energy Technology(level 1)
+Shipyard(level 2)
+Laser Technology(level 3)
+ 
+Heavy Laser 
+Requirements
+Energy Technology(level 3)
+Shipyard(level 4)
+Laser Technology(level 6)
+ 
+Gauss Cannon 
+Requirements
+Shipyard(level 6)
+Energy Technology(level 6)
+Weapons Technology(level 3)
+Shielding Technology(level 1)
+ 
+Ion Cannon 
+Requirements
+Shipyard(level 4)
+Ion Technology(level 4)
+ 
+Plasma Turret 
+Requirements
+Shipyard(level 8)
+Plasma Technology(level 7)
+ 
+Small Shield Dome 
+Requirements
+Shielding Technology(level 2)
+Shipyard(level 1)
+ 
+Large Shield Dome 
+Requirements
+Shielding Technology(level 6)
+Shipyard(level 6)
+ 
+Anti-Ballistic Missiles 
+Requirements
+Missile Silo(level 2)
+Shipyard(level 1)
+ 
+Interplanetary Missiles 
+Requirements
+Missile Silo(level 4)
+Shipyard(level 1)
+ 
+[Lunar Buildings]
+Lunar Base
+  
+Sensor Phalanx 
+Requirements
+Lunar Base(level 1)
+ 
+Jump Gate 
+Requirements
+Lunar Base(level 1)
+Hyperspace Technology(level 7)
+ 

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<packages>
+	<package name="login1" param="@loginServer"><![CDATA[GET http://@loginServer/ HTTP/1.1
+Host: @loginServer
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.106 Safari/535.2
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: zh-CN,zh;q=0.8
+Accept-Charset: GBK,utf-8;q=0.7,*;q=0.3
+]]></package>
+
+	<package name="login2"
+		param="@gameServer,@loginServer,@user,@pass,@@contentLength"><![CDATA[POST http://@gameServer/game/reg/login2.php HTTP/1.1
+Host: @gameServer
+Connection: keep-alive
+Content-Length: @@contentLength
+Cache-Control: max-age=0
+Origin: http://@loginServer
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.106 Safari/535.2
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Referer: http://@loginServer/
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: zh-CN,zh;q=0.8
+Accept-Charset: GBK,utf-8;q=0.7,*;q=0.3
+Cookie: 7d802c8e8d53a9a942397de5d97dea27=1; login_134769=U_tw13%3AAlbert%3Aacd393a47239facaadd31f7b0d9f3638; prsess_134769=a0205d0bad3bacb2b54fa0d0afb7dd74; session=5ecbbbb30a2a
+
+uni_id=&kid=&v=2&is_utf8=0&uni_url=@gameServer&login=@user&pass=@pass
+]]></package>
+</packages>
+<!-- The expected response of login: HTTP/1.1 302 Found Date: Thu, 10 Nov 
+	2011 08:38:06 GMT Server: Apache Set-Cookie: session=6f6ff6fe1da6; path=/ 
+	Expires: Thu, 19 Nov 1981 08:52:00 GMT Cache-Control: no-store, no-cache, 
+	must-revalidate, post-check=0, pre-check=0 Pragma: no-cache Set-Cookie: prsess_134769=c7437244d22b392633effec4b8f1de2a; 
+	expires=Fri, 11-Nov-2011 08:38:06 GMT; path=/ Set-Cookie: login_134769=U_tw13%3AAlbert%3Aacd393a47239facaadd31f7b0d9f3638; 
+	expires=Fri, 11-Nov-2011 08:38:06 GMT; path=/ Location: http://uni13.ogame.tw/game/index.php?page=overview&session=6f6ff6fe1da6&kid= 
+	Vary: Accept-Encoding Content-Length: 0 Connection: close Content-Type: text/html; 
+	charset=utf-8 -->
+	

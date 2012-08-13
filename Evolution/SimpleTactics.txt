@@ -1,0 +1,39 @@
+[Virgon]
+4:194:11
+//4:194:10
+//4:199:12/weak
+//4:189:7/weak
+//4:185:12
+4:185:11
+4:187:12;Large Cargo Ship=2,Battle Ship=2
+[Kobol]
+//4:244:12
+//4:240:8
+//4:236:5
+//4:234:6*
+4:234:7
+4:234:8
+4:234:12
+//4:234:13*
+4:234:14
+4:246:6
+4:246:10
+[Picon]
+//4:258:7;Large Cargo Ship=2,Battle Ship=4
+//4:257:5
+//4:257:8
+4:257:9
+//4:257:10;Small Cargo Ship=10,Battle Ship=1
+//4:257:12;Small Cargo Ship=10,Battle Ship=1
+//4:258:13;Small Cargo Ship=10,Battle Ship=1
+[Caprica]
+4:279:10
+//4:259:9
+//4:259:13
+4:260:13
+//[Aerelon]
+//4:269:7;only bb
+//4:275:7/one time 1zhongzi
+//4:280:5;2lf
+[Hesper]
+6:269:10

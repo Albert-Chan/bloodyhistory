@@ -1,0 +1,15 @@
+//ShipName			StructuralIntegrity ShieldPower WeaponPower CargoCapacity BaseSpeed FuelConsumption type ShiftSpeed ShiftConsumption  
+Small Cargo Ship  		4000				10 			5 			5000 		5000		10			202		10000		20  
+Large Cargo Ship  		12000				25 			5 			25000 		7500 		50  		203
+Light Fighter  			4000 				10 			50 			50 			12500 		20  		204
+Heavy Fighter  			10000 				25 			150 		100 		10000 		75  		0
+Cruiser  				27000 				50 			400 		800 		15000 		300  		206
+Battle Ship  			60000 				200 		1000 		1500 		10000 		500  		207
+Battlecruiser  			70000 				400 		700 		750 		10000 		250  		0
+Destroyer  				110000 				500 		2000 		2000 		5000 		1000  		0
+Death Star  			9000000 			50000 		200000 		1000000 	100 		1  			0
+Bomber  				75000 				500 		1000 		500 		4000		1000		0		5000  
+Recycler  				16000 				10 			1 			20000 		2000 		300  		209
+Espionage Probe  		1000 				0 			0 			5 			100000000 	1  			210
+Solar Satellite  		2000 				1 			1 			0 			0 			0  			0
+Colony Ship  			30000 				100 		50 			7500 		2500 		1000  		0

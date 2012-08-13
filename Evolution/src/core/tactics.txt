@@ -1,0 +1,20 @@
+		/**
+ * 1. Scan the overview each 25 minutes, and add new events into the global
+ * event list; for the ReturnOwnAttack event, launch a TimerTask of FleetSender.
+ * 2.
+ */
+		
+		
+		case IEvent.Attack:
+			// 1)Can win with acceptable lost.
+			// make sure the ships on the planet should be there at the attack
+			// point.
+			// the ship sources can be a) existed b) produced before attack
+			// point c) collected from other planet d)alliance help
+			
+				
+	
+			
+			
+			
+			//2)Otherwise, FS.

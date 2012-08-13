@@ -1,0 +1,651 @@
+<html>
+ <head>
+  <link rel='stylesheet' type='text/css' href='css/default.css' />
+  <link rel='stylesheet' type='text/css' href='css/formate.css' />
+  <link rel="stylesheet" type="text/css" href="http://uni5.ogame.com.cn/evolution/formate_asia.css" />
+
+  <meta http-equiv="content-type" content="text/html; charset=GB2312" />
+
+<link rel="stylesheet" type="text/css" href="css/combox.css">
+
+<title>Uni5 OGame</title>
+
+  <script src="js/utilities.js" type="text/javascript"></script>
+  <script language="JavaScript">
+  </script>
+<script type="text/javascript" src="js/overLib/overlib.js"></script>
+<!-- HEADER -->
+
+</head>
+<body style="overflow: hidden;" onunload="" >
+<div id="overDiv" style="position:absolute; visibility:hidden; z-index:1000;"></div>
+<div id='header_top'><center>
+<table class='header'>
+<tr class='header' >
+<td class='header' style='width:248;' >
+	  <table class='header'>
+    <tr class='header'>
+     <td class='header'><img src="http://uni5.ogame.com.cn/evolution/planeten/small/s_wasserplanet07.jpg" width="50" height="50"></td>
+     <td class='header'>
+	  <table class='header'>
+		  <select size="1" onchange="haha(this)">
+		  			  			  				  <option value="/game/index.php?page=overview&session=64a696acc848&cp=34043740&mode=&gid=&messageziel=&re=0" >Libris				  <a href="index.php?page=galaxy&galaxy=4&system=208&position=4&session=64a696acc848" >[4:208:4]</a></option>
+			  			  			  				  <option value="/game/index.php?page=overview&session=64a696acc848&cp=34044039&mode=&gid=&messageziel=&re=0" >Virgon				  <a href="index.php?page=galaxy&galaxy=4&system=208&position=5&session=64a696acc848" >[4:208:5]</a></option>
+			  			  			  				  <option value="/game/index.php?page=overview&session=64a696acc848&cp=34024962&mode=&gid=&messageziel=&re=0" selected>Kobol				  <a href="index.php?page=galaxy&galaxy=4&system=242&position=11&session=64a696acc848" >[4:242:11]</a></option>
+			  			  			  				  <option value="/game/index.php?page=overview&session=64a696acc848&cp=34046040&mode=&gid=&messageziel=&re=0" >Picon				  <a href="index.php?page=galaxy&galaxy=4&system=258&position=4&session=64a696acc848" >[4:258:4]</a></option>
+			  			  			  				  <option value="/game/index.php?page=overview&session=64a696acc848&cp=34039390&mode=&gid=&messageziel=&re=0" >Tauron				  <a href="index.php?page=galaxy&galaxy=4&system=262&position=5&session=64a696acc848" >[4:262:5]</a></option>
+			  			  			  				  <option value="/game/index.php?page=overview&session=64a696acc848&cp=34038392&mode=&gid=&messageziel=&re=0" >Caprica				  <a href="index.php?page=galaxy&galaxy=4&system=265&position=6&session=64a696acc848" >[4:265:6]</a></option>
+			  			  			  				  <option value="/game/index.php?page=overview&session=64a696acc848&cp=34035509&mode=&gid=&messageziel=&re=0" >Aerelon				  <a href="index.php?page=galaxy&galaxy=4&system=271&position=15&session=64a696acc848" >[4:271:15]</a></option>
+			  			  			  				  <option value="/game/index.php?page=overview&session=64a696acc848&cp=34056543&mode=&gid=&messageziel=&re=0" >Hesper				  <a href="index.php?page=galaxy&galaxy=6&system=263&position=4&session=64a696acc848" >[6:263:4]</a></option>
+			  			  			  				  <option value="/game/index.php?page=overview&session=64a696acc848&cp=34043525&mode=&gid=&messageziel=&re=0" >Earth				  <a href="index.php?page=galaxy&galaxy=6&system=263&position=5&session=64a696acc848" >[6:263:5]</a></option>
+			  		  </select>
+	  </table>
+     </td>
+    </tr>
+  </table></td>
+<td class='header'>   <table class='header' id='resources' border="0" cellspacing="0" cellpadding="0" padding-right='30' >
+	    <tr class='header'>
+	    
+		     <td align="center" width="85" class='header'>
+		      <img border="0" src="http://uni5.ogame.com.cn/evolution/images/metall.gif" width="42" height="22">
+		     </td>
+		     
+		     <td align="center" width="85" class='header'>
+		      <img border="0" src="http://uni5.ogame.com.cn/evolution/images/kristall.gif" width="42" height="22">
+		     </td>
+		     
+		     <td align="center" width="85" class='header'>
+		      <img border="0" src="http://uni5.ogame.com.cn/evolution/images/deuterium.gif" width="42" height="22">
+		     </td>
+	     		     
+		     <td align="center" width="85" class='header'>
+		     <a href=index.php?page=micropayment&session=64a696acc848>
+		      <img border="0" src="img/dm_klein_2.jpg" width="42" height="22"></a>
+		     </td>	     
+	        		     
+		     <td align="center" width="85" class='header'>
+		      <img border="0" src="http://uni5.ogame.com.cn/evolution/images/energie.gif" width="42" height="22">
+		     </td>
+	    </tr>
+
+	    <tr class='header'>
+	     <td align="center" class='header' width="85"><i><b><font color="#ffffff">金属</font></b></i></td>
+	     <td align="center" class='header' width="85"><i><b><font color="#ffffff">晶体</font></b></i></td>
+	     <td align="center" class='header' width="85"><i><b><font color="#ffffff">重氢</font></b></i></td>
+	     	     	<td align="center" class='header' width="85"><i><b><font color="#ffffff">暗物质</font></b></i></td>	
+	          
+	     <td align="center" class='header' width="85"><i><b><font color="#ffffff">能量</font></b></i></td>
+	    </tr>
+	    <tr class='header'>
+	     <td align="center" class='header' width="90"><font >298.610</font></td>
+	     <td align="center" class='header' width="90"><font >128.582</font></td>
+	     <td align="center" class='header' width="90"><font >212.221</font></td>
+	     			 <td align="center" class='header' width="90"><font color="#FFFFFF">179</font></DIV></td>
+	        
+	     <td align="center" class='header' width="90"><font >38</font>/5.219</td>
+	    </tr>
+   </table></td>
+	<td class='header'>
+<table class='header' align=left>
+	 <tr class='header'>
+
+
+	 <td align="center" width="35" class='header'>
+	     <a href='index.php?page=micropayment&session=64a696acc848&session=64a696acc848' accesskey="i">
+	  <img border="0" src="img/commander_ikon_un.gif" width="32" height="32"
+		onmouseover="return overlib('<center><font size=1 color=white><b><br>OGame指挥官</font><br><br><a href=index.php?page=micropayment&session=64a696acc848&session=64a696acc848><font size=1 color=lime>现在就购买吧!</b></font></a></center>', LEFT, WIDTH, 150);" onmouseout="return nd();">
+	  </a>
+	 </td>
+	 <td align="center" width="35" class='header'>
+	  <a href='index.php?page=micropayment&session=64a696acc848&session=64a696acc848' accesskey="i">
+	  <img border="0" src="img/admiral_ikon_un.gif" width="32" height="32"
+		onmouseover="return overlib('<center><font size=1 color=white><b><br>舰队指挥官</font><br><font size=1 color=skyblue>最大舰队数目 +2</font><br><br><a href=index.php?page=micropayment&session=64a696acc848&session=64a696acc848><font size=1 color=lime>现在就购买吧!</b></font></a></center>', LEFT, WIDTH, 150);" onmouseout="return nd();">
+
+	  </a>
+	 </td>
+	 <td align="center" width="35" class='header'>
+	  <a href='index.php?page=micropayment&session=64a696acc848&session=64a696acc848' accesskey="i">
+	  <img border="0" src="img/ingenieur_ikon_un.gif" width="32" height="32"
+		onmouseover="return overlib('<center><font size=1 color=white><b><br>工程师</font><br><font size=1 color=skyblue>战斗中的损失减少一半,<br>+10% 的能量</font><br><br><a href=index.php?page=micropayment&session=64a696acc848&session=64a696acc848><font size=1 color=lime>现在就购买吧!</b></font></a></center>', LEFT, WIDTH, 150);" onmouseout="return nd();">
+	  </a>
+	 </td>
+	 <td align="center" width="35" class='header'>
+	  <a href='index.php?page=micropayment&session=64a696acc848&session=64a696acc848' accesskey="i">
+	  <img border="0" src="img/geologe_ikon_un.gif" width="32" height="32"
+		onmouseover="return overlib('<center><font size=1 color=white><b><br>地质学者</font><br><font size=1 color=skyblue>+10% 资源产量</font><br><br><a href=index.php?page=micropayment&session=64a696acc848&session=64a696acc848><font size=1 color=lime>现在就购买吧!</b></font></a></center>', LEFT, WIDTH, 150);" onmouseout="return nd();">
+	  </a>
+	 </td>
+	 <td align="center" width="35" class='header'>
+	  <a href='index.php?page=micropayment&session=64a696acc848&session=64a696acc848' accesskey="i">
+	  <img border="0" src="img/technokrat_ikon_un.gif" width="32" height="32"
+		onmouseover="return overlib('<center><font size=1 color=white><b><br>技术专家</font><br><font size=1 color=skyblue>+2 空间探测等级, <br>减少 25% 研究时间</font><br><br><a href=index.php?page=micropayment&session=64a696acc848&session=64a696acc848><font size=1 color=lime>现在就购买吧!</b></font></a></center>', LEFT, WIDTH, 150);" onmouseout="return nd();">
+	  </a>
+	 </td>
+	 <td align="center" class='header'></td>
+	</tr>
+</table></td>
+</tr>
+</table>
+</div><!-- END HEADER -->
+
+<!-- LEFTMENU -->
+
+	<div id='leftmenu'>
+	<script language="JavaScript">
+function fenster(target_url,win_name) {
+  var new_win = window.open(target_url,win_name,'resizable=yes,scrollbars=yes,menubar=no,toolbar=no,width=550,height=280,top=0,left=0');
+  new_win.focus();
+}
+</script>
+
+<script language="JavaScript">
+function popUp(URL) {
+  day = new Date();
+  id = day.getTime();
+  eval("page" + id + " = window.open(URL, '" + id + "', 'toolbar=1,scrollbars=1,location=1,statusbar=1,menubar=0,resizable=1,width=120,height=60,alwaysLowered=Yes');");
+}
+
+</script>
+
+
+<center>
+
+<div id='menu'>
+<a href="mailto:barrierefrei@ogame.de" title="如有问题，请发送邮件至 barrierefrei@ogame.de." style="width:1px;"></a>
+<p style="width:110px;"><NOBR>宇宙 5 (<a href="index.php?page=changelog&session=64a696acc848">v 0.78b</a>)</NOBR></p>
+<table width="110" cellspacing="0" cellpadding="0">
+ <tr>
+  <td><img src="http://uni5.ogame.com.cn/evolution/gfx/ogame-produktion.jpg" width="110" height="40" /></td>
+ </tr>
+
+   <tr>
+  <td>
+   <div align="center"><font color="#FFFFFF">
+     <a href='index.php?page=overview&session=64a696acc848' accesskey="o">概况</a>
+    </font></div>
+  </td>
+ </tr>
+
+ 
+ <tr>
+  <td>
+   <div align="center"><font color="#FFFFFF">
+     <a href='index.php?page=b_building&session=64a696acc848' accesskey="b">建筑</a>
+    </font></div>
+  </td>
+ </tr>
+
+ <tr>
+  <td>
+   <div align="center"><font color="#FFFFFF">
+     <a href='index.php?page=resources&session=64a696acc848' accesskey="r">资源</a>
+    </font></div>
+  </td>
+ </tr>
+
+  <tr>
+  <td>
+   <div align="center" ><font color="#FFFFFF">
+     <a href='index.php?page=trader&session=64a696acc848' accesskey=""><font color='FF8900'>商人</font></a> <!-- TODO Loca Keys -->
+    </font></div>
+  </td>
+ </tr>
+ 
+  
+ <tr>
+  <td>
+   <div align="center"><font color="#FFFFFF">
+     <a href='index.php?page=buildings&session=64a696acc848&mode=Forschung' accesskey="c">研究</a>
+    </font></div>
+  </td>
+ </tr>
+
+ <tr>
+  <td>
+   <div align="center"><font color="#FFFFFF">
+     <a href='index.php?page=buildings&session=64a696acc848&mode=Flotte' accesskey="s">造船厂</a>
+    </font></div>
+  </td>
+ </tr>
+
+ <tr>
+  <td>
+   <div align="center"><font color="#FFFFFF">
+     <a href='index.php?page=flotten1&session=64a696acc848&mode=Flotte' accesskey="f">舰队</a>
+    </font></div>
+  </td>
+ </tr>
+
+ <tr>
+  <td>
+   <div align="center"><font color="#FFFFFF">
+     <a href='index.php?page=techtree&session=64a696acc848' accesskey="t">科技</a>
+    </font></div>
+  </td>
+ </tr>
+
+ <tr>
+  <td>
+   <div align="center"><font color="#FFFFFF">
+     <a href='index.php?page=galaxy&session=64a696acc848&no_header=1' accesskey="g">星系</a>
+    </font></div>
+  </td>
+ </tr>
+
+ <tr>
+  <td>
+   <div align="center"><font color="#FFFFFF">
+     <a href='index.php?page=buildings&session=64a696acc848&mode=Verteidigung' accesskey="d">防御</a>
+    </font></div>
+  </td>
+ </tr>
+
+ <tr>
+  <td><img src="http://uni5.ogame.com.cn/evolution/gfx/info-help.jpg" width="110" height="19"></td>
+ </tr>
+
+ <tr>
+  <td>
+   <div align="center"><font color="#FFFFFF">
+     <a href='index.php?page=allianzen&session=64a696acc848' accesskey="a">联盟</a>
+    </font></div>
+  </td>
+ </tr>
+
+  <tr>
+  <td>
+   <div align="center"><font color="#FFFFFF">
+    <a href="http://board.ogame.com.cn" target="_new" accesskey="1" >论坛</a><!-- external link to board -->
+   </font></div>
+  </td>
+ </tr>
+ 
+
+ 	<tr>
+	   <td align=center>
+	   <a id='darkmatter2' style='cursor:pointer; width:110px;'
+	     href='index.php?page=micropayment&session=64a696acc848' accesskey="i"><b>雇用事务官</a></b>
+	   </div>
+	  </td>
+	 </tr>
+ 
+ <tr>
+  <td>
+   <div align="center"><font color="#FFFFFF">
+  <a href='index.php?page=stat&session=64a696acc848' accesskey="k">排名</a>
+    </font></div>
+  </td>
+ </tr>
+
+ <tr>
+  <td>
+   <div align="center"><font color="#FFFFFF">
+     <a href='index.php?page=suche&session=64a696acc848' accesskey="h">搜索</a>
+    </font></div>
+  </td>
+ </tr>
+
+ <tr>
+  <td>
+   <div align="center"><font color="#FFFFFF">
+    <a href="http://tutorial.ogame.com.cn" target="_new" accesskey="2" >帮助</a><!-- external link to ogame tutorial -->
+   </font></div>
+  </td>
+ </tr>
+ 
+ <tr>
+  <td><img src="http://uni5.ogame.com.cn/evolution/gfx/user-menu.jpg" width="110" height="35"></td>
+ </tr>
+
+ <tr>
+  <td>
+   <div align="center"><font color="#FFFFFF">
+     <a href='index.php?page=messages&dsp=1&session=64a696acc848' accesskey="m">消息</a>
+    </font></div>
+  </td>
+ </tr>
+
+ <tr>
+  <td>
+   <div align="center"><font color="#FFFFFF">
+     <a href='#' onclick='fenster("index.php?page=notizen&session=64a696acc848&no_header=1", "Notizen");' accesskey="n">笔记</a>
+    </font></div>
+  </td>
+ </tr>
+
+ <tr>
+  <td>
+   <div align="center"><font color="#FFFFFF">
+     <a href='index.php?page=buddy&session=64a696acc848' accesskey="u">好友</a>
+    </font></div>
+  </td>
+ </tr>
+
+ <tr>
+  <td>
+   <div align="center"><font color="#FFFFFF">
+     <a href='index.php?page=options&session=64a696acc848' accesskey="p">选项</a>
+    </font></div>
+  </td>
+ </tr>
+
+ 
+ <tr>
+  <td>
+   <div align="center"><font color="#FFFFFF">
+     <a href='index.php?page=logout&session=64a696acc848' accesskey="q">退出</a>
+    </font></div>
+  </td>
+ </tr>
+
+ 
+ 
+
+ <tr>
+  <td>
+   <div align="center"><font color="#FFFFFF">
+     <a href="http://ogame.com.cn/regeln.html" target="_new">游戏规则</a> <!-- external link to rules -->
+   </font></div>
+  </td>
+ </tr>
+
+ <tr>
+  <td>
+   <div align="center"><font color="#FFFFFF">
+    <a href="http://ogame.com.cn/portal/?go=contact&lang=cn" target="_new">法律条款</a> <!-- external link to impressum -->
+   </font></div>
+  </td>
+ </tr>
+
+ </table>
+ </center>
+
+	</div>
+
+<!-- END LEFTMENU -->
+
+<!-- CONTENT AREA -->
+<div id='content'>
+<center>
+<script type="text/javascript">
+<!--
+function t_building() {
+	v = new Date();
+	var bxx = document.getElementById('bxx');
+	var timeout = 1;
+	n=new Date();
+	ss=pp;
+	aa=Math.round((n.getTime()-v.getTime())/1000.);
+	s=ss-aa;
+	m=0;
+	h=0;
+	
+	if (s < 0) {
+		bxx.innerHTML='--';
+		
+		if ((ss + 6) >= aa) {
+			window.setTimeout('document.location.href="index.php?page=overview&session='+ps+'";', 1500);
+		}
+	} else {
+		if(s>59){
+			m=Math.floor(s/60);
+			s=s-m*60;
+		}
+        if(m>59){
+        	h=Math.floor(m/60);
+        	m=m-h*60;
+        }
+        if(s<10){
+        	s="0"+s;
+        }
+        if(m<10){
+        	m="0"+m;
+        }
+		bxx.innerHTML=h+":"+m+":"+s;
+	}    
+	pp=pp-1;
+  	window.setTimeout("t_building();", 999);
+}
+//-->
+</script>
+
+
+<!-- _________________ComBox___________________ -->
+<div id="combox_container" >
+<a id="combox"href="index.php?page=micropayment&session=64a696acc848">
+<div id="anfang">OGame正在寻找领导者…</div>
+<div id="ende">…立刻成为指挥官吧!</div>
+</a>
+</div>
+<!-- _________________ComBox Ende _____________ -->
+<table width="519">
+  <tr>
+    <td class="c" colspan="4">
+
+     <a href="index.php?page=renameplanet&session=64a696acc848&pl=34024962" title="星球选单">星球&quot;Kobol&quot;</a>     (chaordic)
+    </td>
+  </tr>
+    <tr>
+   <th colspan="4">
+     <a href="index.php?page=messages&dsp=1&session=64a696acc848">
+     你有 3 条新消息s   </th>
+  </tr>
+
+    <tr>
+   <th>
+    服务器时间   </th>
+   <th colspan=3>Sun Jan 13 7:27:41</th>
+  </tr>
+  <tr>
+   <td colspan="4" class="c">
+    事件   </td>
+  </tr>
+<tr class='flight'>
+<th><div id='bxx1' title='283'star='1200205944'></div></th>
+<th colspan='3'><span class='flight ownattack'>你的 <a href='#' onmouseover='return overlib("&lt;font color=white&gt;&lt;b&gt;小型运输舰 10&lt;br&gt;&lt;/b&gt;&lt;/font&gt;");' onmouseout='return nd();' class='ownattack'>舰队</a><a href='#' title='小型运输舰 10'></a> 正从 星球 Picon <a href="index.php?page=galaxy&galaxy=4&system=258&position=4&session=64a696acc848" ownattack>[4:258:4]</a> 前往 星球 qin <a href="index.php?page=galaxy&galaxy=4&system=257&position=9&session=64a696acc848" ownattack>[4:257:9]</a>. 任务为: 攻击</span>
+</th>
+</tr>
+<tr class='return'>
+<th><div id='bxx2' title='366'star='1200206027'></div></th>
+<th colspan='3'><span class='return ownattack'>你的 <a href='#' onmouseover='return overlib("&lt;font color=white&gt;&lt;b&gt;大型运输舰 2&lt;br&gt;战列舰 2&lt;br&gt;&lt;/b&gt;&lt;/font&gt;");' onmouseout='return nd();' class='ownattack'>舰队</a><a href='#' title='大型运输舰 2战列舰 2'></a> 正从 星球 MIMI <a href="index.php?page=galaxy&galaxy=4&system=187&position=12&session=64a696acc848" ownattack>[4:187:12]</a> 回到 星球 Virgon <a href="index.php?page=galaxy&galaxy=4&system=208&position=5&session=64a696acc848" ownattack>[4:208:5]</a>. 任务为: <a href='#' onmouseover='return overlib("&lt;font color=white&gt;&lt;b&gt;运输: &lt;br /&gt; 金属： 16.012&lt;br /&gt;晶体： 4.589&lt;br /&gt;重氢： 810&lt;/b&gt;&lt;/font&gt;");' onmouseout='return nd();'' class='ownattack'>攻击</a><a href='#' title='运输: 金属： 16.012 晶体： 4.589 重氢： 810'></a></span>
+</th>
+</tr>
+<tr class='flight'>
+<th><div id='bxx3' title='658'star='1200206319'></div></th>
+<th colspan='3'><span class='flight ownattack'>你的 <a href='#' onmouseover='return overlib("&lt;font color=white&gt;&lt;b&gt;小型运输舰 10&lt;br&gt;&lt;/b&gt;&lt;/font&gt;");' onmouseout='return nd();' class='ownattack'>舰队</a><a href='#' title='小型运输舰 10'></a> 正从 星球 Kobol <a href="index.php?page=galaxy&galaxy=4&system=242&position=11&session=64a696acc848" ownattack>[4:242:11]</a> 前往 星球 殖民星 <a href="index.php?page=galaxy&galaxy=4&system=246&position=10&session=64a696acc848" ownattack>[4:246:10]</a>. 任务为: 攻击</span>
+</th>
+</tr>
+<tr class='flight'>
+<th><div id='bxx4' title='764'star='1200206425'></div></th>
+<th colspan='3'><span class='flight ownattack'>你的 <a href='#' onmouseover='return overlib("&lt;font color=white&gt;&lt;b&gt;小型运输舰 10&lt;br&gt;&lt;/b&gt;&lt;/font&gt;");' onmouseout='return nd();' class='ownattack'>舰队</a><a href='#' title='小型运输舰 10'></a> 正从 星球 Kobol <a href="index.php?page=galaxy&galaxy=4&system=242&position=11&session=64a696acc848" ownattack>[4:242:11]</a> 前往 星球 Base <a href="index.php?page=galaxy&galaxy=4&system=234&position=7&session=64a696acc848" ownattack>[4:234:7]</a>. 任务为: 攻击</span>
+</th>
+</tr>
+<tr class='flight'>
+<th><div id='bxx5' title='791'star='1200206452'></div></th>
+<th colspan='3'><span class='flight ownattack'>你的 <a href='#' onmouseover='return overlib("&lt;font color=white&gt;&lt;b&gt;小型运输舰 10&lt;br&gt;&lt;/b&gt;&lt;/font&gt;");' onmouseout='return nd();' class='ownattack'>舰队</a><a href='#' title='小型运输舰 10'></a> 正从 星球 Kobol <a href="index.php?page=galaxy&galaxy=4&system=242&position=11&session=64a696acc848" ownattack>[4:242:11]</a> 前往 星球 Base <a href="index.php?page=galaxy&galaxy=4&system=234&position=8&session=64a696acc848" ownattack>[4:234:8]</a>. 任务为: 攻击</span>
+</th>
+</tr>
+<tr class='flight'>
+<th><div id='bxx6' title='800'star='1200206461'></div></th>
+<th colspan='3'><span class='flight ownattack'>你的 <a href='#' onmouseover='return overlib("&lt;font color=white&gt;&lt;b&gt;小型运输舰 10&lt;br&gt;&lt;/b&gt;&lt;/font&gt;");' onmouseout='return nd();' class='ownattack'>舰队</a><a href='#' title='小型运输舰 10'></a> 正从 星球 Kobol <a href="index.php?page=galaxy&galaxy=4&system=242&position=11&session=64a696acc848" ownattack>[4:242:11]</a> 前往 星球 21997732 <a href="index.php?page=galaxy&galaxy=4&system=234&position=12&session=64a696acc848" ownattack>[4:234:12]</a>. 任务为: 攻击</span>
+</th>
+</tr>
+<tr class='flight'>
+<th><div id='bxx7' title='1064'star='1200206725'></div></th>
+<th colspan='3'><span class='flight ownattack'>你的 <a href='#' onmouseover='return overlib("&lt;font color=white&gt;&lt;b&gt;小型运输舰 10&lt;br&gt;&lt;/b&gt;&lt;/font&gt;");' onmouseout='return nd();' class='ownattack'>舰队</a><a href='#' title='小型运输舰 10'></a> 正从 星球 Caprica <a href="index.php?page=galaxy&galaxy=4&system=265&position=6&session=64a696acc848" ownattack>[4:265:6]</a> 前往 星球 母星 <a href="index.php?page=galaxy&galaxy=4&system=279&position=10&session=64a696acc848" ownattack>[4:279:10]</a>. 任务为: 攻击</span>
+</th>
+</tr>
+<tr class='flight'>
+<th><div id='bxx8' title='1278'star='1200206939'></div></th>
+<th colspan='3'><span class='flight ownattack'>你的 <a href='#' onmouseover='return overlib("&lt;font color=white&gt;&lt;b&gt;小型运输舰 10&lt;br&gt;&lt;/b&gt;&lt;/font&gt;");' onmouseout='return nd();' class='ownattack'>舰队</a><a href='#' title='小型运输舰 10'></a> 正从 星球 Virgon <a href="index.php?page=galaxy&galaxy=4&system=208&position=5&session=64a696acc848" ownattack>[4:208:5]</a> 前往 星球 星球 <a href="index.php?page=galaxy&galaxy=4&system=194&position=11&session=64a696acc848" ownattack>[4:194:11]</a>. 任务为: 攻击</span>
+</th>
+</tr>
+<tr class='flight'>
+<th><div id='bxx9' title='1803'star='1200207464'></div></th>
+<th colspan='3'><span class='flight ownattack'>你的 <a href='#' onmouseover='return overlib("&lt;font color=white&gt;&lt;b&gt;小型运输舰 10&lt;br&gt;&lt;/b&gt;&lt;/font&gt;");' onmouseout='return nd();' class='ownattack'>舰队</a><a href='#' title='小型运输舰 10'></a> 正从 星球 Virgon <a href="index.php?page=galaxy&galaxy=4&system=208&position=5&session=64a696acc848" ownattack>[4:208:5]</a> 前往 星球 AACC <a href="index.php?page=galaxy&galaxy=4&system=185&position=11&session=64a696acc848" ownattack>[4:185:11]</a>. 任务为: 攻击</span>
+</th>
+</tr>
+<tr class='return'>
+<th><div id='bxx10' title='4238'star='1200209899'></div></th>
+<th colspan='3'><span class='return ownattack'>你的 <a href='#' onmouseover='return overlib("&lt;font color=white&gt;&lt;b&gt;小型运输舰 10&lt;br&gt;&lt;/b&gt;&lt;/font&gt;");' onmouseout='return nd();' class='ownattack'>舰队</a><a href='#' title='小型运输舰 10'></a> 正从 星球 qin <a href="index.php?page=galaxy&galaxy=4&system=257&position=9&session=64a696acc848" ownattack>[4:257:9]</a> 回到 星球 Picon <a href="index.php?page=galaxy&galaxy=4&system=258&position=4&session=64a696acc848" ownattack>[4:258:4]</a>. 任务为: <span class='class'>攻击</span></span>
+</th>
+</tr>
+<tr class='return'>
+<th><div id='bxx11' title='4809'star='1200210470'></div></th>
+<th colspan='3'><span class='return ownattack'>你的 <a href='#' onmouseover='return overlib("&lt;font color=white&gt;&lt;b&gt;小型运输舰 10&lt;br&gt;&lt;/b&gt;&lt;/font&gt;");' onmouseout='return nd();' class='ownattack'>舰队</a><a href='#' title='小型运输舰 10'></a> 正从 星球 殖民星 <a href="index.php?page=galaxy&galaxy=4&system=246&position=10&session=64a696acc848" ownattack>[4:246:10]</a> 回到 星球 Kobol <a href="index.php?page=galaxy&galaxy=4&system=242&position=11&session=64a696acc848" ownattack>[4:242:11]</a>. 任务为: <span class='class'>攻击</span></span>
+</th>
+</tr>
+<tr class='return'>
+<th><div id='bxx12' title='5163'star='1200210824'></div></th>
+<th colspan='3'><span class='return ownattack'>你的 <a href='#' onmouseover='return overlib("&lt;font color=white&gt;&lt;b&gt;小型运输舰 10&lt;br&gt;&lt;/b&gt;&lt;/font&gt;");' onmouseout='return nd();' class='ownattack'>舰队</a><a href='#' title='小型运输舰 10'></a> 正从 星球 Base <a href="index.php?page=galaxy&galaxy=4&system=234&position=7&session=64a696acc848" ownattack>[4:234:7]</a> 回到 星球 Kobol <a href="index.php?page=galaxy&galaxy=4&system=242&position=11&session=64a696acc848" ownattack>[4:242:11]</a>. 任务为: <span class='class'>攻击</span></span>
+</th>
+</tr>
+<tr class='return'>
+<th><div id='bxx13' title='5190'star='1200210851'></div></th>
+<th colspan='3'><span class='return ownattack'>你的 <a href='#' onmouseover='return overlib("&lt;font color=white&gt;&lt;b&gt;小型运输舰 10&lt;br&gt;&lt;/b&gt;&lt;/font&gt;");' onmouseout='return nd();' class='ownattack'>舰队</a><a href='#' title='小型运输舰 10'></a> 正从 星球 Base <a href="index.php?page=galaxy&galaxy=4&system=234&position=8&session=64a696acc848" ownattack>[4:234:8]</a> 回到 星球 Kobol <a href="index.php?page=galaxy&galaxy=4&system=242&position=11&session=64a696acc848" ownattack>[4:242:11]</a>. 任务为: <span class='class'>攻击</span></span>
+</th>
+</tr>
+<tr class='return'>
+<th><div id='bxx14' title='5199'star='1200210860'></div></th>
+<th colspan='3'><span class='return ownattack'>你的 <a href='#' onmouseover='return overlib("&lt;font color=white&gt;&lt;b&gt;小型运输舰 10&lt;br&gt;&lt;/b&gt;&lt;/font&gt;");' onmouseout='return nd();' class='ownattack'>舰队</a><a href='#' title='小型运输舰 10'></a> 正从 星球 21997732 <a href="index.php?page=galaxy&galaxy=4&system=234&position=12&session=64a696acc848" ownattack>[4:234:12]</a> 回到 星球 Kobol <a href="index.php?page=galaxy&galaxy=4&system=242&position=11&session=64a696acc848" ownattack>[4:242:11]</a>. 任务为: <span class='class'>攻击</span></span>
+</th>
+</tr>
+<tr class='return'>
+<th><div id='bxx15' title='5811'star='1200211472'></div></th>
+<th colspan='3'><span class='return ownattack'>你的 <a href='#' onmouseover='return overlib("&lt;font color=white&gt;&lt;b&gt;小型运输舰 10&lt;br&gt;&lt;/b&gt;&lt;/font&gt;");' onmouseout='return nd();' class='ownattack'>舰队</a><a href='#' title='小型运输舰 10'></a> 正从 星球 母星 <a href="index.php?page=galaxy&galaxy=4&system=279&position=10&session=64a696acc848" ownattack>[4:279:10]</a> 回到 星球 Caprica <a href="index.php?page=galaxy&galaxy=4&system=265&position=6&session=64a696acc848" ownattack>[4:265:6]</a>. 任务为: <span class='class'>攻击</span></span>
+</th>
+</tr>
+<tr class='return'>
+<th><div id='bxx16' title='6025'star='1200211686'></div></th>
+<th colspan='3'><span class='return ownattack'>你的 <a href='#' onmouseover='return overlib("&lt;font color=white&gt;&lt;b&gt;小型运输舰 10&lt;br&gt;&lt;/b&gt;&lt;/font&gt;");' onmouseout='return nd();' class='ownattack'>舰队</a><a href='#' title='小型运输舰 10'></a> 正从 星球 星球 <a href="index.php?page=galaxy&galaxy=4&system=194&position=11&session=64a696acc848" ownattack>[4:194:11]</a> 回到 星球 Virgon <a href="index.php?page=galaxy&galaxy=4&system=208&position=5&session=64a696acc848" ownattack>[4:208:5]</a>. 任务为: <span class='class'>攻击</span></span>
+</th>
+</tr>
+<tr class='return'>
+<th><div id='bxx17' title='7028'star='1200212689'></div></th>
+<th colspan='3'><span class='return ownattack'>你的 <a href='#' onmouseover='return overlib("&lt;font color=white&gt;&lt;b&gt;小型运输舰 10&lt;br&gt;&lt;/b&gt;&lt;/font&gt;");' onmouseout='return nd();' class='ownattack'>舰队</a><a href='#' title='小型运输舰 10'></a> 正从 星球 AACC <a href="index.php?page=galaxy&galaxy=4&system=185&position=11&session=64a696acc848" ownattack>[4:185:11]</a> 回到 星球 Virgon <a href="index.php?page=galaxy&galaxy=4&system=208&position=5&session=64a696acc848" ownattack>[4:208:5]</a>. 任务为: <span class='class'>攻击</span></span>
+</th>
+</tr>
+<script language=javascript>anz=17;t();</script>
+
+
+  <tr>
+    <th>
+        
+             </th>
+    <th colspan="2">
+        <img src="http://uni5.ogame.com.cn/evolution/planeten/wasserplanet07.jpg" width="200" height="200">
+        
+ 	 	 <br><center>晶体矿 (21)<div id="bxx" title="1200282649" class="z"></div><SCRIPT language=JavaScript>
+	 	          pp="76988";
+	 	          ps="64a696acc848";
+                  t_building();
+	              </script> 	 	 </center>
+             <br>
+    </th>
+    <th class="s">
+      <table border="0" align="top" class="s">
+       <tr>
+                <th>
+         Libris<br>
+         <a href="index.php?page=overview&session=64a696acc848&cp=34043740" title="Libris"><img src="http://uni5.ogame.com.cn/evolution/planeten/small/s_dschjungelplanet04.jpg" width="50" height="50"></a>
+                  <br><center>空闲<center>                 </th>
+                     <th>
+         Virgon<br>
+         <a href="index.php?page=overview&session=64a696acc848&cp=34044039" title="Virgon"><img src="http://uni5.ogame.com.cn/evolution/planeten/small/s_dschjungelplanet02.jpg" width="50" height="50"></a>
+                  <br><center>空闲<center>                 </th>
+            </tr>
+      <tr>
+                     <th>
+         Picon<br>
+         <a href="index.php?page=overview&session=64a696acc848&cp=34046040" title="Picon"><img src="http://uni5.ogame.com.cn/evolution/planeten/small/s_dschjungelplanet01.jpg" width="50" height="50"></a>
+                  <br><center>空闲<center>                 </th>
+                     <th>
+         Tauron<br>
+         <a href="index.php?page=overview&session=64a696acc848&cp=34039390" title="Tauron"><img src="http://uni5.ogame.com.cn/evolution/planeten/small/s_dschjungelplanet01.jpg" width="50" height="50"></a>
+          	 <br><center>晶体矿</center>
+                 </th>
+            </tr>
+      <tr>
+                     <th>
+         Caprica<br>
+         <a href="index.php?page=overview&session=64a696acc848&cp=34038392" title="Caprica"><img src="http://uni5.ogame.com.cn/evolution/planeten/small/s_dschjungelplanet04.jpg" width="50" height="50"></a>
+                  <br><center>空闲<center>                 </th>
+                     <th>
+         Aerelon<br>
+         <a href="index.php?page=overview&session=64a696acc848&cp=34035509" title="Aerelon"><img src="http://uni5.ogame.com.cn/evolution/planeten/small/s_eisplanet05.jpg" width="50" height="50"></a>
+                  <br><center>空闲<center>                 </th>
+            </tr>
+      <tr>
+                     <th>
+         Hesper<br>
+         <a href="index.php?page=overview&session=64a696acc848&cp=34056543" title="Hesper"><img src="http://uni5.ogame.com.cn/evolution/planeten/small/s_dschjungelplanet04.jpg" width="50" height="50"></a>
+                  <br><center>空闲<center>                 </th>
+                     <th>
+         Earth<br>
+         <a href="index.php?page=overview&session=64a696acc848&cp=34043525" title="Earth"><img src="http://uni5.ogame.com.cn/evolution/planeten/small/s_dschjungelplanet06.jpg" width="50" height="50"></a>
+                  <br><center>空闲<center>                 </th>
+            </tr>
+      <tr>
+                   </tr>
+     </table>
+    </th>
+    <tr>
+    <th>
+    直径</th><th colspan=3>12.800 公里     (<a title="建筑空间">141 </a> / <a title="最大建筑空间">163 </a> 空间)    </th>
+   </tr>
+   <tr>
+    <th>
+    气温 </th> <th colspan=3>大约 -32&deg;C 到 8&deg;C</th> </tr>   <tr>
+    <th>
+    位置</th><th colspan=3><a href="index.php?page=galaxy&galaxy=4&system=242&position=11&session=64a696acc848" >[4:242:11]</a></th></tr>
+   <tr>
+    <th>
+    积分</th><th colspan=3>99.605 (你目前的排名处于 9.300 中的第 <a href='index.php?page=stat&session=64a696acc848&start=1101'>1.185</a> 位)</th></tr>      </table>
+ <br>
+ <script language=javascript>tt();</script><br><br><br><br>
+</center>
+</div>
+<!-- END CONTENT AREA -->
+<script>
+messageboxHeight=0;
+errorboxHeight=0;
+contentbox = document.getElementById('content');
+</script>
+
+<div id='messagebox'>
+<center>
+</center>
+</div>
+<div id='errorbox'>
+<center>
+</center>
+</div>
+
+<script>
+headerHeight = 81;
+errorbox.style.top=parseInt(headerHeight+messagebox.offsetHeight+5)+'px';
+contentbox.style.top=parseInt(headerHeight+errorbox.offsetHeight+messagebox.offsetHeight+10)+'px';
+if (navigator.appName=='Netscape'){if (window.innerWidth<1020){document.body.scroll='no';}   contentbox.style.height=parseInt(window.innerHeight)-messagebox.offsetHeight-errorbox.offsetHeight-headerHeight-20;
+if(document.getElementById('resources')) {   document.getElementById('resources').style.width=(window.innerWidth*0.4);}}
+ else {
+if (document.body.offsetWidth<1020){document.body.scroll='no';}   contentbox.style.height=parseInt(document.body.offsetHeight)-messagebox.offsetHeight-headerHeight-errorbox.offsetHeight-20;document.getElementById('resources').style.width=(document.body.offsetWidth*0.4);
+}</script>
+<style>
+.layer {
+	z-index:999999999;
+	position:absolute;
+	left: 0;
+	right: 0;
+	top: 100px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 757px; 
+	height: 475px; 
+	background-color: #040e1e;
+	border: 3px double orange;
+	padding: 0;
+	opacity: .90;
+}
+</style>
+ </body>
+</html>
