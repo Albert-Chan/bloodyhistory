@@ -8,7 +8,6 @@ import java.text.SimpleDateFormat;
 import stockdata.DayData;
 import stockdata.StockInfo;
 
-
 public class TenPercent extends AbstractCallBackHandler {
 	private static final SimpleDateFormat df = new SimpleDateFormat(
 			"MM/dd/yyyy");
@@ -27,7 +26,7 @@ public class TenPercent extends AbstractCallBackHandler {
 
 	public void operate(StockInfo stock) {
 		boolean printTitle = true;
-		DayData[] dealRecords = (DayData[])stock.getDealArray();
+		DayData[] dealRecords = (DayData[]) stock.getDealArray();
 
 		for (int i = 1; i < dealRecords.length; i++) {
 

@@ -7,7 +7,7 @@ import java.util.Date;
 public class DayData implements IDealData {
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat(
 			"MM/dd/yyyy");
-	
+
 	public Date date;
 	public double opening;
 	public double highest;

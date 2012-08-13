@@ -24,7 +24,8 @@ public class JrjCrawlerByDay {
 
 	public static void main(String[] args) {
 
-		File base = new File("D:/StockAnalysis/data/mx", DATE_FORMAT.format(new Date()));
+		File base = new File("D:/StockAnalysis/data/mx",
+				DATE_FORMAT.format(new Date()));
 		if (base.exists()) {
 			System.out.print("The base directory already exists!");
 			return;

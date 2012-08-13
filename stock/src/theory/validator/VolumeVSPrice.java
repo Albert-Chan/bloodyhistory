@@ -5,7 +5,7 @@ import stockdata.StockInfo;
 
 public class VolumeVSPrice implements ICallBackHandler {
 	public void operate(StockInfo stock) {
-		DayData[]dealRecords = (DayData[])stock.getDealArray();
+		DayData[] dealRecords = (DayData[]) stock.getDealArray();
 		long subTotalVolume = 0;
 
 		int currentPositive = 0;
@@ -41,9 +41,9 @@ public class VolumeVSPrice implements ICallBackHandler {
 			}
 		}
 		System.out.println(stock.getStockId() + ": " + stock.getStockName());
-		System.out.println("+:"+currentPositive);
-		System.out.println("-:"+currentNegative);
-		System.out.println(">+:"+nextPositive);
-		System.out.println(">-:"+nextNegative);
+		System.out.println("+:" + currentPositive);
+		System.out.println("-:" + currentNegative);
+		System.out.println(">+:" + nextPositive);
+		System.out.println(">-:" + nextNegative);
 	}
 }

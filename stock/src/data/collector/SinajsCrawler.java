@@ -1,4 +1,5 @@
 package data.collector;
+
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.URL;
@@ -13,7 +14,7 @@ public class SinajsCrawler {
 			byte[] bytes = new byte[256];
 			InputStream in = null;
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
-			//while (true)
+			// while (true)
 			{
 				try {
 					in = u.openStream();

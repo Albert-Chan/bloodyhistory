@@ -10,11 +10,9 @@ import org.json.JSONObject;
 
 public class JrjCrawlerRealTime {
 
-	
 	public static void main(String[] args) {
-		
 
-			getStockByID("600000");
+		getStockByID("600000");
 
 	}
 
@@ -23,8 +21,9 @@ public class JrjCrawlerRealTime {
 		ArrayList<JSONObject> array = new ArrayList<JSONObject>();
 		String lastResponse = null;
 		while (true) {
-			String url = "http://qmx.jrjimg.cn/mx.do?code=" + id + "&page=1&size=3";
-			//pageIndex++;
+			String url = "http://qmx.jrjimg.cn/mx.do?code=" + id
+					+ "&page=1&size=3";
+			// pageIndex++;
 
 			try {
 
@@ -44,19 +43,19 @@ public class JrjCrawlerRealTime {
 
 					String compareString = jsonText.substring(jsonText
 							.indexOf("DetailData"));
-//					if (compareString.equals(lastResponse))
-//						break;
-//					else
-//						lastResponse = compareString;
-					
+					// if (compareString.equals(lastResponse))
+					// break;
+					// else
+					// lastResponse = compareString;
+
 					JSONObject myjson = new JSONObject(jsonText);
 					JSONArray jsonArray = myjson.getJSONArray("DetailData");
 
-					for (int i = jsonArray.length()-1; i >=0; i--) {
+					for (int i = jsonArray.length() - 1; i >= 0; i--) {
 						JSONObject arrayElement = jsonArray.getJSONObject(i);
 						array.add(arrayElement);
 					}
-					
+
 					for (JSONObject object : array)
 						System.out.println(object);
 					System.out.println("----------------------");

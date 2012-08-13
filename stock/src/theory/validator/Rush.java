@@ -31,7 +31,7 @@ public class Rush extends AbstractCallBackHandler {
 					printTitle = false;
 				}
 
-				//AnlaysisData anlaysis = new AnlaysisData();
+				// AnlaysisData anlaysis = new AnlaysisData();
 
 			}
 		}

@@ -51,7 +51,8 @@ public class BlogCrawler {
 				if (!response.toString().equals(last)) {
 					last = response.toString();
 					System.out.println(new Date());
-					PrintWriter writer = new PrintWriter("D:\\"+dateFormat.format(new Date())+".html");
+					PrintWriter writer = new PrintWriter("D:\\"
+							+ dateFormat.format(new Date()) + ".html");
 					writer.print(last);
 					writer.close();
 				}

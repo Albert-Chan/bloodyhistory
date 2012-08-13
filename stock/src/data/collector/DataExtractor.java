@@ -25,7 +25,7 @@ public class DataExtractor {
 	public static void main(String[] args) {
 		PrintWriter writer = null;
 		try {
-			writer = new PrintWriter("D:\\check10percent.txt","utf8");
+			writer = new PrintWriter("D:\\check10percent.txt", "utf8");
 
 			try {
 				if (writer != null)
