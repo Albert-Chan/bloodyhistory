@@ -3,8 +3,7 @@ package data.collector;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -62,7 +61,7 @@ public class SinaRisingRateCrawler {
 						new RisingRateDataComparator());
 
 				// System.out.print( Arrays.deepToString( rankArray ) );
-				
+
 				for(RisingRateData data: rankArray)
 				{
 					String id = data.id;
@@ -73,8 +72,7 @@ public class SinaRisingRateCrawler {
 					FengShiData[] dataes = history.getDealArray();
 					
 				}
-				
-				Thread.sleep(1000);
+				TimeUnit.MILLISECONDS.sleep(1000);
 			}
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, e.getMessage());
@@ -92,7 +90,7 @@ public class SinaRisingRateCrawler {
 		ArrayList<RisingRateData> rank = new ArrayList<RisingRateData>();
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject arrayElement = jsonArray.getJSONObject(i);
-			String id = arrayElement.getString("symbol");
+			String id = arrayElement.getString("symbol").substring(2);
 			String name = arrayElement.getString("name");
 			String percent = arrayElement.getString("percent");
 			String dayPercent = arrayElement.getString("day_percent");
