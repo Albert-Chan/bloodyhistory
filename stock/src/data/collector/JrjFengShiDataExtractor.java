@@ -14,11 +14,11 @@ import stockdata.StockInfo;
 import theory.validator.ICallBackHandler;
 import theory.validator.TenPercent;
 
-public class FengShiDataExtractor {
+public class JrjFengShiDataExtractor {
 
 	ICallBackHandler handler;
 
-	public FengShiDataExtractor(ICallBackHandler handler) {
+	public JrjFengShiDataExtractor(ICallBackHandler handler) {
 		this.handler = handler;
 	}
 
@@ -29,7 +29,7 @@ public class FengShiDataExtractor {
 
 			try {
 				if (writer != null)
-					new FengShiDataExtractor(new TenPercent(writer))
+					new JrjFengShiDataExtractor(new TenPercent(writer))
 							.extract("D:\\mx\\20120725");
 			} catch (IOException e) {
 				System.out.println(e.getLocalizedMessage());

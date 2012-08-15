@@ -3,17 +3,26 @@ package data.collector;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import stockdata.FengShiData;
+import stockdata.FengShiStockInfo;
 import stockdata.RisingRateData;
 import stockdata.RisingRateDataComparator;
 import connection.HttpConnection;
 
 public class SinaRisingRateCrawler {
+	// The static logger
+	static protected Logger logger = Logger
+			.getLogger(SinaRisingRateCrawler.class.getName());
 
-	protected static SimpleDateFormat dateFormat = new SimpleDateFormat(
+	// protected static final Logger logger = Logger.getAnonymousLogger();
+
+	protected static final SimpleDateFormat dateFormat = new SimpleDateFormat(
 			"yyyy-MM-dd");
 
 	/**
@@ -28,6 +37,21 @@ public class SinaRisingRateCrawler {
 
 	public static void main(String[] args) {
 
+		// FileHandler fileHandler = null;
+		// try {
+		// fileHandler = new FileHandler("%u.log ");
+		// } catch (SecurityException e1) {
+		// // TODO Auto-generated catch block
+		// e1.printStackTrace();
+		// } catch (IOException e1) {
+		// // TODO Auto-generated catch block
+		// e1.printStackTrace();
+		// }
+		// if (null != fileHandler) {
+		// fileHandler.setFormatter(new SimpleFormatter());
+		// logger.addHandler(fileHandler);
+		// }
+
 		try {
 			while (true) {
 				ArrayList<RisingRateData> rank = new ArrayList<RisingRateData>();
@@ -38,11 +62,22 @@ public class SinaRisingRateCrawler {
 						new RisingRateDataComparator());
 
 				// System.out.print( Arrays.deepToString( rankArray ) );
-
+				
+				for(RisingRateData data: rankArray)
+				{
+					String id = data.id;
+					FengShiStockInfo current = JrjCrawlerRealTime.getStockByID(id);
+					FengShiStockInfo history = JrjFengShiDataExtractor.extract(id);
+					
+					FengShiData[] dataes = current.getDealArray();
+					FengShiData[] dataes = history.getDealArray();
+					
+				}
+				
 				Thread.sleep(1000);
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			logger.log(Level.SEVERE, e.getMessage());
 		}
 	}
 
