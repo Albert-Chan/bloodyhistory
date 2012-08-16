@@ -3,16 +3,19 @@ package data.collector;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import stockdata.FengShiData;
-import stockdata.FengShiStockInfo;
 import stockdata.RisingRateData;
 import stockdata.RisingRateDataComparator;
 import connection.HttpConnection;
+import data.collector.JrjCrawlerByDay.PostHandler;
 
 public class SinaRisingRateCrawler {
 	// The static logger
@@ -34,6 +37,8 @@ public class SinaRisingRateCrawler {
 	 */
 	private static final String urlSZ = "http://hq.sinajs.cn/rn=avmm9&format=text&list=stock_sz_up_5min_20";
 
+	private static final int MAX_CONNECTION = 16;
+	
 	public static void main(String[] args) {
 
 		// FileHandler fileHandler = null;
@@ -52,6 +57,7 @@ public class SinaRisingRateCrawler {
 		// }
 
 		try {
+			ExecutorService executor = Executors.newFixedThreadPool(MAX_CONNECTION);
 			while (true) {
 				ArrayList<RisingRateData> rank = new ArrayList<RisingRateData>();
 				rank.addAll(getRealTimeData(urlSH));
@@ -65,11 +71,13 @@ public class SinaRisingRateCrawler {
 				for(RisingRateData data: rankArray)
 				{
 					String id = data.id;
-					FengShiStockInfo current = JrjCrawlerRealTime.getStockByID(id);
-					FengShiStockInfo history = JrjFengShiDataExtractor.extract(id);
+					executor.execute(new GetJrJFengShiStockInfoThread(id, new PostHandler()));
 					
-					FengShiData[] dataes = current.getDealArray();
-					FengShiData[] dataes = history.getDealArray();
+//					FengShiStockInfo current = JrjCrawlerRealTime.getStockByID(id);
+//					FengShiStockInfo history = JrjFengShiDataExtractor.extract(id);
+//					
+//					FengShiData[] dataes = current.getDealArray();
+//					FengShiData[] dataes = history.getDealArray();
 					
 				}
 				TimeUnit.MILLISECONDS.sleep(1000);
