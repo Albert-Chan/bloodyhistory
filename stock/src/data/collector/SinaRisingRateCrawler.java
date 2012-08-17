@@ -15,7 +15,6 @@ import org.json.JSONObject;
 import stockdata.RisingRateData;
 import stockdata.RisingRateDataComparator;
 import connection.HttpConnection;
-import data.collector.JrjCrawlerByDay.PostHandler;
 
 public class SinaRisingRateCrawler {
 	// The static logger
@@ -38,7 +37,7 @@ public class SinaRisingRateCrawler {
 	private static final String urlSZ = "http://hq.sinajs.cn/rn=avmm9&format=text&list=stock_sz_up_5min_20";
 
 	private static final int MAX_CONNECTION = 16;
-	
+
 	public static void main(String[] args) {
 
 		// FileHandler fileHandler = null;
@@ -57,7 +56,8 @@ public class SinaRisingRateCrawler {
 		// }
 
 		try {
-			ExecutorService executor = Executors.newFixedThreadPool(MAX_CONNECTION);
+			ExecutorService executor = Executors
+					.newFixedThreadPool(MAX_CONNECTION);
 			while (true) {
 				ArrayList<RisingRateData> rank = new ArrayList<RisingRateData>();
 				rank.addAll(getRealTimeData(urlSH));
@@ -68,17 +68,19 @@ public class SinaRisingRateCrawler {
 
 				// System.out.print( Arrays.deepToString( rankArray ) );
 
-				for(RisingRateData data: rankArray)
-				{
+				for (RisingRateData data : rankArray) {
 					String id = data.id;
-					executor.execute(new GetJrJFengShiStockInfoThread(id, new PostHandler()));
-					
-//					FengShiStockInfo current = JrjCrawlerRealTime.getStockByID(id);
-//					FengShiStockInfo history = JrjFengShiDataExtractor.extract(id);
-//					
-//					FengShiData[] dataes = current.getDealArray();
-//					FengShiData[] dataes = history.getDealArray();
-					
+					executor.execute(new GetJrJFengShiStockInfoThread(id,
+							new SimplePostHandler()));
+
+					// FengShiStockInfo current =
+					// JrjCrawlerRealTime.getStockByID(id);
+					// FengShiStockInfo history =
+					// JrjFengShiDataExtractor.extract(id);
+					//
+					// FengShiData[] dataes = current.getDealArray();
+					// FengShiData[] dataes = history.getDealArray();
+
 				}
 				TimeUnit.MILLISECONDS.sleep(1000);
 			}
@@ -107,6 +109,12 @@ public class SinaRisingRateCrawler {
 					Double.valueOf(dayPercent)));
 		}
 		return rank;
+	}
+
+	static class SimplePostHandler implements ICrawlerPostHandler {
+		public void handle(String stockId, ArrayList<JSONObject> array ){
+			
+		}
 	}
 
 }

@@ -45,17 +45,17 @@ public class JrjCrawlerByDay {
 		for (File file : dir.listFiles()) {
 			String stockId = file.getName();
 			stockId = stockId.substring(2, 8);
-			executor.execute(new GetJrJFengShiStockInfoThread(stockId, new PostHandler()));
+			executor.execute(new GetJrJFengShiStockInfoThread(stockId,
+					new PrintWriterPostHandler()));
 		}
 		executor.shutdown();
 	}
-	
-	
-	static class PostHandler
-	{
-		public void handle(String stockId, ArrayList<JSONObject> array ) throws Exception
-		{
-			PrintWriter writer = new PrintWriter(baseDir + stockId + ".txt", "utf8");
+
+	static class PrintWriterPostHandler implements ICrawlerPostHandler {
+		public void handle(String stockId, ArrayList<JSONObject> array)
+				throws Exception {
+			PrintWriter writer = new PrintWriter(baseDir + stockId + ".txt",
+					"utf8");
 			for (JSONObject object : array)
 				writer.println(object);
 			writer.close();

@@ -6,15 +6,14 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import connection.HttpConnection;
-import data.collector.JrjCrawlerByDay.PostHandler;
 
 public class GetJrJFengShiStockInfoThread implements Runnable {
 
 	private static final int maxTry = 50;
 	private String stockId;
-	private PostHandler postHandler;
+	private ICrawlerPostHandler postHandler;
 
-	public GetJrJFengShiStockInfoThread(String stockId, PostHandler handler) {
+	public GetJrJFengShiStockInfoThread(String stockId, ICrawlerPostHandler handler) {
 		this.stockId = stockId;
 		this.postHandler = handler;
 	}
@@ -44,9 +43,9 @@ public class GetJrJFengShiStockInfoThread implements Runnable {
 		int tryCount = 0;
 		while (true) {
 			String result;
+			String url = "http://qmx.jrjimg.cn/mx.do?code=" + id + "&page="
+					+ pageIndex + "&size=120";
 			try {
-				String url = "http://qmx.jrjimg.cn/mx.do?code=" + id + "&page="
-						+ pageIndex + "&size=120";
 				result = HttpConnection.getData(url, "gbk");
 			} catch (Exception e) {
 				System.out.print("Problem on Stock: " + stockId
