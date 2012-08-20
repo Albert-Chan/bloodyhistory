@@ -11,6 +11,7 @@ public abstract class StockInfo {
 	String stockId;
 	String stockName;
 	ArrayList<IDealData> deal = new ArrayList<IDealData>();
+	ArrayList<IExtendedData> extended = null;
 
 	public StockInfo(String stockId, String stockName) {
 		this.stockId = stockId;
@@ -27,6 +28,10 @@ public abstract class StockInfo {
 		}
 		deal.add(data);
 		return true;
+	}
+	
+	public void attach(ArrayList<IExtendedData> extended){
+		this.extended = extended;
 	}
 
 	public String getStockId() {

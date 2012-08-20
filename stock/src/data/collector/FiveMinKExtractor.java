@@ -10,27 +10,28 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
 import stockdata.DayStockInfo;
+import stockdata.FiveMinStockInfo;
 import stockdata.StockInfo;
 import theory.validator.ICallBackHandler;
-import theory.validator.TenPercent;
+import theory.validator.Rush;
 
-public class DataExtractor {
+public class FiveMinKExtractor {
 
 	ICallBackHandler handler;
 
-	public DataExtractor(ICallBackHandler handler) {
+	public FiveMinKExtractor(ICallBackHandler handler) {
 		this.handler = handler;
 	}
 
 	public static void main(String[] args) {
 		PrintWriter writer = null;
 		try {
-			writer = new PrintWriter("D:\\check10percent.txt", "utf8");
+			writer = new PrintWriter("D:/StockAnalysis/RisingRush.txt", "utf8");
 
 			try {
 				if (writer != null)
-					new DataExtractor(new TenPercent(writer))
-							.extract("D:\\jcb_sina\\T0002\\export_Day_19901219-20120724");
+					new FiveMinKExtractor(new Rush(writer))
+							.extract("D:/StockAnalysis/data/5min");
 			} catch (IOException e) {
 				System.out.println(e.getLocalizedMessage());
 			}
@@ -61,7 +62,7 @@ public class DataExtractor {
 	}
 
 	/**
-	 * extract the data by day
+	 * extract the data by 5min
 	 * 
 	 * @param path
 	 */
@@ -71,14 +72,14 @@ public class DataExtractor {
 		BufferedReader reader = null;
 		try {
 			reader = new BufferedReader(new InputStreamReader(
-					new FileInputStream(stockFile), "GB2312"));
+					new FileInputStream(stockFile), "GBK"));
 			// the first line
 			String line = reader.readLine();
 			String[] data1 = line.split(" ");
 
 			String stockId = data1[0];
 			String stockName = data1[1];
-			StockInfo stock = new DayStockInfo(stockId, stockName);
+			StockInfo stock = new FiveMinStockInfo(stockId, stockName);
 
 			stockIdForCheck = stockIdForCheck.substring(2, 8);
 			if (!stockId.equals(stockIdForCheck)) {
