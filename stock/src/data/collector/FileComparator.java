@@ -9,8 +9,8 @@ public class FileComparator {
 
 	public static void main(String[] args) {
 
-		String path1 = "D:/StockAnalysis/data/mx/2012-08-17-1/";
-		String path2 = "D:/StockAnalysis/data/mx/2012-08-17/";
+		String path1 = "D:/StockAnalysis/data/mx/2012-08-21x/";
+		String path2 = "D:/StockAnalysis/data/mx/2012-08-21/";
 
 		File dir1 = new File(path1);
 		if (!dir1.isDirectory()) {

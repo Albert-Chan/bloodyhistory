@@ -19,6 +19,8 @@ public abstract class StockInfo {
 	}
 
 	public abstract IDealData createDealData();
+	
+	public abstract IDealData[] getDealArray();
 
 	public boolean add(String dealData) {
 		IDealData data = createDealData();
@@ -40,11 +42,6 @@ public abstract class StockInfo {
 
 	public String getStockName() {
 		return stockName;
-	}
-
-	public IDealData[] getDealArray() {
-		IDealData[] dealRecords = deal.toArray(new IDealData[0]);
-		return dealRecords;
 	}
 
 	public void setHandlers(ICallBackHandler... handlers) {

@@ -9,7 +9,12 @@ public class DayStockInfo extends StockInfo {
 		super(stockId, stockName);
 	}
 
-	public IDealData createDealData() {
+	public DayData createDealData() {
 		return new DayData();
+	}
+	
+	public DayData[] getDealArray() {
+		DayData[] dealRecords = deal.toArray(new DayData[0]);
+		return dealRecords;
 	}
 }

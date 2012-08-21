@@ -9,7 +9,12 @@ public class FiveMinStockInfo extends StockInfo {
 		super(stockId, stockName);
 	}
 
-	public IDealData createDealData() {
+	public FiveMinData createDealData() {
 		return new FiveMinData();
+	}
+	
+	public FiveMinData[] getDealArray() {
+		FiveMinData[] dealRecords = deal.toArray(new FiveMinData[0]);
+		return dealRecords;
 	}
 }

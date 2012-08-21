@@ -8,7 +8,12 @@ public class FengShiStockInfo extends StockInfo {
 		super(stockId, stockName);
 	}
 
-	public IDealData createDealData() {
+	public FengShiData createDealData() {
 		return new FengShiData();
+	}
+	
+	public FengShiData[] getDealArray() {
+		FengShiData[] dealRecords = deal.toArray(new FengShiData[0]);
+		return dealRecords;
 	}
 }
