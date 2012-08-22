@@ -11,8 +11,8 @@ import java.io.UnsupportedEncodingException;
 
 import stockdata.DayStockInfo;
 import stockdata.StockInfo;
+import theory.validator.FivePercentDayRise;
 import theory.validator.ICallBackHandler;
-import theory.validator.TenPercent;
 
 public class DayKExtractor {
 
@@ -25,12 +25,16 @@ public class DayKExtractor {
 	public static void main(String[] args) {
 		PrintWriter writer = null;
 		try {
-			writer = new PrintWriter("D:\\check10percent.txt", "utf8");
+			writer = new PrintWriter("D:/StockAnalysis/check5percentDayRise3.txt", "utf8");
 
 			try {
-				if (writer != null)
-					new DayKExtractor(new TenPercent(writer))
-							.extract("D:/StockAnalysis/data/5min");
+				if (writer != null) {
+					ICallBackHandler handler = new FivePercentDayRise(writer);
+					new DayKExtractor(handler)
+							.extract("D:/StockAnalysis/data/day");
+					((FivePercentDayRise) handler).postHandle();
+				}
+					
 			} catch (IOException e) {
 				System.out.println(e.getLocalizedMessage());
 			}
@@ -71,7 +75,7 @@ public class DayKExtractor {
 		BufferedReader reader = null;
 		try {
 			reader = new BufferedReader(new InputStreamReader(
-					new FileInputStream(stockFile), "GB2312"));
+					new FileInputStream(stockFile), "GBK"));
 			// the first line
 			String line = reader.readLine();
 			String[] data1 = line.split(" ");
