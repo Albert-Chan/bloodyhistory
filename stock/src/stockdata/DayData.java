@@ -17,6 +17,8 @@ public class DayData implements IDealData {
 	public double turnover;
 
 	public boolean build(String raw) {
+		if (raw.equals("数据来源:通达信"))
+			return true;
 		String[] data = raw.split("\t");
 		if (data.length != 7) {
 			return false;

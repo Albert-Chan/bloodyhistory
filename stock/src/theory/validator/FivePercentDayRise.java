@@ -38,16 +38,20 @@ public class FivePercentDayRise extends AbstractCallBackHandler {
 				break;
 			if (dealRecords[i].date.before(baseline))
 				continue;
-// high open
+			// close at the highest
 			boolean closeAtHighest = ((dealRecords[i].highest - dealRecords[i].closing) / dealRecords[i].opening) < 0.002;
 			if (!closeAtHighest) {
 				continue;
 			}
-			
+			// 3% < raiseRate < 5%
 			double raiseRate = (dealRecords[i].closing - dealRecords[i].opening)
 					/ dealRecords[i].opening;
 
 			if (raiseRate > 0.03 && raiseRate < 0.05 ) {
+			// first day raise
+				if (i >= 2
+						&& dealRecords[i - 2].highest > dealRecords[i - 1].highest)
+					continue;
 				if (printTitle) {
 					writer.println(stock.getStockId() + ":"
 							+ stock.getStockName()
