@@ -4,7 +4,7 @@ import stockdata.DayData;
 import stockdata.StockInfo;
 
 public class VolumeVSPrice implements ICallBackHandler {
-	public void operate(StockInfo stock) {
+	public void step(StockInfo stock) {
 		DayData[] dealRecords = (DayData[]) stock.getDealArray();
 		long subTotalVolume = 0;
 

@@ -24,7 +24,7 @@ public class TenPercent extends AbstractCallBackHandler {
 		super(writer);
 	}
 
-	public void operate(StockInfo stock) {
+	public void step(StockInfo stock) {
 		boolean printTitle = true;
 		DayData[] dealRecords = (DayData[]) stock.getDealArray();
 

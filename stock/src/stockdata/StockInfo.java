@@ -52,7 +52,7 @@ public abstract class StockInfo {
 	public void analysize() {
 		for (ICallBackHandler handler : handlers) {
 			if (null != handler)
-				handler.operate(this);
+				handler.step(this);
 		}
 	}
 }

@@ -25,7 +25,7 @@ public class DayKExtractor {
 	public static void main(String[] args) {
 		PrintWriter writer = null;
 		try {
-			writer = new PrintWriter("D:/StockAnalysis/check5percentDayRise5.txt", "utf8");
+			writer = new PrintWriter("D:/StockAnalysis/check5percentDayRise6.txt", "utf8");
 
 			try {
 				if (writer != null) {

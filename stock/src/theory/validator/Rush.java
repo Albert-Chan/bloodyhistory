@@ -14,7 +14,7 @@ public class Rush extends AbstractCallBackHandler {
 		super(writer);
 	}
 
-	public void operate(StockInfo stock) {
+	public void step(StockInfo stock) {
 		FiveMinData[] dealRecords = (FiveMinData[]) stock.getDealArray();
 		ArrayList<IExtendedData> extended = new ArrayList<IExtendedData>();
 		stock.attach(extended);

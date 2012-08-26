@@ -3,5 +3,5 @@ package theory.validator;
 import stockdata.StockInfo;
 
 public interface ICallBackHandler {
-	public void operate(StockInfo stock);
+	public void step(StockInfo stock);
 }

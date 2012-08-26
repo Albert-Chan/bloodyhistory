@@ -28,7 +28,7 @@ public class FivePercentDayRise extends AbstractCallBackHandler {
 		super(writer);
 	}
 
-	public void operate(StockInfo stock) {
+	public void step(StockInfo stock) {
 		boolean printTitle = true;
 		DayData[] dealRecords = (DayData[]) stock.getDealArray();
 
@@ -47,11 +47,13 @@ public class FivePercentDayRise extends AbstractCallBackHandler {
 			double raiseRate = (dealRecords[i].closing - dealRecords[i].opening)
 					/ dealRecords[i].opening;
 
-			if (raiseRate > 0.03 && raiseRate < 0.05 ) {
-			// first day raise
-				if (i >= 2
-						&& dealRecords[i - 2].highest > dealRecords[i - 1].highest)
-					continue;
+			if (raiseRate > 0.03 && raiseRate < 0.05 &&
+					i >= 4
+							&& dealRecords[i - 4].closing > dealRecords[i - 3].closing
+							&& dealRecords[i - 3].closing > dealRecords[i - 2].closing
+					&& dealRecords[i - 2].closing < dealRecords[i - 1].closing
+					&& dealRecords[i -1 ].closing < dealRecords[i].closing) {
+		
 				if (printTitle) {
 					writer.println(stock.getStockId() + ":"
 							+ stock.getStockName()

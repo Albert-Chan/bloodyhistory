@@ -11,7 +11,7 @@ public class RisingRateCalculator extends AbstractCallBackHandler {
 		super(writer);
 	}
 
-	public void operate(StockInfo stock) {
+	public void step(StockInfo stock) {
 		boolean printTitle = true;
 		FengShiData[] dealRecords = (FengShiData[]) stock.getDealArray();
 
