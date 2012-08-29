@@ -3,7 +3,7 @@ package theory.validator;
 import stockdata.DayData;
 import stockdata.StockInfo;
 
-public class VolumeVSPrice implements ICallBackHandler {
+public class VolumeVSPrice implements IStepExecutor {
 	public void step(StockInfo stock) {
 		DayData[] dealRecords = (DayData[]) stock.getDealArray();
 		long subTotalVolume = 0;

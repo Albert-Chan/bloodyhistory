@@ -12,14 +12,14 @@ import java.io.UnsupportedEncodingException;
 import stockdata.DayStockInfo;
 import stockdata.FiveMinStockInfo;
 import stockdata.StockInfo;
-import theory.validator.ICallBackHandler;
+import theory.validator.IStepExecutor;
 import theory.validator.Rush;
 
 public class FiveMinKExtractor {
 
-	ICallBackHandler handler;
+	IStepExecutor handler;
 
-	public FiveMinKExtractor(ICallBackHandler handler) {
+	public FiveMinKExtractor(IStepExecutor handler) {
 		this.handler = handler;
 	}
 

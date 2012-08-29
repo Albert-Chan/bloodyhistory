@@ -2,11 +2,11 @@ package stockdata;
 
 import java.util.ArrayList;
 
-import theory.validator.ICallBackHandler;
+import theory.validator.IStepExecutor;
 
 public abstract class StockInfo {
 
-	ArrayList<ICallBackHandler> handlers = new ArrayList<ICallBackHandler>();
+	ArrayList<IStepExecutor> handlers = new ArrayList<IStepExecutor>();
 
 	String stockId;
 	String stockName;
@@ -44,13 +44,13 @@ public abstract class StockInfo {
 		return stockName;
 	}
 
-	public void setHandlers(ICallBackHandler... handlers) {
-		for (ICallBackHandler handler : handlers)
+	public void setHandlers(IStepExecutor... handlers) {
+		for (IStepExecutor handler : handlers)
 			this.handlers.add(handler);
 	}
 
 	public void analysize() {
-		for (ICallBackHandler handler : handlers) {
+		for (IStepExecutor handler : handlers) {
 			if (null != handler)
 				handler.step(this);
 		}

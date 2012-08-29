@@ -12,13 +12,13 @@ import java.io.UnsupportedEncodingException;
 import stockdata.DayStockInfo;
 import stockdata.StockInfo;
 import theory.validator.FivePercentDayRise;
-import theory.validator.ICallBackHandler;
+import theory.validator.IStepExecutor;
 
 public class DayKExtractor {
 
-	ICallBackHandler handler;
+	IStepExecutor handler;
 
-	public DayKExtractor(ICallBackHandler handler) {
+	public DayKExtractor(IStepExecutor handler) {
 		this.handler = handler;
 	}
 
@@ -29,7 +29,7 @@ public class DayKExtractor {
 
 			try {
 				if (writer != null) {
-					ICallBackHandler handler = new FivePercentDayRise(writer);
+					IStepExecutor handler = new FivePercentDayRise(writer);
 					new DayKExtractor(handler)
 							.extract("D:/StockAnalysis/data/day");
 					((FivePercentDayRise) handler).postHandle();

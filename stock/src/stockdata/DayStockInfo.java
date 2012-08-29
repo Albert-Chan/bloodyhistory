@@ -2,6 +2,8 @@ package stockdata;
 
 import java.util.Date;
 
+import theory.validator.IStepExecutor;
+
 public class DayStockInfo extends StockInfo {
 
 	public static final DayStockInfo ERROR_INFO = new DayStockInfo("errorId",
@@ -23,11 +25,11 @@ public class DayStockInfo extends StockInfo {
 		return dealRecords;
 	}
 
-	public void exec(StepExecutor executor) {
+	public void exec(IStepExecutor executor) {
 		if (dealRecords == null)
 			return;
 		for (index = 0; index < dealRecords.length; index++) {
-			executor.exec();
+			executor.step(this);
 		}
 	}
 	

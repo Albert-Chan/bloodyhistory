@@ -11,14 +11,14 @@ import java.io.UnsupportedEncodingException;
 
 import stockdata.FengShiStockInfo;
 import stockdata.StockInfo;
-import theory.validator.ICallBackHandler;
+import theory.validator.IStepExecutor;
 import theory.validator.TenPercent;
 
 public class JrjFengShiDataExtractor {
 
-	ICallBackHandler handler;
+	IStepExecutor handler;
 
-	public JrjFengShiDataExtractor(ICallBackHandler handler) {
+	public JrjFengShiDataExtractor(IStepExecutor handler) {
 		this.handler = handler;
 	}
 
