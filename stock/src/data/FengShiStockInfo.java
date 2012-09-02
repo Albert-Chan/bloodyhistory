@@ -1,4 +1,4 @@
-package stockdata;
+package data;
 
 public class FengShiStockInfo extends StockInfo {
 	public static final FengShiStockInfo ERROR_INFO = new FengShiStockInfo(

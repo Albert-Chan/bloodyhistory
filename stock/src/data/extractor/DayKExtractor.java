@@ -1,4 +1,4 @@
-package data.collector;
+package data.extractor;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,31 +8,52 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.Properties;
 
-import stockdata.DayStockInfo;
-import stockdata.FiveMinStockInfo;
-import stockdata.StockInfo;
-import theory.validator.IStepExecutor;
-import theory.validator.Rush;
+import data.DayStockInfo;
+import data.StockInfo;
 
-public class FiveMinKExtractor {
+import theory.validator.CallBackHandler;
 
-	IStepExecutor handler;
+public class DayKExtractor {
 
-	public FiveMinKExtractor(IStepExecutor handler) {
+	CallBackHandler handler;
+
+	public DayKExtractor(CallBackHandler handler) {
 		this.handler = handler;
 	}
 
 	public static void main(String[] args) {
+
+		Properties props = new Properties();
+		try {
+			FileInputStream in = new FileInputStream(
+					"D:/StockAnalysis/config.ini");
+			props.load(in);
+			in.close();
+		} catch (FileNotFoundException e3) {
+			System.out.println(e3.getLocalizedMessage());
+		} catch (IOException e3) {
+			System.out.println(e3.getLocalizedMessage());
+		}
+
 		PrintWriter writer = null;
 		try {
-			writer = new PrintWriter("D:/StockAnalysis/RisingRush.txt", "utf8");
-
+			String baseDir = props.getProperty("baseDir");
+			
+			String output = props.getProperty("output");
+			writer = new PrintWriter(baseDir +"output/"+ output, "utf8");
+			String handlerClassName = props.getProperty("handler");
 			try {
-				if (writer != null)
-					new FiveMinKExtractor(new Rush(writer))
-							.extract("D:/StockAnalysis/data/5min");
-			} catch (IOException e) {
+				if (writer != null) {
+					Class clazz = Class.forName(handlerClassName);
+					CallBackHandler handler = (CallBackHandler) clazz
+							.newInstance();
+					handler.setWriter(writer);
+					new DayKExtractor(handler).extract(baseDir + "/data/day");
+					handler.postHandle();
+				}
+			} catch (Exception e) {
 				System.out.println(e.getLocalizedMessage());
 			}
 			writer.close();
@@ -62,7 +83,7 @@ public class FiveMinKExtractor {
 	}
 
 	/**
-	 * extract the data by 5min
+	 * extract the data by day
 	 * 
 	 * @param path
 	 */
@@ -79,7 +100,7 @@ public class FiveMinKExtractor {
 
 			String stockId = data1[0];
 			String stockName = data1[1];
-			StockInfo stock = new FiveMinStockInfo(stockId, stockName);
+			StockInfo stock = new DayStockInfo(stockId, stockName);
 
 			stockIdForCheck = stockIdForCheck.substring(2, 8);
 			if (!stockId.equals(stockIdForCheck)) {

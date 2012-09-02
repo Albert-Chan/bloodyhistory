@@ -1,17 +1,11 @@
 package theory.validator;
 
-import java.io.PrintWriter;
+import data.FengShiData;
+import data.StockInfo;
 
-import stockdata.FengShiData;
-import stockdata.StockInfo;
+public class RisingRateCalculator extends CallBackHandler {
 
-public class RisingRateCalculator extends AbstractCallBackHandler {
-
-	public RisingRateCalculator(PrintWriter writer) {
-		super(writer);
-	}
-
-	public void step(StockInfo stock) {
+	public void exec(StockInfo stock) {
 		boolean printTitle = true;
 		FengShiData[] dealRecords = (FengShiData[]) stock.getDealArray();
 

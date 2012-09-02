@@ -1,10 +1,11 @@
 package theory.validator;
 
-import stockdata.DayData;
-import stockdata.StockInfo;
+import data.DayData;
+import data.StockInfo;
 
-public class VolumeVSPrice implements IStepExecutor {
-	public void step(StockInfo stock) {
+public class VolumeVSPrice extends CallBackHandler {
+
+	public void exec(StockInfo stock) {
 		DayData[] dealRecords = (DayData[]) stock.getDealArray();
 		long subTotalVolume = 0;
 
@@ -19,21 +20,21 @@ public class VolumeVSPrice implements IStepExecutor {
 				continue;
 			}
 
-			subTotalVolume = dealRecords[i].volume + dealRecords[i - 1].volume
-					+ dealRecords[i - 2].volume + dealRecords[i - 3].volume
-					+ dealRecords[i - 4].volume;
+			subTotalVolume = dealRecords[i].vol + dealRecords[i - 1].vol
+					+ dealRecords[i - 2].vol + dealRecords[i - 3].vol
+					+ dealRecords[i - 4].vol;
 
 			long averageTotalVolume = subTotalVolume / 5;
 
-			if (dealRecords[i].volume > 1.5 * averageTotalVolume) {
+			if (dealRecords[i].vol > 1.5 * averageTotalVolume) {
 
-				if (dealRecords[i].closing >= dealRecords[i].opening)
+				if (dealRecords[i].close >= dealRecords[i].open)
 					currentPositive++;
 				else
 					currentNegative++;
 
 				if (i + 1 < dealRecords.length) {
-					if (dealRecords[i + 1].closing >= dealRecords[i + 1].opening)
+					if (dealRecords[i + 1].close >= dealRecords[i + 1].open)
 						nextPositive++;
 					else
 						nextNegative++;

@@ -1,4 +1,4 @@
-package stockdata;
+package data;
 
 public class FiveMinStockInfo extends StockInfo {
 

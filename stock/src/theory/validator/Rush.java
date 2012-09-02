@@ -1,20 +1,16 @@
 package theory.validator;
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import stockdata.ExtendedData;
-import stockdata.FiveMinData;
-import stockdata.IExtendedData;
-import stockdata.StockInfo;
+import data.ExtendedData;
+import data.FiveMinData;
+import data.IExtendedData;
+import data.StockInfo;
 
-public class Rush extends AbstractCallBackHandler {
 
-	public Rush(PrintWriter writer) {
-		super(writer);
-	}
+public class Rush extends CallBackHandler {
 
-	public void step(StockInfo stock) {
+	public void exec(StockInfo stock) {
 		FiveMinData[] dealRecords = (FiveMinData[]) stock.getDealArray();
 		ArrayList<IExtendedData> extended = new ArrayList<IExtendedData>();
 		stock.attach(extended);

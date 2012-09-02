@@ -1,4 +1,4 @@
-package data.collector;
+package data.extractor;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,32 +9,31 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
-import stockdata.DayStockInfo;
-import stockdata.StockInfo;
-import theory.validator.FivePercentDayRise;
-import theory.validator.IStepExecutor;
+import data.FengShiStockInfo;
+import data.StockInfo;
 
-public class DayKExtractor {
+import theory.validator.CallBackHandler;
+import theory.validator.TenPercent;
 
-	IStepExecutor handler;
+public class FengShiExtractor {
 
-	public DayKExtractor(IStepExecutor handler) {
+	CallBackHandler handler;
+
+	public FengShiExtractor(CallBackHandler handler) {
 		this.handler = handler;
 	}
 
 	public static void main(String[] args) {
 		PrintWriter writer = null;
 		try {
-			writer = new PrintWriter("D:/StockAnalysis/check5percentDayRise6.txt", "utf8");
+			writer = new PrintWriter("D:\\checkRush.txt", "utf8");
 
 			try {
 				if (writer != null) {
-					IStepExecutor handler = new FivePercentDayRise(writer);
-					new DayKExtractor(handler)
-							.extract("D:/StockAnalysis/data/day");
-					((FivePercentDayRise) handler).postHandle();
+					CallBackHandler handler = new TenPercent();
+					handler.setWriter(writer);
+					new FengShiExtractor(handler).extract("D:\\mx\\20120725");
 				}
-					
 			} catch (IOException e) {
 				System.out.println(e.getLocalizedMessage());
 			}
@@ -76,26 +75,9 @@ public class DayKExtractor {
 		try {
 			reader = new BufferedReader(new InputStreamReader(
 					new FileInputStream(stockFile), "GBK"));
-			// the first line
-			String line = reader.readLine();
-			String[] data1 = line.split(" ");
 
-			String stockId = data1[0];
-			String stockName = data1[1];
-			StockInfo stock = new DayStockInfo(stockId, stockName);
-
-			stockIdForCheck = stockIdForCheck.substring(2, 8);
-			if (!stockId.equals(stockIdForCheck)) {
-				System.out.println("Need check " + stockId + " != "
-						+ stockIdForCheck);
-				return DayStockInfo.ERROR_INFO;
-			}
-
-			// insert this stock into stock table ...
-
-			// the second line, ignore.
-			reader.readLine();
-
+			StockInfo stock = new FengShiStockInfo(stockFile.getName(), null);
+			String line = null;
 			while (null != (line = reader.readLine())) {
 				// insert the data for the stock of this date
 				stock.add(line);
@@ -109,6 +91,6 @@ public class DayKExtractor {
 		} finally {
 			reader.close();
 		}
-		return DayStockInfo.ERROR_INFO;
+		return FengShiStockInfo.ERROR_INFO;
 	}
 }

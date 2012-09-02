@@ -1,4 +1,4 @@
-package stockdata;
+package data;
 
 public interface IExtendedData {
 

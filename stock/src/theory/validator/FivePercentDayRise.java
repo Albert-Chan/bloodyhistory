@@ -1,14 +1,14 @@
 package theory.validator;
 
-import java.io.PrintWriter;
-import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
-import stockdata.DayData;
-import stockdata.StockInfo;
+import data.DayData;
+import data.StockInfo;
 
-public class FivePercentDayRise extends AbstractCallBackHandler {
+
+public class FivePercentDayRise extends CallBackHandler {
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat(
 			"MM/dd/yyyy");
 	private static Date baseline = null;
@@ -24,11 +24,7 @@ public class FivePercentDayRise extends AbstractCallBackHandler {
 	double saleAtNextHighest = 1;
 	double saleAtNextLowest = 1;
 
-	public FivePercentDayRise(PrintWriter writer) {
-		super(writer);
-	}
-
-	public void step(StockInfo stock) {
+	public void exec(StockInfo stock) {
 		boolean printTitle = true;
 		DayData[] dealRecords = (DayData[]) stock.getDealArray();
 
@@ -39,20 +35,20 @@ public class FivePercentDayRise extends AbstractCallBackHandler {
 			if (dealRecords[i].date.before(baseline))
 				continue;
 			// close at the highest
-			boolean closeAtHighest = ((dealRecords[i].highest - dealRecords[i].closing) / dealRecords[i].opening) < 0.002;
+			boolean closeAtHighest = ((dealRecords[i].high - dealRecords[i].close) / dealRecords[i].open) < 0.002;
 			if (!closeAtHighest) {
 				continue;
 			}
 			// 3% < raiseRate < 5%
-			double raiseRate = (dealRecords[i].closing - dealRecords[i].opening)
-					/ dealRecords[i].opening;
+			double raiseRate = (dealRecords[i].close - dealRecords[i].open)
+					/ dealRecords[i].open;
 
 			if (raiseRate > 0.03 && raiseRate < 0.05 &&
 					i >= 4
-							&& dealRecords[i - 4].closing > dealRecords[i - 3].closing
-							&& dealRecords[i - 3].closing > dealRecords[i - 2].closing
-					&& dealRecords[i - 2].closing < dealRecords[i - 1].closing
-					&& dealRecords[i -1 ].closing < dealRecords[i].closing) {
+							&& dealRecords[i - 4].close > dealRecords[i - 3].close
+							&& dealRecords[i - 3].close > dealRecords[i - 2].close
+					&& dealRecords[i - 2].close < dealRecords[i - 1].close
+					&& dealRecords[i -1 ].close < dealRecords[i].close) {
 		
 				if (printTitle) {
 					writer.println(stock.getStockId() + ":"
@@ -66,20 +62,20 @@ public class FivePercentDayRise extends AbstractCallBackHandler {
 
 				AnlaysisData3 anlaysis = new AnlaysisData3();
 
-				anlaysis.closeVsOpen = (dealRecords[i].closing - dealRecords[i].opening)
-						/ dealRecords[i].opening;
-				anlaysis.highestVsOpen= (dealRecords[i].highest - dealRecords[i].opening)
-						/ dealRecords[i].opening;
-				anlaysis.lowestVsOpen= (dealRecords[i].lowest - dealRecords[i].opening)
-						/ dealRecords[i].opening;
-				anlaysis.nextOpenVsClose= (dealRecords[i+1].opening - dealRecords[i].closing)
-						/ dealRecords[i].closing;
-				anlaysis.nextHighestVsClose= (dealRecords[i+1].highest - dealRecords[i].closing)
-						/ dealRecords[i].closing;
-				anlaysis.nextLowestVsClose= (dealRecords[i+1].lowest - dealRecords[i].closing)
-						/ dealRecords[i].closing;
-				anlaysis.nextCloseVsClose= (dealRecords[i+1].closing - dealRecords[i].closing)
-						/ dealRecords[i].closing;
+				anlaysis.closeVsOpen = (dealRecords[i].close - dealRecords[i].open)
+						/ dealRecords[i].open;
+				anlaysis.highestVsOpen= (dealRecords[i].high - dealRecords[i].open)
+						/ dealRecords[i].open;
+				anlaysis.lowestVsOpen= (dealRecords[i].low - dealRecords[i].open)
+						/ dealRecords[i].open;
+				anlaysis.nextOpenVsClose= (dealRecords[i+1].open - dealRecords[i].close)
+						/ dealRecords[i].close;
+				anlaysis.nextHighestVsClose= (dealRecords[i+1].high - dealRecords[i].close)
+						/ dealRecords[i].close;
+				anlaysis.nextLowestVsClose= (dealRecords[i+1].low - dealRecords[i].close)
+						/ dealRecords[i].close;
+				anlaysis.nextCloseVsClose= (dealRecords[i+1].close - dealRecords[i].close)
+						/ dealRecords[i].close;
 				
 				writer.print(dateFormat.format(dealRecords[i].date) + "\t\t\t\t");
 

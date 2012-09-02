@@ -1,14 +1,14 @@
 package theory.validator;
 
-import java.io.PrintWriter;
-import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
-import stockdata.DayData;
-import stockdata.StockInfo;
+import data.DayData;
+import data.StockInfo;
 
-public class TenPercent extends AbstractCallBackHandler {
+
+public class TenPercent extends CallBackHandler {
 	private static final SimpleDateFormat df = new SimpleDateFormat(
 			"MM/dd/yyyy");
 	private static Date baseline = null;
@@ -20,11 +20,7 @@ public class TenPercent extends AbstractCallBackHandler {
 		}
 	}
 
-	public TenPercent(PrintWriter writer) {
-		super(writer);
-	}
-
-	public void step(StockInfo stock) {
+	public void exec(StockInfo stock) {
 		boolean printTitle = true;
 		DayData[] dealRecords = (DayData[]) stock.getDealArray();
 
@@ -35,8 +31,8 @@ public class TenPercent extends AbstractCallBackHandler {
 			if (dealRecords[i].date.before(baseline))
 				continue;
 
-			double raiseRate = (dealRecords[i].closing - dealRecords[i - 1].closing)
-					/ dealRecords[i - 1].closing;
+			double raiseRate = (dealRecords[i].close - dealRecords[i - 1].close)
+					/ dealRecords[i - 1].close;
 
 			if (raiseRate > 0.09) {
 				if (printTitle) {
@@ -48,21 +44,21 @@ public class TenPercent extends AbstractCallBackHandler {
 				}
 
 				AnlaysisData anlaysis = new AnlaysisData();
-				anlaysis.openVsLastClosing = (dealRecords[i + 1].opening - dealRecords[i].closing)
-						/ dealRecords[i].closing;
-				anlaysis.closeVsLastClosing = (dealRecords[i + 1].closing - dealRecords[i].closing)
-						/ dealRecords[i].closing;
+				anlaysis.openVsLastClosing = (dealRecords[i + 1].open - dealRecords[i].close)
+						/ dealRecords[i].close;
+				anlaysis.closeVsLastClosing = (dealRecords[i + 1].close - dealRecords[i].close)
+						/ dealRecords[i].close;
 
-				anlaysis.closeVsOpening = (dealRecords[i + 1].closing - dealRecords[i + 1].opening)
-						/ dealRecords[i + 1].closing;
-				anlaysis.closeVsHighest = (dealRecords[i + 1].closing - dealRecords[i + 1].highest)
-						/ dealRecords[i + 1].closing;
-				anlaysis.closeVsLowest = (dealRecords[i + 1].closing - dealRecords[i + 1].lowest)
-						/ dealRecords[i + 1].closing;
-				anlaysis.openVsHighest = (dealRecords[i + 1].opening - dealRecords[i + 1].highest)
-						/ dealRecords[i + 1].opening;
-				anlaysis.openVsLowest = (dealRecords[i + 1].opening - dealRecords[i + 1].lowest)
-						/ dealRecords[i + 1].opening;
+				anlaysis.closeVsOpening = (dealRecords[i + 1].close - dealRecords[i + 1].open)
+						/ dealRecords[i + 1].close;
+				anlaysis.closeVsHighest = (dealRecords[i + 1].close - dealRecords[i + 1].high)
+						/ dealRecords[i + 1].close;
+				anlaysis.closeVsLowest = (dealRecords[i + 1].close - dealRecords[i + 1].low)
+						/ dealRecords[i + 1].close;
+				anlaysis.openVsHighest = (dealRecords[i + 1].open - dealRecords[i + 1].high)
+						/ dealRecords[i + 1].open;
+				anlaysis.openVsLowest = (dealRecords[i + 1].open - dealRecords[i + 1].low)
+						/ dealRecords[i + 1].open;
 
 				writer.print(df.format(anlaysis.openVsLastClosing * 100) + "%"
 						+ "\t\t\t\t");

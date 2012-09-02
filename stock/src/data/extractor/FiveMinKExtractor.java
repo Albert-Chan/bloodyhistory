@@ -1,4 +1,4 @@
-package data.collector;
+package data.extractor;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,29 +9,34 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
-import stockdata.FengShiStockInfo;
-import stockdata.StockInfo;
-import theory.validator.IStepExecutor;
+import theory.validator.CallBackHandler;
 import theory.validator.TenPercent;
+import data.DayStockInfo;
+import data.FiveMinStockInfo;
+import data.StockInfo;
 
-public class JrjFengShiDataExtractor {
+public class FiveMinKExtractor {
 
-	IStepExecutor handler;
+	CallBackHandler handler;
 
-	public JrjFengShiDataExtractor(IStepExecutor handler) {
+	public FiveMinKExtractor(CallBackHandler handler) {
 		this.handler = handler;
 	}
 
 	public static void main(String[] args) {
 		PrintWriter writer = null;
 		try {
-			writer = new PrintWriter("D:\\checkRush.txt", "utf8");
+			writer = new PrintWriter("D:/StockAnalysis/RisingRush.txt", "utf8");
 
 			try {
-				if (writer != null)
-					new JrjFengShiDataExtractor(new TenPercent(writer))
-							.extract("D:\\mx\\20120725");
-			} catch (IOException e) {
+				if (writer != null) {
+					CallBackHandler handler = new TenPercent();
+					handler.setWriter(writer);
+					new FiveMinKExtractor(handler)
+							.extract("D:/StockAnalysis/data/5min");
+				}
+
+			} catch (Exception e) {
 				System.out.println(e.getLocalizedMessage());
 			}
 			writer.close();
@@ -61,7 +66,7 @@ public class JrjFengShiDataExtractor {
 	}
 
 	/**
-	 * extract the data by day
+	 * extract the data by 5min
 	 * 
 	 * @param path
 	 */
@@ -72,9 +77,26 @@ public class JrjFengShiDataExtractor {
 		try {
 			reader = new BufferedReader(new InputStreamReader(
 					new FileInputStream(stockFile), "GBK"));
+			// the first line
+			String line = reader.readLine();
+			String[] data1 = line.split(" ");
 
-			StockInfo stock = new FengShiStockInfo(stockFile.getName(), null);
-			String line = null;
+			String stockId = data1[0];
+			String stockName = data1[1];
+			StockInfo stock = new FiveMinStockInfo(stockId, stockName);
+
+			stockIdForCheck = stockIdForCheck.substring(2, 8);
+			if (!stockId.equals(stockIdForCheck)) {
+				System.out.println("Need check " + stockId + " != "
+						+ stockIdForCheck);
+				return DayStockInfo.ERROR_INFO;
+			}
+
+			// insert this stock into stock table ...
+
+			// the second line, ignore.
+			reader.readLine();
+
 			while (null != (line = reader.readLine())) {
 				// insert the data for the stock of this date
 				stock.add(line);
@@ -88,6 +110,6 @@ public class JrjFengShiDataExtractor {
 		} finally {
 			reader.close();
 		}
-		return FengShiStockInfo.ERROR_INFO;
+		return DayStockInfo.ERROR_INFO;
 	}
 }

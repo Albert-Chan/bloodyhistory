@@ -1,12 +1,12 @@
-package stockdata;
+package data;
 
 import java.util.ArrayList;
 
-import theory.validator.IStepExecutor;
+import theory.validator.CallBackHandler;
 
 public abstract class StockInfo {
 
-	ArrayList<IStepExecutor> handlers = new ArrayList<IStepExecutor>();
+	ArrayList<CallBackHandler> handlers = new ArrayList<CallBackHandler>();
 
 	String stockId;
 	String stockName;
@@ -19,7 +19,7 @@ public abstract class StockInfo {
 	}
 
 	public abstract IDealData createDealData();
-	
+
 	public abstract IDealData[] getDealArray();
 
 	public boolean add(String dealData) {
@@ -31,8 +31,8 @@ public abstract class StockInfo {
 		deal.add(data);
 		return true;
 	}
-	
-	public void attach(ArrayList<IExtendedData> extended){
+
+	public void attach(ArrayList<IExtendedData> extended) {
 		this.extended = extended;
 	}
 
@@ -44,15 +44,15 @@ public abstract class StockInfo {
 		return stockName;
 	}
 
-	public void setHandlers(IStepExecutor... handlers) {
-		for (IStepExecutor handler : handlers)
+	public void setHandlers(CallBackHandler... handlers) {
+		for (CallBackHandler handler : handlers)
 			this.handlers.add(handler);
 	}
 
 	public void analysize() {
-		for (IStepExecutor handler : handlers) {
+		for (CallBackHandler handler : handlers) {
 			if (null != handler)
-				handler.step(this);
+				handler.exec(this);
 		}
 	}
 }

@@ -1,4 +1,4 @@
-package data.collector;
+package data.crawler;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,9 +12,9 @@ import java.util.logging.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import stockdata.RisingRateData;
-import stockdata.RisingRateDataComparator;
 import connection.HttpConnection;
+import data.RisingRateData;
+import data.RisingRateDataComparator;
 
 public class SinaRisingRateCrawler {
 	// The static logger

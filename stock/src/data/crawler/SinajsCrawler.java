@@ -1,4 +1,4 @@
-package data.collector;
+package data.crawler;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
