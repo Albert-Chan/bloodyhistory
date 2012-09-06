@@ -23,6 +23,8 @@ public abstract class StockInfo {
 	public abstract IDealData[] getDealArray();
 
 	public boolean add(String dealData) {
+		if (dealData.equals("数据来源:通达信"))
+			return true;
 		IDealData data = createDealData();
 		if (!data.build(dealData)) {
 			System.out.println("Data error on " + stockId + ": " + stockName);
