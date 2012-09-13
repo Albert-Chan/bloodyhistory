@@ -15,8 +15,11 @@ import org.json.JSONObject;
 
 public class JrjCrawlerByDay {
 
-	protected static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(
+	protected static final SimpleDateFormat DATE_FORMAT_YMD = new SimpleDateFormat(
 			"yyyy-MM-dd");
+
+	protected static final SimpleDateFormat DATE_FORMAT_YMDHMS = new SimpleDateFormat(
+			"yyyy-MM-dd HH:mm:SS");
 
 	private static final int MAX_CONNECTION = 16;
 
@@ -30,7 +33,11 @@ public class JrjCrawlerByDay {
 	public void start() {
 		Timer timer = new Timer();
 		// every 12h
-		timer.schedule(new TaskThread(), 0, 12 * 3600 * 1000);
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.HOUR_OF_DAY, 16);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		timer.schedule(new TaskThread(), calendar.getTime(), 12 * 3600 * 1000);
 	}
 
 	class TaskThread extends TimerTask {
@@ -41,7 +48,7 @@ public class JrjCrawlerByDay {
 				return;
 			}
 
-			String today = DATE_FORMAT.format(new Date());
+			String today = DATE_FORMAT_YMD.format(new Date());
 			File base1 = new File("D:/StockAnalysis/data/mx", today);
 			doRun(base1);
 			// sleep 50min
@@ -97,7 +104,7 @@ public class JrjCrawlerByDay {
 			executor.shutdown();
 		}
 	}
-	
+
 	class PrintWriterPostHandler implements ICrawlerPostHandler {
 		public void handle(String stockId, ArrayList<JSONObject> array)
 				throws Exception {
