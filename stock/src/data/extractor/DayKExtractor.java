@@ -46,7 +46,7 @@ public class DayKExtractor {
 			String handlerClassName = props.getProperty("handler");
 			try {
 				if (writer != null) {
-					Class clazz = Class.forName(handlerClassName);
+					Class<?> clazz = Class.forName(handlerClassName);
 					CallBackHandler handler = (CallBackHandler) clazz
 							.newInstance();
 					handler.setWriter(writer);

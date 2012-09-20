@@ -6,14 +6,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-
-import data.FengShiStockInfo;
-import data.StockInfo;
+import java.util.Properties;
 
 import theory.validator.CallBackHandler;
-import theory.validator.TenPercent;
+import data.FengShiStockInfo;
+import data.StockInfo;
 
 public class FengShiExtractor {
 
@@ -24,25 +21,29 @@ public class FengShiExtractor {
 	}
 
 	public static void main(String[] args) {
-		PrintWriter writer = null;
+		Properties props = new Properties();
 		try {
-			writer = new PrintWriter("D:\\checkRush.txt", "utf8");
-
-			try {
-				if (writer != null) {
-					CallBackHandler handler = new TenPercent();
-					handler.setWriter(writer);
-					new FengShiExtractor(handler).extract("D:\\mx\\20120725");
-				}
-			} catch (IOException e) {
-				System.out.println(e.getLocalizedMessage());
-			}
-			writer.close();
-		} catch (FileNotFoundException e1) {
-			System.out.println(e1.getLocalizedMessage());
-		} catch (UnsupportedEncodingException e2) {
-			System.out.println(e2.getLocalizedMessage());
+			FileInputStream in = new FileInputStream(
+					"D:/StockAnalysis/config.ini");
+			props.load(in);
+			in.close();
+		} catch (FileNotFoundException e3) {
+			System.out.println(e3.getLocalizedMessage());
+		} catch (IOException e3) {
+			System.out.println(e3.getLocalizedMessage());
 		}
+
+		try {
+
+			CallBackHandler handler = null;// new TenPercent();
+			String baseDir = props.getProperty("baseDir");
+			if (baseDir == null)
+				new FengShiExtractor(handler).extract(baseDir + "/data/mx");
+
+		} catch (IOException e) {
+			System.out.println(e.getLocalizedMessage());
+		}
+
 	}
 
 	public boolean extract(String path) throws IOException {
@@ -52,6 +53,7 @@ public class FengShiExtractor {
 		}
 
 		for (File file : dir.listFiles()) {
+			
 			String stockIdForCheck = file.getName();
 			// createTable ...
 			StockInfo stock = extractStock(file, stockIdForCheck);

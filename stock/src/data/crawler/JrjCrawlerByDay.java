@@ -48,7 +48,6 @@ public class JrjCrawlerByDay {
 			try {
 				Thread.sleep(50 * 60 * 1000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			File base2 = new File("D:/StockAnalysis/data/mx", today + "x");

@@ -14,7 +14,9 @@ public class FengShiData implements IDealData {
 	public Date date;
 	public double price;
 	public long volume;
-	public double turnover;
+	public double amount;
+	public long A4;
+	public boolean raise;
 
 	public boolean build(String raw) {
 
@@ -23,14 +25,16 @@ public class FengShiData implements IDealData {
 			String a1 = obj.getString("A1");
 			String a2 = obj.getString("A2");
 			String a3 = obj.getString("A3");
-			// String a4 = obj.getString("A4");
+			String a4 = obj.getString("A4");
 			String a5 = obj.getString("A5");
-			// String a6 = obj.getString("A6");
-
-			date = dateFormat.parse(a5);
+			String a6 = obj.getString("A6");
+			
 			price = Double.valueOf(a1);
 			volume = Long.valueOf(a2);
-			turnover = Double.valueOf(a3);
+			amount = Double.valueOf(a3);
+			A4 = Long.valueOf(a4);
+			date = dateFormat.parse(a5);
+			raise = Long.valueOf(a6) == 1 ? true: false;
 
 		} catch (ParseException e) {
 			System.out.println(e.getMessage());
