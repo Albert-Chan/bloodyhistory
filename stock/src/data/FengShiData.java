@@ -8,8 +8,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class FengShiData implements IDealData {
-	private static SimpleDateFormat dateFormat = new SimpleDateFormat(
-			"HH:mm:ss");
+	protected static final SimpleDateFormat DATE_FORMAT_YMD = new SimpleDateFormat(
+			"yyyy-MM-dd");
+	protected static final SimpleDateFormat DATE_FORMAT_YMDHMS = new SimpleDateFormat(
+			"yyyy-MM-dd HH:mm:SS");
 
 	public Date date;
 	public double price;
@@ -17,6 +19,12 @@ public class FengShiData implements IDealData {
 	public double amount;
 	public long A4;
 	public boolean raise;
+
+	private String whichDay;
+
+	public FengShiData(String date) {
+		this.whichDay = date;
+	}
 
 	public boolean build(String raw) {
 
@@ -28,13 +36,13 @@ public class FengShiData implements IDealData {
 			String a4 = obj.getString("A4");
 			String a5 = obj.getString("A5");
 			String a6 = obj.getString("A6");
-			
+
 			price = Double.valueOf(a1);
 			volume = Long.valueOf(a2);
 			amount = Double.valueOf(a3);
 			A4 = Long.valueOf(a4);
-			date = dateFormat.parse(a5);
-			raise = Long.valueOf(a6) == 1 ? true: false;
+			date = DATE_FORMAT_YMDHMS.parse(whichDay + " " + a5);
+			raise = Long.valueOf(a6) == 1 ? true : false;
 
 		} catch (ParseException e) {
 			System.out.println(e.getMessage());

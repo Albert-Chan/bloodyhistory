@@ -37,9 +37,9 @@ public class FengShiExtractor {
 
 			CallBackHandler handler = null;// new TenPercent();
 			String baseDir = props.getProperty("baseDir");
-			if (baseDir == null)
+			if (baseDir != null)
 				new FengShiExtractor(handler).extract(baseDir + "/data/mx");
-
+				
 		} catch (IOException e) {
 			System.out.println(e.getLocalizedMessage());
 		}
@@ -51,15 +51,18 @@ public class FengShiExtractor {
 		if (!dir.isDirectory()) {
 			System.out.println(path + " is not a directory.");
 		}
-
+		//every day
 		for (File file : dir.listFiles()) {
-			
-			String stockIdForCheck = file.getName();
-			// createTable ...
-			StockInfo stock = extractStock(file, stockIdForCheck);
-			if (null != stock && null != handler) {
-				stock.setHandlers(handler);
-				stock.analysize();
+			if (file.isDirectory()) {
+				String date = file.getName();
+				for (File stockMx : file.listFiles()) {
+					// createTable ...
+					StockInfo stock = extractStock(stockMx, date);
+					if (null != stock && null != handler) {
+						stock.setHandlers(handler);
+						stock.analysize();
+					}		
+				}
 			}
 		}
 		return true;
@@ -70,7 +73,7 @@ public class FengShiExtractor {
 	 * 
 	 * @param path
 	 */
-	public StockInfo extractStock(File stockFile, String stockIdForCheck)
+	public StockInfo extractStock(File stockFile, String date)
 			throws IOException {
 
 		BufferedReader reader = null;
@@ -78,7 +81,7 @@ public class FengShiExtractor {
 			reader = new BufferedReader(new InputStreamReader(
 					new FileInputStream(stockFile), "GBK"));
 
-			StockInfo stock = new FengShiStockInfo(stockFile.getName(), null);
+			StockInfo stock = new FengShiStockInfo(stockFile.getName(), null, date);
 			String line = null;
 			while (null != (line = reader.readLine())) {
 				// insert the data for the stock of this date
