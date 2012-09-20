@@ -1,6 +1,7 @@
 package data;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import theory.validator.CallBackHandler;
 
@@ -10,7 +11,7 @@ public abstract class StockInfo {
 
 	String stockId;
 	String stockName;
-	ArrayList<IDealData> deal = new ArrayList<IDealData>();
+	LinkedList<IDealData> deal = new LinkedList<IDealData>();
 	ArrayList<IExtendedData> extended = null;
 
 	public StockInfo(String stockId, String stockName) {
