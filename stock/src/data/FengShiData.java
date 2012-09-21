@@ -53,4 +53,14 @@ public class FengShiData implements IDealData {
 		}
 		return true;
 	}
+
+	public boolean equals(FengShiData d) {
+		if (d == null)
+			return false;
+		if (d.date == date && d.price == price && d.volume == volume
+				&& d.amount == amount && d.A4 == A4 && d.raise == raise)
+			return true;
+		return false;
+	}
+
 }

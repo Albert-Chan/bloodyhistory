@@ -1,5 +1,6 @@
 package data;
 
+import java.util.Comparator;
 import java.util.TreeSet;
 
 public class FengShiStockInfo extends StockInfo {
@@ -25,7 +26,8 @@ public class FengShiStockInfo extends StockInfo {
 		return dealRecords;
 	}
 
-	TreeSet<FengShiData> set = new TreeSet<FengShiData>();
+	TreeSet<FengShiData> set = new TreeSet<FengShiData>(
+			new DateTimeComparator());
 
 	public boolean add(String dealData) {
 		if (dealData.equals("数据来源:通达信"))
@@ -35,8 +37,21 @@ public class FengShiStockInfo extends StockInfo {
 			System.out.println("Data error on " + stockId + ": " + stockName);
 			return false;
 		}
-		set.add(data);
-		return true;
+		return set.add(data);
 	}
 
+	public boolean add(FengShiData data) {
+		return set.add(data);
+	}
+
+	class DateTimeComparator implements Comparator<FengShiData> {
+		public int compare(FengShiData a, FengShiData b) {
+			if (a.date.equals(b.date))
+				return 0;
+			if (a.date.before(b.date))
+				return -1;
+			else
+				return 1;
+		}
+	}
 }
