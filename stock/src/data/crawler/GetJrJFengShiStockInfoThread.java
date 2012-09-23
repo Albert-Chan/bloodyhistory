@@ -28,7 +28,7 @@ public class GetJrJFengShiStockInfoThread implements Runnable {
 			getStockByIdDetailed(stockId);
 			return true;
 		} catch (Exception e) {
-			System.out.print("Problem on Stock: " + stockId + "\t");
+			System.out.print("Fatal >>> Problem on Stock: " + stockId + "\t");
 			System.out.println(e.getMessage());
 			return false;
 		}

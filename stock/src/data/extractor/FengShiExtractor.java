@@ -24,7 +24,7 @@ public class FengShiExtractor {
 		Properties props = new Properties();
 		try {
 			FileInputStream in = new FileInputStream(
-					"D:/StockAnalysis/config.ini");
+					"E:/StockAnalysis/config.ini");
 			props.load(in);
 			in.close();
 		} catch (FileNotFoundException e) {

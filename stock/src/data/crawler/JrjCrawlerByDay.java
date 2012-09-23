@@ -49,7 +49,7 @@ public class JrjCrawlerByDay {
 			}
 
 			String today = DATE_FORMAT_YMD.format(new Date());
-			File base1 = new File("D:/StockAnalysis/data/mx", today);
+			File base1 = new File("E:/StockAnalysis/data/mx", today);
 			doRun(base1);
 			// sleep 50min
 			try {
@@ -57,7 +57,7 @@ public class JrjCrawlerByDay {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			File base2 = new File("D:/StockAnalysis/data/mx", today + "x");
+			File base2 = new File("E:/StockAnalysis/data/mx", today + "x");
 			doRun(base2);
 		}
 
@@ -65,7 +65,7 @@ public class JrjCrawlerByDay {
 			// only fetch on working day and at 16:00-23:00
 			Calendar calendar = Calendar.getInstance();
 			int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-			if (dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY)
+			if (dayOfWeek == Calendar.SATURDAY )//|| dayOfWeek == Calendar.SUNDAY)
 				return false;
 			int h = calendar.get(Calendar.HOUR_OF_DAY);
 			if (h < 16 || h > 23)
@@ -86,7 +86,7 @@ public class JrjCrawlerByDay {
 				System.out.print("Base directory is not created!");
 				return;
 			}
-			String path = "D:/StockAnalysis/data/day";
+			String path = "E:/StockAnalysis/data/day";
 			File dir = new File(path);
 			if (!dir.isDirectory()) {
 				System.out.println(path + " is not a directory.");
