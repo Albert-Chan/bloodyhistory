@@ -51,9 +51,9 @@ public class JrjCrawlerByDay {
 			String today = DATE_FORMAT_YMD.format(new Date());
 			File base1 = new File("E:/StockAnalysis/data/mx", today);
 			doRun(base1);
-			// sleep 50min
+			// sleep 1min
 			try {
-				Thread.sleep(50 * 60 * 1000);
+				Thread.sleep(1 * 60 * 1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -65,7 +65,7 @@ public class JrjCrawlerByDay {
 			// only fetch on working day and at 16:00-23:00
 			Calendar calendar = Calendar.getInstance();
 			int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-			if (dayOfWeek == Calendar.SATURDAY )//|| dayOfWeek == Calendar.SUNDAY)
+			if (dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY)
 				return false;
 			int h = calendar.get(Calendar.HOUR_OF_DAY);
 			if (h < 16 || h > 23)
@@ -101,7 +101,9 @@ public class JrjCrawlerByDay {
 				executor.execute(new GetJrJFengShiStockInfoThread(stockId,
 						new PrintWriterPostHandler()));
 			}
+			System.out.println("Shutting down 1");
 			executor.shutdown();
+			System.out.println("Shutting down 2");
 		}
 	}
 
