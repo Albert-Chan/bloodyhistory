@@ -23,8 +23,6 @@ public class JrjCrawlerByDay {
 
 	private static final int MAX_CONNECTION = 16;
 
-	private static String baseDir = null;
-
 	public static void main(String[] args) {
 		JrjCrawlerByDay crawler = new JrjCrawlerByDay();
 		crawler.start();
@@ -34,6 +32,11 @@ public class JrjCrawlerByDay {
 		Timer timer = new Timer();
 		// every 12h
 		Calendar calendar = Calendar.getInstance();
+		if (calendar.get(Calendar.HOUR_OF_DAY) < 8) {
+			// FIXME handle the last day of a year.
+			calendar.set(Calendar.DAY_OF_YEAR,
+					calendar.get(Calendar.HOUR_OF_DAY) - 1);
+		}
 		calendar.set(Calendar.HOUR_OF_DAY, 16);
 		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(Calendar.SECOND, 0);
@@ -51,12 +54,6 @@ public class JrjCrawlerByDay {
 			String today = DATE_FORMAT_YMD.format(new Date());
 			File base1 = new File("E:/StockAnalysis/data/mx", today);
 			doRun(base1);
-			// sleep 1min
-			try {
-				Thread.sleep(1 * 60 * 1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 			File base2 = new File("E:/StockAnalysis/data/mx", today + "x");
 			doRun(base2);
 		}
@@ -68,7 +65,7 @@ public class JrjCrawlerByDay {
 			if (dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY)
 				return false;
 			int h = calendar.get(Calendar.HOUR_OF_DAY);
-			if (h < 16 || h > 23)
+			if (h < 15 && h > 9)
 				return false;
 			return true;
 		}
@@ -81,11 +78,7 @@ public class JrjCrawlerByDay {
 			} else {
 				base.mkdir();
 			}
-			baseDir = base.getAbsolutePath() + "\\";
-			if (baseDir == null) {
-				System.out.print("Base directory is not created!");
-				return;
-			}
+			String baseDir = base.getAbsolutePath() + "\\";
 			String path = "E:/StockAnalysis/data/day";
 			File dir = new File(path);
 			if (!dir.isDirectory()) {
@@ -99,15 +92,19 @@ public class JrjCrawlerByDay {
 				String stockId = file.getName();
 				stockId = stockId.substring(2, 8);
 				executor.execute(new GetJrJFengShiStockInfoThread(stockId,
-						new PrintWriterPostHandler()));
+						new PrintWriterPostHandler(baseDir)));
 			}
-			System.out.println("Shutting down 1");
 			executor.shutdown();
-			System.out.println("Shutting down 2");
 		}
 	}
 
 	class PrintWriterPostHandler implements ICrawlerPostHandler {
+		private String baseDir = null;
+
+		public PrintWriterPostHandler(String baseDir) {
+			this.baseDir = baseDir;
+		}
+
 		public void handle(String stockId, ArrayList<JSONObject> array)
 				throws Exception {
 			PrintWriter writer = new PrintWriter(baseDir + stockId + ".txt",
