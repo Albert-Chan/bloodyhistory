@@ -40,7 +40,7 @@ public class JrjCrawlerByDay {
 		calendar.set(Calendar.HOUR_OF_DAY, 16);
 		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(Calendar.SECOND, 0);
-		timer.schedule(new TaskThread(), calendar.getTime(), 12 * 3600 * 1000);
+		timer.schedule(new TaskThread(), 0,/*calendar.getTime(),*/ 12 * 3600 * 1000);
 	}
 
 	class TaskThread extends TimerTask {
@@ -59,14 +59,14 @@ public class JrjCrawlerByDay {
 		}
 
 		private boolean checkTime() {
-			// only fetch on working day and at 16:00-23:00
+			// only fetch on working day and before 9:00 after 15:00
 			Calendar calendar = Calendar.getInstance();
 			int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-			if (dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY)
-				return false;
-			int h = calendar.get(Calendar.HOUR_OF_DAY);
-			if (h < 15 && h > 9)
-				return false;
+////			if (dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY)
+////				return false;
+//			int h = calendar.get(Calendar.HOUR_OF_DAY);
+//			if (h < 15 && h > 9)
+//				return false;
 			return true;
 		}
 
