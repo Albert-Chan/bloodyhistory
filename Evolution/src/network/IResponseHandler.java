@@ -1,7 +1,7 @@
 package network;
 
 public interface IResponseHandler {
-	
-	public Response getResponse();
-	
+
+	public Response handle(byte[] original);
+
 }

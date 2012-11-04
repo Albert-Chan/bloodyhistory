@@ -5,32 +5,21 @@ import java.io.InputStream;
 import java.util.zip.GZIPInputStream;
 
 
-public class ResponseUngzipHandler implements IResponseHandler {
-	private byte[] input;
+public class UngzipHandler implements IResponseHandler {
 
-	Response response = null;
 
-	public Response getResponse() {
-		return response;
-	}
-
-	public ResponseUngzipHandler(byte[] bytes) {
-		this.input = bytes;
-		handle();
-	}
-
-	private void handle() {
+	public Response handle(byte[] input) {
 		if (input == null)
-			return;
+			return null;
 		int breakPoint = getHttpHead(input);
 		if (-1 == breakPoint)
-			return;
-		response = new Response();
+			return null;
+		Response response = new Response();
 		response.setHttpHeader(new String(input, 0, breakPoint));
 		ByteArrayInputStream bats = new ByteArrayInputStream(input, breakPoint,
 				input.length - breakPoint);
 		response.setHttpContent(ungzip(bats));
-
+		return response;
 	}
 
 	private int getHttpHead(byte[] bytes) {
