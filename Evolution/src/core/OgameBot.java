@@ -1,20 +1,18 @@
 package core;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import network.HttpClient;
 import network.Response;
 import network.UngzipHandler;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import parser.HTMLTextParser;
 
@@ -36,16 +34,13 @@ public class OgameBot {
 
 		OgameBot bot = new OgameBot(client);
 
-		String strHTML = "<div id=\"planetList\">" + "sss" + "</div>";
+		
 
-		try {
-			bot.getHostileAndCPMap(strHTML.getBytes("utf-8"));
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+			bot.getHostileAndCPMap("abcdsefgdke");
+		
 
-		bot.login();
+		//bot.login();
 	}
 
 	public void login() {
@@ -112,30 +107,40 @@ public class OgameBot {
 		String name;
 	}
 
-	private void getHostileAndCPMap(byte[] html) {
-		Document doc = htmlParser.parseHTML(new ByteArrayInputStream(html));
+	// private void getHostileAndCPMap(byte[] html) {
+	// Document doc = htmlParser.parseHTML(new ByteArrayInputStream(html));
+	//
+	// NodeList divs = doc.getElementsByTagName("div");
+	//
+	// for (int i = 0; i < divs.getLength(); i++) {
+	// Node node = divs.item(i);
+	// String idValue = getAttribute(node, "id");//
+	// node.getAttributes().getNamedItem("id").getNodeValue();
+	// if ("planetList".equals(idValue)) {
+	// NodeList planetList = node.getChildNodes();
+	// for (int j = 0; j < planetList.getLength(); j++) {
+	// Node planet = planetList.item(j);
+	// String cpStr = getAttribute(planet, "id");
+	// String[] cpPair = cpStr.split("-");
+	// if (cpPair.length == 2 && cpPair[0].equals("planet")) {
+	// String cp = cpPair[1];
+	// }
+	// NodeList divs = planet.getElementsByTagName("div");
+	// }
+	//
+	// break;
+	// }
+	//
+	// }
+	// }
 
-		NodeList divs = doc.getElementsByTagName("div");
+	private void getHostileAndCPMap(String html) {
+		String patternString = null;
+		Pattern pattern = Pattern.compile("d.{1}e");
+		Matcher matcher = pattern.matcher(html);
+		while (matcher.find())
+			System.out.println(matcher.group(0));
 
-		for (int i = 0; i < divs.getLength(); i++) {
-			Node node = divs.item(i);
-			String idValue = getAttribute(node, "id");// node.getAttributes().getNamedItem("id").getNodeValue();
-			if ("planetList".equals(idValue)) {
-				NodeList planetList = node.getChildNodes();
-				for (int j = 0; j < planetList.getLength(); j++) {
-					Node planet = planetList.item(j);
-					String cpStr = getAttribute(planet, "id");
-					String[] cpPair = cpStr.split("-");
-					if (cpPair.length == 2 && cpPair[0].equals("planet")) {
-						String cp = cpPair[1];
-					}
-					planet.get
-				}
-
-				break;
-			}
-
-		}
 	}
 
 	private String getAttribute(Node node, String attributeName) {
