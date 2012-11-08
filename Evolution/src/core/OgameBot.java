@@ -33,14 +33,7 @@ public class OgameBot {
 		client.registerResponseHandler(new UngzipHandler());
 
 		OgameBot bot = new OgameBot(client);
-
-		
-
-		
-			bot.getHostileAndCPMap("abcdsefgdke");
-		
-
-		//bot.login();
+		bot.login();
 	}
 
 	public void login() {
@@ -106,33 +99,6 @@ public class OgameBot {
 		String cp;
 		String name;
 	}
-
-	// private void getHostileAndCPMap(byte[] html) {
-	// Document doc = htmlParser.parseHTML(new ByteArrayInputStream(html));
-	//
-	// NodeList divs = doc.getElementsByTagName("div");
-	//
-	// for (int i = 0; i < divs.getLength(); i++) {
-	// Node node = divs.item(i);
-	// String idValue = getAttribute(node, "id");//
-	// node.getAttributes().getNamedItem("id").getNodeValue();
-	// if ("planetList".equals(idValue)) {
-	// NodeList planetList = node.getChildNodes();
-	// for (int j = 0; j < planetList.getLength(); j++) {
-	// Node planet = planetList.item(j);
-	// String cpStr = getAttribute(planet, "id");
-	// String[] cpPair = cpStr.split("-");
-	// if (cpPair.length == 2 && cpPair[0].equals("planet")) {
-	// String cp = cpPair[1];
-	// }
-	// NodeList divs = planet.getElementsByTagName("div");
-	// }
-	//
-	// break;
-	// }
-	//
-	// }
-	// }
 
 	private void getHostileAndCPMap(String html) {
 		String patternString = null;

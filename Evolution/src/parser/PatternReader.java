@@ -1,0 +1,96 @@
+package parser;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+
+public class PatternReader {
+	
+	private HashMap<String, Pattern> map = new HashMap<String, Pattern>();
+
+	public PatternReader(String path) throws IOException{
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new InputStreamReader(new FileInputStream(
+					path), "UTF-8"));
+
+			Visitor visitor = new Visitor();
+			String line = null;
+			while ((line = br.readLine()) != null) {
+				visitor.visit(line);
+			}
+		} finally {
+			if (null != br) {
+				br.close();
+			}
+		}
+	}
+	
+	public HashMap<String, Pattern> getPatternMap()
+	{
+		return map;
+	}
+	
+	class Visitor {
+		public void visit(String line) {
+			if (line.startsWith("[")) {
+				startPattern(line);
+			} else if (line.startsWith("/[")) {
+				endPattern(line);
+			} else if (line.startsWith("@@")) {
+				handleParam(line);
+			} else {
+				handlePatternString(line);
+			}
+		}
+
+		
+
+		private String currentPatternName = null;
+		private Pattern currentPattern = null;
+
+		private void startPattern(String line) {
+			String patternName = line.substring(1, line.length() - 2);
+			if (map.containsKey(patternName)) {
+				System.err.println("duplicate pattern name.");
+			} else {
+				currentPattern = new Pattern(patternName);
+				map.put(patternName, currentPattern);
+				currentPatternName = patternName;
+			}
+		}
+
+		private void endPattern(String line) {
+			String patternName = line.substring(2, line.length() - 2);
+			if (currentPatternName != null
+					&& currentPatternName.equals(patternName)) {
+				currentPatternName = null;
+				currentPattern = null;
+			} else {
+				System.err.println("pattern name does not match.");
+			}
+		}
+
+		private void handleParam(String line) {
+			if (currentPattern == null) {
+				System.err.println("Not in a pattern.");
+			}
+			String[] keyValue = line.split("=");
+			Parameter p = new Parameter(keyValue[0], keyValue[1]);
+			currentPattern.addParam(p);
+		}
+
+		private void handlePatternString(String line) {
+			if (currentPattern == null) {
+				System.err.println("Not in a pattern.");
+			}
+			currentPattern.appendContent(line);
+		}
+
+}
+
+
+
+}
