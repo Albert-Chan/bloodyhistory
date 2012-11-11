@@ -6,11 +6,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 
-public class PatternReader {
+public class PatternDescriptorReader {
 	
-	private HashMap<String, Pattern> map = new HashMap<String, Pattern>();
+	private HashMap<String, PatternDescriptor> map = new HashMap<String, PatternDescriptor>();
 
-	public PatternReader(String path) throws IOException{
+	public PatternDescriptorReader(String path) throws IOException{
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new InputStreamReader(new FileInputStream(
@@ -28,7 +28,7 @@ public class PatternReader {
 		}
 	}
 	
-	public HashMap<String, Pattern> getPatternMap()
+	public HashMap<String, PatternDescriptor> getPatternMap()
 	{
 		return map;
 	}
@@ -49,14 +49,14 @@ public class PatternReader {
 		
 
 		private String currentPatternName = null;
-		private Pattern currentPattern = null;
+		private PatternDescriptor currentPattern = null;
 
 		private void startPattern(String line) {
 			String patternName = line.substring(1, line.length() - 2);
 			if (map.containsKey(patternName)) {
 				System.err.println("duplicate pattern name.");
 			} else {
-				currentPattern = new Pattern(patternName);
+				currentPattern = new PatternDescriptor(patternName);
 				map.put(patternName, currentPattern);
 				currentPatternName = patternName;
 			}
@@ -79,7 +79,7 @@ public class PatternReader {
 			}
 			String[] keyValue = line.split("=");
 			Parameter p = new Parameter(keyValue[0], keyValue[1]);
-			currentPattern.addParam(p);
+			currentPattern.addParameter(p);
 		}
 
 		private void handlePatternString(String line) {
