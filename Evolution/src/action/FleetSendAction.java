@@ -1,6 +1,6 @@
 package action;
 
-import gamelogic.Coordinate;
+import gamelogic.Planet;
 import gamelogic.Fleet;
 
 import java.util.GregorianCalendar;

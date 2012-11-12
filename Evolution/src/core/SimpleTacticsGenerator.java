@@ -1,6 +1,6 @@
 package core;
 
-import gamelogic.Coordinate;
+import gamelogic.Planet;
 import gamelogic.Fleet;
 
 import java.io.BufferedReader;
@@ -11,17 +11,17 @@ import java.util.LinkedList;
 
 
 public class SimpleTacticsGenerator {
-	private static HashMap<String, Coordinate> nameCpMap = new HashMap<String, Coordinate>();
+	private static HashMap<String, Planet> nameCpMap = new HashMap<String, Planet>();
 	static {
-		nameCpMap.put("Libris", new Coordinate("4:208:4", "34043740", "Libris"));
-		nameCpMap.put("Virgon", new Coordinate("4:208:5", "34044039", "Virgon"));
-		nameCpMap.put("Kobol", new Coordinate("4:242:11", "34024962", "Kobol"));
-		nameCpMap.put("Picon", new Coordinate("4:258:4", "34046040", "Picon"));
-		nameCpMap.put("Tauron", new Coordinate("4:262:5", "34039390", "Tauron"));
-		nameCpMap.put("Caprica", new Coordinate("4:265:6", "34038392", "Caprica"));
-		nameCpMap.put("Aerelon", new Coordinate("4:271:15", "34035509", "Aerelon"));
-		nameCpMap.put("Hesper", new Coordinate("6:263:4", "34056543", "Hesper"));
-		nameCpMap.put("Earth", new Coordinate("6:263:5", "34043525", "Earth"));
+		nameCpMap.put("Libris", new Planet("4:208:4", "34043740", "Libris"));
+		nameCpMap.put("Virgon", new Planet("4:208:5", "34044039", "Virgon"));
+		nameCpMap.put("Kobol", new Planet("4:242:11", "34024962", "Kobol"));
+		nameCpMap.put("Picon", new Planet("4:258:4", "34046040", "Picon"));
+		nameCpMap.put("Tauron", new Planet("4:262:5", "34039390", "Tauron"));
+		nameCpMap.put("Caprica", new Planet("4:265:6", "34038392", "Caprica"));
+		nameCpMap.put("Aerelon", new Planet("4:271:15", "34035509", "Aerelon"));
+		nameCpMap.put("Hesper", new Planet("6:263:4", "34056543", "Hesper"));
+		nameCpMap.put("Earth", new Planet("6:263:5", "34043525", "Earth"));
 	}
 	
 	private static final String tacticsFile = "..\\..\\SimpleTactics.txt";
@@ -31,7 +31,7 @@ public class SimpleTacticsGenerator {
 		parse();
 	}
 
-	private static Coordinate getColonyCoordinateByName(String name) {
+	private static Planet getColonyCoordinateByName(String name) {
 		return nameCpMap.get(name);
 	}
 	
@@ -55,7 +55,7 @@ public class SimpleTacticsGenerator {
 					String[] strArray = str.split(";");
 					Tactics tactics = new Tactics();
 					tactics.setSource(getColonyCoordinateByName(srcName));
-					tactics.setTarget(new Coordinate(strArray[0]));
+					tactics.setTarget(new Planet(strArray[0]));
 					if (strArray.length == 1) {
 						Fleet fleet = new Fleet();
 						fleet.add("Small Cargo Ship", 10);

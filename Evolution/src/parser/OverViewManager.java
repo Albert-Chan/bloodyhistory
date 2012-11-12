@@ -2,7 +2,7 @@ package parser;
 import event.EventFactory;
 import event.IMinaryEvent;
 import gamelogic.Constants;
-import gamelogic.Coordinate;
+import gamelogic.Planet;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -57,7 +57,7 @@ public class OverViewManager {
 	private int energy;
 	private int energyGap;
 	
-	private static Coordinate[] cpMap = null;
+	private static Planet[] cpMap = null;
 	
 		
 	public List getEvents(){
@@ -187,7 +187,7 @@ public class OverViewManager {
 					String planetName = subString[1];
 					String coordinate = subString[2];
 					if (counter < Constants.MAX_COLONY_NUM) {
-						OverViewManager.cpMap[counter++] = new Coordinate(
+						OverViewManager.cpMap[counter++] = new Planet(
 								coordinate, cp, planetName);
 					}
 				}

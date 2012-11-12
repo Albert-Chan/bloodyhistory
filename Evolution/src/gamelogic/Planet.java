@@ -1,5 +1,8 @@
 package gamelogic;
-public class Coordinate {
+
+import java.util.HashMap;
+
+public class Planet {
 	int galaxy;
 
 	int system;
@@ -18,8 +21,14 @@ public class Coordinate {
 	String planetName;
 	
 	String cp = null;
+	
+	public Planet(HashMap<String, String> propMap)
+	{
+		
+	}
+	
 
-	public Coordinate(String position) {
+	public Planet(String position) {
 		this.position = position;
 		if (null != position) {
 			String[] pos = position.split(":");
@@ -31,12 +40,12 @@ public class Coordinate {
 		}
 	}
 	
-	public Coordinate(String position, String player) {
+	public Planet(String position, String player) {
 		this(position);
 		this.belongTo = player;
 	}
 	
-	public Coordinate(String position, String cp, String name) {
+	public Planet(String position, String cp, String name) {
 		this(position);
 		this.cp = cp;
 		this.planetName = name;
