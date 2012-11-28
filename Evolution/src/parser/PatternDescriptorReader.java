@@ -46,13 +46,11 @@ public class PatternDescriptorReader {
 			}
 		}
 
-		
-
 		private String currentPatternName = null;
 		private PatternDescriptor currentPattern = null;
 
 		private void startPattern(String line) {
-			String patternName = line.substring(1, line.length() - 2);
+			String patternName = line.substring(1, line.length() - 1);
 			if (map.containsKey(patternName)) {
 				System.err.println("duplicate pattern name.");
 			} else {
@@ -63,20 +61,22 @@ public class PatternDescriptorReader {
 		}
 
 		private void endPattern(String line) {
-			String patternName = line.substring(2, line.length() - 2);
+			String patternName = line.substring(2, line.length() - 1);
 			if (currentPatternName != null
 					&& currentPatternName.equals(patternName)) {
 				currentPatternName = null;
 				currentPattern = null;
 			} else {
-				System.err.println("pattern name does not match.");
+				System.err.println("pattern name does not match: " + patternName);
 			}
 		}
 
 		private void handleParam(String line) {
 			if (currentPattern == null) {
 				System.err.println("Not in a pattern.");
+				return;
 			}
+			line = line.trim();
 			String[] keyValue = line.split("=");
 			Parameter p = new Parameter(keyValue[0], keyValue[1]);
 			currentPattern.addParameter(p);

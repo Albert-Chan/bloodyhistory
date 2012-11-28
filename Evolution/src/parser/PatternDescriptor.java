@@ -34,9 +34,7 @@ public class PatternDescriptor {
 	}
 
 	public void appendContent(String str) {
-		str = str.trim();
-		patternContent.append(str);
-		
+		patternContent.append(str).append("\n");
 		extractOrderedParameters(str);
 	}
 	
@@ -44,7 +42,7 @@ public class PatternDescriptor {
 		String patternString = getContent();
 
 		for (Parameter p : parameters) {
-			patternString.replace(p.name, "(" + p.value + ")");
+			patternString = patternString.replaceAll(p.name, "(" + p.value + ")");
 		}
 		return patternString;
 	}
@@ -55,7 +53,7 @@ public class PatternDescriptor {
 	
 	private void extractOrderedParameters(String str)
 	{
-		Pattern pattern = Pattern.compile("@@.*@");
+		Pattern pattern = Pattern.compile("@@.*?@");
 		Matcher matcher = pattern.matcher(str);
 		while (matcher.find())
 			orderedParameters.add(matcher.group(0));
