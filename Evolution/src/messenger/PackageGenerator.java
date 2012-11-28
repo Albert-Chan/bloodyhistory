@@ -16,8 +16,8 @@ public class PackageGenerator {
 		}
 	}
 
-	public String generate(String name, Parameter... paramters) {
-		PackageDescriptor pack = map.get(name);
+	public String generate(String packageName, Parameter... paramters) {
+		PackageDescriptor pack = map.get(packageName);
 		return pack.getPackage(paramters);
 	}
 
