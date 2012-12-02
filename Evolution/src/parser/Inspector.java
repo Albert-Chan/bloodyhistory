@@ -1,6 +1,6 @@
 package parser;
 
-import gamelogic.Planet;
+import gamelogic.Coordinate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,14 +8,14 @@ import java.util.HashMap;
 public class Inspector {
 	
 	private PatternExtractor extractor = new PatternExtractor();
-	public HashMap<String, Planet> getCPMap(String html) {
+	public HashMap<String, Coordinate> getCPMap(String html) {
 		ArrayList<HashMap<String, String>> planets = extractor.extract(html, "planet");
-		HashMap<String, Planet> planetsMap = new HashMap<String, Planet>();
+		HashMap<String, Coordinate> planetsMap = new HashMap<String, Coordinate>();
 		
 		for ( HashMap<String, String> planetPropMap : planets)
 		{
 			String coordinate = planetPropMap.get("coordinate");
-			Planet planet = new Planet(planetPropMap);
+			Coordinate planet = new Coordinate(planetPropMap);
 			planetsMap.put(coordinate, planet);
 		}
 		return planetsMap;

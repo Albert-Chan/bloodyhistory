@@ -1,12 +1,12 @@
 package core;
 
-import gamelogic.Planet;
+import gamelogic.Coordinate;
 import gamelogic.Fleet;
 
 public class Tactics
 {
-	private Planet source;
-	private Planet target;
+	private Coordinate source;
+	private Coordinate target;
 	private Fleet fleet;
 	
 	public Fleet getFleet() {
@@ -15,16 +15,16 @@ public class Tactics
 	public void setFleet(Fleet fleet) {
 		this.fleet = fleet;
 	}
-	public Planet getTarget() {
+	public Coordinate getTarget() {
 		return target;
 	}
-	public void setTarget(Planet target) {
+	public void setTarget(Coordinate target) {
 		this.target = target;
 	}
-	public Planet getSource() {
+	public Coordinate getSource() {
 		return source;
 	}
-	public void setSource(Planet source) {
+	public void setSource(Coordinate source) {
 		this.source = source;
 	}
 }

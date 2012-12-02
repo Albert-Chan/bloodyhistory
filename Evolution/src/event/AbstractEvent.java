@@ -1,41 +1,38 @@
 package event;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import action.IAction;
+
 public abstract class AbstractEvent implements IEvent {
 
-	// if two events has the same property and exist in the same batch ID, they
-	// will be regarded as two independent events; Otherwise, the later one will
-	// be suppressed.
+	private LinkedList<IAction> actions = new LinkedList<IAction>();
+
 	public boolean equals(IEvent e) {
 		return false;
 	}
 
-	private int batch = -1;
+	private long when;
 
-	public int getBatch() {
-		return this.batch;
-	}
-
-	private int type = UNKNOWN;
-
-	public int getType() {
-		return type;
-	}
-
-	public void setType(int type) {
-		this.type = type;
-	}
-
-	// The interval from the event being caught to the occurrence.
-	private int when;
-
-	public int getWhen() {
+	public long getWhen() {
 		return this.when;
 	}
 
-	public void setWhen(int when) {
+	public void setWhen(long when) {
 		this.when = when;
 	}
 
-	public abstract AbstractEvent parse(String rawData);
+	public List<IAction> removeActions() {
+		return actions;
+	}
+
+	public boolean attachAction(IAction action) {
+		return this.actions.add(action);
+	}
+
+	public boolean attachActions(List<IAction> actions) {
+		return this.actions.addAll(actions);
+	}
 
 }

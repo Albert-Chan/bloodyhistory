@@ -1,12 +1,12 @@
 package event;
 
-import gamelogic.Planet;
+import gamelogic.Coordinate;
 import gamelogic.Fleet;
 
 public abstract class MinaryEvent extends AbstractEvent {
 
-	private Planet subject;
-	private Planet object;
+	private Coordinate subject;
+	private Coordinate object;
 	private Fleet fleet;
 
 	/**
@@ -14,11 +14,11 @@ public abstract class MinaryEvent extends AbstractEvent {
 	 * 
 	 * @return the coordinate of the subject.
 	 */
-	public Planet getSubject() {
+	public Coordinate getSubject() {
 		return subject;
 	}
 
-	public void setSubject(Planet subject) {
+	public void setSubject(Coordinate subject) {
 		this.subject = subject;
 	}
 
@@ -27,11 +27,11 @@ public abstract class MinaryEvent extends AbstractEvent {
 	 * 
 	 * @return the coordinate of the object.
 	 */
-	public Planet getObject() {
+	public Coordinate getObject() {
 		return object;
 	}
 
-	public void setObject(Planet object) {
+	public void setObject(Coordinate object) {
 		this.object = object;
 	}
 

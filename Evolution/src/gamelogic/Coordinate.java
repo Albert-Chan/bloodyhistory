@@ -2,13 +2,13 @@ package gamelogic;
 
 import java.util.HashMap;
 
-public class Planet {
+public class Coordinate {
 	int galaxy;
 
 	int system;
 
-	int planet;
-	
+	int position;
+
 	/**
 	 * planet=1, DF=2, Moon=3
 	 */
@@ -16,39 +16,23 @@ public class Planet {
 
 	String belongTo;
 
-	String position;
-	
 	String planetName;
-	
-	String cp = null;
-	
-	public Planet(HashMap<String, String> propMap)
-	{
-		
-	}
-	
 
-	public Planet(String position) {
-		this.position = position;
-		if (null != position) {
-			String[] pos = position.split(":");
+	String cp = null;
+
+	public Coordinate(String coordString) {
+		if (null != coordString) {
+			String[] pos = coordString.split(":");
 			if (null != pos && pos.length == 3) {
 				galaxy = Integer.parseInt(pos[0]);
 				system = Integer.parseInt(pos[1]);
-				planet = Integer.parseInt(pos[2]);
+				position = Integer.parseInt(pos[2]);
 			}
 		}
 	}
-	
-	public Planet(String position, String player) {
-		this(position);
-		this.belongTo = player;
-	}
-	
-	public Planet(String position, String cp, String name) {
-		this(position);
-		this.cp = cp;
-		this.planetName = name;
+
+	public Coordinate(HashMap<String, String> propMap) {
+
 	}
 
 	public String getBelongTo() {
@@ -67,28 +51,20 @@ public class Planet {
 		this.galaxy = galaxy;
 	}
 
-	public int getPlanet() {
-		return planet;
-	}
-
-	public void setPlanet(int planet) {
-		this.planet = planet;
-	}
-
-	public String getPosition() {
-		return position;
-	}
-
-	public void setPosition(String position) {
-		this.position = position;
-	}
-
 	public int getSystem() {
 		return system;
 	}
 
 	public void setSystem(int system) {
 		this.system = system;
+	}
+
+	public int getPosition() {
+		return position;
+	}
+
+	public void setPosition(int position) {
+		this.position = position;
 	}
 
 	public int getType() {
@@ -114,15 +90,14 @@ public class Planet {
 	public void setPlanetName(String planetName) {
 		this.planetName = planetName;
 	}
-	
-	public String toString()
-	{
+
+	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		sb.append(galaxy);
 		sb.append(":");
 		sb.append(system);
 		sb.append(":");
-		sb.append(planet);
+		sb.append(position);
 		return sb.toString();
 	}
 

@@ -1,17 +1,25 @@
 package event;
 
+import java.util.List;
+
+import action.IAction;
+import core.Context;
+
 public interface IEvent {
-	
-	int UNKNOWN = -1;
-	int OWN_ATTACK_FLIGHT = 1;
-	int OWN_ATTACK_RETURN = 2;
-	
-	int getType();
-	void setType(int type);
-	
-	int getWhen();
-	void setWhen(int when);
-	
+
 	boolean equals(IEvent e);
-	int getBatch();
+	/**
+	 * the difference, measured in milliseconds, between the incident time and
+	 * midnight, January 1, 1970 UTC.
+	 */
+	long getWhen();
+
+	void setWhen(long when);
+
+	List<IAction> removeActions();
+	
+	boolean attachAction(IAction action);
+	boolean attachActions(List<IAction> actions);
+
+	IAction handle(Context context);
 }

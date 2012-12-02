@@ -1,6 +1,6 @@
 package action;
 
-import gamelogic.Planet;
+import gamelogic.Coordinate;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -19,7 +19,7 @@ public class LoginAction extends AbstractAction {
 		super(context);
 	}
 
-	public void login() throws IOException {
+	public void act() throws IOException {
 		HttpClient client = context.getClient();
 		if (null == client)
 			return;
@@ -50,7 +50,7 @@ public class LoginAction extends AbstractAction {
 		// System.out.println(response.getHttpHeader());
 		// System.out.println(new String(response.getHttpContent(), "utf-8"));
 
-		HashMap<String, Planet> cpMap = inspector.getCPMap(new String(response
+		HashMap<String, Coordinate> cpMap = inspector.getCPMap(new String(response
 				.getHttpContent(), "utf-8"));
 	}
 

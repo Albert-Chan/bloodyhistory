@@ -11,7 +11,7 @@ public class OgameBot {
 
 	public void initialize() {
 		initializeContext();
-		context.setClient(createHttpClient());
+		createHttpClient();
 		scheduler = createScheduler();
 	}
 
@@ -25,11 +25,12 @@ public class OgameBot {
 	private HttpClient createHttpClient() {
 		HttpClient client = new HttpClient(context.getGameServer(), 80);
 		client.registerResponseHandler(new UngzipHandler());
+		context.setClient(client);
 		return client;
 	}
 
 	private Scheduler createScheduler() {
-		Scheduler scheduler = new Scheduler();
+		Scheduler scheduler = new Scheduler(context);
 		return scheduler;
 	}
 

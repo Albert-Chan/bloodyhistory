@@ -1,4 +1,5 @@
 package gamelogic;
+
 public class Resource {
 	int metal;
 
@@ -6,13 +7,12 @@ public class Resource {
 
 	int deuterium;
 
-	public Resource(int metal, int crystal, int deuterium)
-	{
+	public Resource(int metal, int crystal, int deuterium) {
 		this.metal = metal;
 		this.crystal = crystal;
 		this.deuterium = deuterium;
 	}
-	
+
 	public int getCrystal() {
 		return crystal;
 	}
