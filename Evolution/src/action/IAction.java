@@ -14,7 +14,7 @@ public interface IAction {
 
 	void setWhen(long when);
 
-	void act() throws IOException;
+	void perform();
 
 	public void addPreAction(IAction action);
 

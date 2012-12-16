@@ -29,7 +29,7 @@ public class FleetSendAction extends AbstractAction {
 		this.fleet = fleet;
 	}
 
-	public void act() {
+	protected void exec() {
 		HttpClient client = context.getClient();
 		if (null == client)
 			return;

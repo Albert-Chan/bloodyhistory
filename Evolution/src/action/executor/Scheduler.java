@@ -1,23 +1,28 @@
 package action.executor;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import action.FleetSendAction;
 import action.IAction;
 import action.LoginAction;
 import core.Context;
 import event.IEvent;
+import gamelogic.Coordinate;
 
 public class Scheduler {
 
 	private LinkedList<IEvent> eventList = new LinkedList<IEvent>();
 
-	private LinkedHashMap<Long, IAction> actionQueue = new LinkedHashMap<Long, IAction>();
+	private HashMap<IAction, ActionThread> actionQueue = new HashMap<IAction, ActionThread>();
 
 	private Context context;
+
+	private Timer timer = new Timer();
 
 	public Scheduler(Context context) {
 		this.context = context;
@@ -26,7 +31,7 @@ public class Scheduler {
 	public void addEvent(IEvent event) {
 		eventList.add(event);
 		IAction action = event.handle(context);
-		addAction(action.getWhen(), action);
+		addAction(action);
 	}
 
 	public void removeEvent(IEvent event) {
@@ -37,55 +42,112 @@ public class Scheduler {
 		}
 	}
 
-	public void addAction(long when, IAction action) {
-		actionQueue.put(when, action);
-		checkRestriction();
+	public void addAction(IAction action) {
+		if (!checkRestriction())
+			return;
+
+		ActionThread actionThread = new ActionThread(action);
+		long delay = action.getWhen() - System.currentTimeMillis();
+		timer.schedule(actionThread, delay < 0 ? 0 : delay);
+		actionQueue.put(action, actionThread);
+	}
+
+	class ActionThread extends TimerTask {
+
+		IAction action;
+
+		public ActionThread(IAction action) {
+			this.action = action;
+		}
+
+		public void run() {
+			action.perform();
+		}
 	}
 
 	public void removeAction(IAction action) {
-		actionQueue.remove(action);
 		ArrayList<IAction> preActions = action.getPreActions();
 		for (IAction preAction : preActions) {
 			removeAction(preAction);
 		}
+		ActionThread actionThread = actionQueue.remove(action);
+		actionThread.cancel();
+	}
 
+	// TODO
+	private boolean checkRestriction() {
+		return true;
 	}
-	
-	//TODO
-	private void checkRestriction(){
-		
-	}
+
+	private ArrayList<RouteOccupancy> routes = new ArrayList<RouteOccupancy>();
+	ArrayList<Coordinate> sheepList = null;
+	int cursor = 0;
 
 	public void run() {
+		LoginAction login = new LoginAction(context);
+		addAction(login);
 
-//		try {
-//			new UnLoginState().process();
-//		} catch (IOException e) {
-//			// log the excpetion
-//			new UnLoginState().process();
-//		}
+		retrevieRouteNumber();
+
+		// checkOverviewEvent();
+
+		loadSheepList();
+
+		for (int i = 0; i < context.routeLimit; i++) {
+			RouteOccupancy occupancy = new RouteOccupancy();
+			occupancy.setType(RouteOccupancy.TYPE_SHEEP_HUNTING);
+			Coordinate dest = sheepList.get(cursor++);
+			// occupancy need not dest?
+			// occupancy.setDest(dest);
+
+			// Coordinate source = chooseSource(dest);
+			// FleetSendAction fleetSend = new FleetSendAction(context, source,
+			// dest, resource, fleet);
+			// addAction(fleetSend);
+			//
+			// occupancy.setFreeTimePoint(freeTimePoint);
+			//
+			// routes.add(occupancy);
+		}
 
 	}
 
-//	class UnLoginState {
-//		public void process() throws IOException {
-//			LoginAction login = new LoginAction(context);
-//			login.act();
-//			new OverViewRunRobinState().process();
-//		}
-//	}
-//
-//	class OverViewRunRobinState {
-//		public void process() throws IOException {
-//			CheckEventAction checkEventAction = new CheckEventAction(context);
-//			checkEventAction.act();
-//			EventGroup events = checkEventAction.getOutput();
-//			if (events.getHostile().isEmpty()) {
-//				new EatSheepState().process();
-//			} else {
-//				new FSState().process();
-//			}
-//		}
-//	}
+	private void loadSheepList() {
+		sheepList = new ArrayList<Coordinate>();
+	}
+
+	private void retrevieRouteNumber() {
+		context.routeLimit = 5;
+	}
+
+	// public void old_run() {
+	// try {
+	// new UnLoginState().process();
+	// } catch (IOException e) {
+	// // log the excpetion
+	// new UnLoginState().process();
+	// }
+	// }
+
+	// class UnLoginState {
+	// public void process() throws IOException {
+	// LoginAction login = new LoginAction(context);
+	// login.act();
+	// new OverViewRunRobinState().process();
+	// }
+	// }
+	//
+	// class OverViewRunRobinState {
+	// public void process() throws IOException {
+	// CheckEventAction checkEventAction = new CheckEventAction(context);
+	// checkEventAction.act();
+	// EventGroup events = checkEventAction.getOutput();
+	// if (events.getHostile().isEmpty()) {
+	// new EatSheepState().process();
+	// } else {
+	// new FSState().process();
+	// }
+	// }
+	// }
 
 }

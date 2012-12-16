@@ -13,13 +13,19 @@ import network.Response;
 import parser.Inspector;
 import core.Context;
 
+/**
+ * Login and get cp map.
+ * 
+ * @author Albert
+ * 
+ */
 public class LoginAction extends AbstractAction {
 
 	public LoginAction(Context context) {
 		super(context);
 	}
 
-	public void act() throws IOException {
+	protected void exec() throws IOException {
 		HttpClient client = context.getClient();
 		if (null == client)
 			return;
@@ -50,8 +56,9 @@ public class LoginAction extends AbstractAction {
 		// System.out.println(response.getHttpHeader());
 		// System.out.println(new String(response.getHttpContent(), "utf-8"));
 
-		HashMap<String, Coordinate> cpMap = inspector.getCPMap(new String(response
-				.getHttpContent(), "utf-8"));
+		HashMap<String, Coordinate> cpMap = inspector.getCPMap(new String(
+				response.getHttpContent(), "utf-8"));
+		context.setCpMap(cpMap);
 	}
 
 	private void parseCookie(Response response) {

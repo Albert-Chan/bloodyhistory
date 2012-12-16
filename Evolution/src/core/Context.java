@@ -1,6 +1,9 @@
 package core;
 
+import gamelogic.Coordinate;
+
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.TimeZone;
 
 import messenger.PackageGenerator;
@@ -16,11 +19,15 @@ public class Context {
 	private String cookie;
 	private String phpSession;
 
+	private String user;
+	private String pass;
+
 	private PackageGenerator generator = new PackageGenerator();
 	private Inspector inspector = new Inspector();
 
-	private String user;
-	private String pass;
+	private HashMap<String, Coordinate> cpMap;
+
+	public int routeLimit;
 
 	public HttpClient getClient() {
 		return client;
@@ -61,7 +68,7 @@ public class Context {
 	public Inspector getInspector() {
 		return inspector;
 	}
-	
+
 	public String getUser() {
 		return user;
 	}
@@ -76,6 +83,14 @@ public class Context {
 
 	public void setPass(String pass) {
 		this.pass = pass;
+	}
+
+	public HashMap<String, Coordinate> getCpMap() {
+		return cpMap;
+	}
+
+	public void setCpMap(HashMap<String, Coordinate> cpMap) {
+		this.cpMap = cpMap;
 	}
 
 	public String getCurrentDateTime() {

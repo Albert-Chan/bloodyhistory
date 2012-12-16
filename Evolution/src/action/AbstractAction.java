@@ -1,18 +1,23 @@
 package action;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.locks.ReentrantLock;
 
 import core.Context;
 
 public abstract class AbstractAction implements IAction {
+	private static ReentrantLock lock = new ReentrantLock();
+
 	protected Context context;
 
-	private ArrayList<IAction> preActions;
+	private ArrayList<IAction> preActions = new ArrayList<IAction>();
 
 	public AbstractAction(Context context) {
 		this.context = context;
+		setWhen(System.currentTimeMillis());
 	}
-	
+
 	private long when;
 
 	public long getWhen() {
@@ -30,5 +35,17 @@ public abstract class AbstractAction implements IAction {
 	public ArrayList<IAction> getPreActions() {
 		return preActions;
 	}
+
+	public void perform() {
+		lock.lock();
+		try {
+			exec();
+		} catch (IOException e) {
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	protected abstract void exec() throws IOException;
 
 }
