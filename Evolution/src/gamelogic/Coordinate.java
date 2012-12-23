@@ -3,36 +3,36 @@ package gamelogic;
 import java.util.HashMap;
 
 public class Coordinate {
-	int galaxy;
+	public static final int TYPE_PLANET = 1;
+	public static final int TYPE_DF = 2;
+	public static final int TYPE_MOON = 3;
 
-	int system;
-
-	int position;
-
+	private int galaxy;
+	private int system;
+	private int position;
 	/**
 	 * planet=1, DF=2, Moon=3
 	 */
-	int type = 1;
+	private int type = TYPE_PLANET;
 
-	String belongTo;
-
-	String planetName;
-
-	String cp = null;
-
-	public Coordinate(String coordString) {
-		if (null != coordString) {
-			String[] pos = coordString.split(":");
-			if (null != pos && pos.length == 3) {
-				galaxy = Integer.parseInt(pos[0]);
-				system = Integer.parseInt(pos[1]);
-				position = Integer.parseInt(pos[2]);
-			}
-		}
-	}
+	private String belongTo;
+	private String planetName;
+	private String cp = null;
 
 	public Coordinate(HashMap<String, String> propMap) {
+		String coordStr = propMap.get("@@coord@");
+		parse(coordStr);
+		this.cp = propMap.get("@@cp@");
+		this.planetName = propMap.get("@@planetName@");
+	}
 
+	public Coordinate(String planetCoord) {
+		this(planetCoord, TYPE_PLANET);
+	}
+
+	public Coordinate(String planetCoord, int type) {
+		parse(planetCoord);
+		this.type = type;
 	}
 
 	public String getBelongTo() {
@@ -99,6 +99,21 @@ public class Coordinate {
 		sb.append(":");
 		sb.append(position);
 		return sb.toString();
+	}
+
+	private void parse(String coordString) {
+		if (null != coordString) {
+			// remove [] quote.
+			if (coordString.startsWith("[") && coordString.endsWith("]"))
+				coordString = coordString
+						.substring(1, coordString.length() - 1);
+			String[] pos = coordString.split(":");
+			if (null != pos && pos.length == 3) {
+				galaxy = Integer.parseInt(pos[0]);
+				system = Integer.parseInt(pos[1]);
+				position = Integer.parseInt(pos[2]);
+			}
+		}
 	}
 
 }

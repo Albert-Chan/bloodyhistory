@@ -3,8 +3,9 @@ package core;
 import gamelogic.Coordinate;
 
 import java.util.GregorianCalendar;
-import java.util.HashMap;
+import java.util.List;
 import java.util.TimeZone;
+import java.util.concurrent.locks.ReentrantLock;
 
 import messenger.PackageGenerator;
 import network.HttpClient;
@@ -25,7 +26,7 @@ public class Context {
 	private PackageGenerator generator = new PackageGenerator();
 	private Inspector inspector = new Inspector();
 
-	private HashMap<String, Coordinate> cpMap;
+	private List<Coordinate> colonies;
 
 	public int routeLimit;
 
@@ -85,12 +86,34 @@ public class Context {
 		this.pass = pass;
 	}
 
-	public HashMap<String, Coordinate> getCpMap() {
-		return cpMap;
+	private boolean logined = Boolean.FALSE;
+	private Object monitor = new Object();
+
+	public void loginSucceed() {
+		synchronized (monitor) {
+			logined = true;
+			monitor.notifyAll();
+		}
 	}
 
-	public void setCpMap(HashMap<String, Coordinate> cpMap) {
-		this.cpMap = cpMap;
+	public void waitForLogin() {
+		synchronized (monitor) {
+			try {
+				while (!logined)
+					monitor.wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public List<Coordinate> getColonies() {
+
+		return colonies;
+	}
+
+	public void setColonies(List<Coordinate> colonies) {
+		this.colonies = colonies;
 	}
 
 	public String getCurrentDateTime() {

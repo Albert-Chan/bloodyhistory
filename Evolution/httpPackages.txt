@@ -65,8 +65,9 @@ Accept-Encoding: gzip,deflate,sdch
 Accept-Language: en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4,zh-TW;q=0.2
 Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
 Cookie: @@cookie@
-
+#
 galaxy=@@g@&system=@@s@&position=@@p@&type=@@t@&mission=@@mission@&speed=@@speed@&@@ships@
+/#
 /[fleet2]
 [fleetcheck]
 @@GameServer@
@@ -90,9 +91,10 @@ Accept-Encoding: gzip,deflate,sdch
 Accept-Language: en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4,zh-TW;q=0.2
 Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
 Cookie: @@cookie@
-
+#
 galaxy=@@g@&system=@@s@&planet=@@p@&type=@@t@
-[/fleetcheck]
+/#
+/[fleetcheck]
 [fleet3]
 @@GameServer@
 @@cookie@
@@ -119,8 +121,9 @@ Accept-Encoding: gzip,deflate,sdch
 Accept-Language: en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4,zh-TW;q=0.2
 Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
 Cookie: @@cookie@
-
+#
 type=@@t@&mission=@@mission@&union=@@union@&@@ships@&galaxy=@@g@&system=@@s@&position=@@p@&speed=@@speed@
+/#
 /[fleet3]
 [movement]
 @@GameServer@
@@ -155,6 +158,7 @@ Accept-Encoding: gzip,deflate,sdch
 Accept-Language: en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4,zh-TW;q=0.2
 Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
 Cookie: @@cookie@
-
+#
 holdingtime=@@holding@&expeditiontime=@@expedition@&token=@@token@&galaxy=@@g@&system=@@s@&position=@@p@&type=@@t@&mission=@@mission@&union2=@@union2@&holdingOrExpTime=@@holdOrExp@&speed=@@speed@&@@ships@&metal=@@m@&crystal=@@c@&deuterium=@@d@
+/#
 /[movement]

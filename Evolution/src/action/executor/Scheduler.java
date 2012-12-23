@@ -13,6 +13,8 @@ import action.LoginAction;
 import core.Context;
 import event.IEvent;
 import gamelogic.Coordinate;
+import gamelogic.Fleet;
+import gamelogic.Resource;
 
 public class Scheduler {
 
@@ -45,13 +47,28 @@ public class Scheduler {
 	public void addAction(IAction action) {
 		if (!checkRestriction())
 			return;
+		
+		ArrayList<IAction> preActions = action.getPreActions();
+		for (IAction preAction : preActions) {
+			addAction(preAction);
+		}
 
 		ActionThread actionThread = new ActionThread(action);
+		actionQueue.put(action, actionThread);
+		
 		long delay = action.getWhen() - System.currentTimeMillis();
 		timer.schedule(actionThread, delay < 0 ? 0 : delay);
-		actionQueue.put(action, actionThread);
 	}
-
+	
+	public void removeAction(IAction action) {
+		ArrayList<IAction> preActions = action.getPreActions();
+		for (IAction preAction : preActions) {
+			removeAction(preAction);
+		}
+		ActionThread actionThread = actionQueue.remove(action);
+		actionThread.cancel();
+	}
+	
 	class ActionThread extends TimerTask {
 
 		IAction action;
@@ -63,15 +80,6 @@ public class Scheduler {
 		public void run() {
 			action.perform();
 		}
-	}
-
-	public void removeAction(IAction action) {
-		ArrayList<IAction> preActions = action.getPreActions();
-		for (IAction preAction : preActions) {
-			removeAction(preAction);
-		}
-		ActionThread actionThread = actionQueue.remove(action);
-		actionThread.cancel();
 	}
 
 	// TODO
@@ -86,29 +94,41 @@ public class Scheduler {
 	public void run() {
 		LoginAction login = new LoginAction(context);
 		addAction(login);
+//		context.waitForLogin();
+		
+		List<Coordinate> colonies = context.getColonies();
+		Coordinate source = colonies.get(0);
+		Coordinate target = new Coordinate("[1:271:10]");
+		Fleet fleet = new Fleet();
+		fleet.add(203, 1);
+		FleetSendAction fleetSend = new FleetSendAction(context, source,
+				target, Resource.NO_RESOURCE, fleet,
+				FleetSendAction.MISSION_ATTACK,
+				FleetSendAction.SPEED_100_PERCENT);
+		addAction(fleetSend);
 
-		retrevieRouteNumber();
-
-		// checkOverviewEvent();
-
-		loadSheepList();
-
-		for (int i = 0; i < context.routeLimit; i++) {
-			RouteOccupancy occupancy = new RouteOccupancy();
-			occupancy.setType(RouteOccupancy.TYPE_SHEEP_HUNTING);
-			Coordinate dest = sheepList.get(cursor++);
-			// occupancy need not dest?
-			// occupancy.setDest(dest);
-
-			// Coordinate source = chooseSource(dest);
-			// FleetSendAction fleetSend = new FleetSendAction(context, source,
-			// dest, resource, fleet);
-			// addAction(fleetSend);
-			//
-			// occupancy.setFreeTimePoint(freeTimePoint);
-			//
-			// routes.add(occupancy);
-		}
+//		retrevieRouteNumber();
+//
+//		// checkOverviewEvent();
+//
+//		loadSheepList();
+//
+//		for (int i = 0; i < context.routeLimit; i++) {
+//			RouteOccupancy occupancy = new RouteOccupancy();
+//			occupancy.setType(RouteOccupancy.TYPE_SHEEP_HUNTING);
+//			Coordinate dest = sheepList.get(cursor++);
+//			// occupancy need not dest?
+//			// occupancy.setDest(dest);
+//
+//			// Coordinate source = chooseSource(dest);
+//			// FleetSendAction fleetSend = new FleetSendAction(context, source,
+//			// dest, resource, fleet);
+//			// addAction(fleetSend);
+//			//
+//			// occupancy.setFreeTimePoint(freeTimePoint);
+//			//
+//			// routes.add(occupancy);
+//		}
 
 	}
 

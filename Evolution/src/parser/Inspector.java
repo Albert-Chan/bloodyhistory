@@ -4,32 +4,33 @@ import gamelogic.Coordinate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Inspector {
-	
+
 	private PatternExtractor extractor = new PatternExtractor();
-	public HashMap<String, Coordinate> getCPMap(String html) {
-		ArrayList<HashMap<String, String>> planets = extractor.extract(html, "planet");
-		HashMap<String, Coordinate> planetsMap = new HashMap<String, Coordinate>();
-		
-		for ( HashMap<String, String> planetPropMap : planets)
-		{
-			String coordinate = planetPropMap.get("coordinate");
+
+	public List<Coordinate> getColonies(String html) {
+		ArrayList<HashMap<String, String>> planets = extractor.extract(html,
+				"planet");
+		List<Coordinate> colonies = new ArrayList<Coordinate>();
+
+		for (HashMap<String, String> planetPropMap : planets) {
 			Coordinate planet = new Coordinate(planetPropMap);
-			planetsMap.put(coordinate, planet);
+			colonies.add(planet);
 		}
-		return planetsMap;
+		return colonies;
 	}
 
-	public boolean attackAlert(String html)
-	{
-		ArrayList<HashMap<String, String>> alert = extractor.extract(html, "attackAlert");
+	public boolean attackAlert(String html) {
+		ArrayList<HashMap<String, String>> alert = extractor.extract(html,
+				"attackAlert");
 		if (alert.isEmpty())
 			return false;
 		else
 			return true;
 	}
-	
+
 	public void getEvents(String html) {
 		extractor.extract(html, "event");
 	}

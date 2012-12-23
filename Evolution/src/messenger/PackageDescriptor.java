@@ -7,7 +7,8 @@ public class PackageDescriptor {
 
 	public String name;
 	public List<Parameter> parameters = new ArrayList<Parameter>();
-	public StringBuffer packageContent = new StringBuffer();;
+	public StringBuffer header = new StringBuffer();
+	public StringBuffer content = new StringBuffer();;
 
 	public PackageDescriptor(String name) {
 		this.name = name;
@@ -21,21 +22,37 @@ public class PackageDescriptor {
 		return parameters;
 	}
 
+	public void appendHeader(String str) {
+		header.append(str).append("\r\n");
+	}
+
 	public void appendContent(String str) {
-		packageContent.append(str).append("\r\n");
+		content.append(str);
 	}
 
 	public String getPackage(Parameter... parameters) {
-		String packageString = getContent();
+		String content = getContent();
 		for (Parameter p : parameters) {
-			packageString = packageString.replaceAll(p.name, p.value);
+			content = content.replaceAll(p.name, p.value);
 		}
+
+		String header = getHeader();
+		for (Parameter p : parameters) {
+			header = header.replaceAll(p.name, p.value);
+		}
+		header = header.replaceAll("@@length@",
+				Integer.toString(content.length()));
+
+		String packageString = header + "\r\n" + content + "\r\n";
 		return packageString;
 	}
 
+	private String getHeader() {
+		return header.toString();
+	}
+
 	private String getContent() {
-		return packageContent.toString();
+		return content.toString();
 	}
 
 }
-

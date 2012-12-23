@@ -12,17 +12,6 @@ import java.util.LinkedList;
 
 public class SimpleTacticsGenerator {
 	private static HashMap<String, Coordinate> nameCpMap = new HashMap<String, Coordinate>();
-//	static {
-//		nameCpMap.put("Libris", new Coordinate("4:208:4", "34043740", "Libris"));
-//		nameCpMap.put("Virgon", new Coordinate("4:208:5", "34044039", "Virgon"));
-//		nameCpMap.put("Kobol", new Coordinate("4:242:11", "34024962", "Kobol"));
-//		nameCpMap.put("Picon", new Coordinate("4:258:4", "34046040", "Picon"));
-//		nameCpMap.put("Tauron", new Coordinate("4:262:5", "34039390", "Tauron"));
-//		nameCpMap.put("Caprica", new Coordinate("4:265:6", "34038392", "Caprica"));
-//		nameCpMap.put("Aerelon", new Coordinate("4:271:15", "34035509", "Aerelon"));
-//		nameCpMap.put("Hesper", new Coordinate("6:263:4", "34056543", "Hesper"));
-//		nameCpMap.put("Earth", new Coordinate("6:263:5", "34043525", "Earth"));
-//	}
 	
 	private static final String tacticsFile = "..\\..\\SimpleTactics.txt";
 	

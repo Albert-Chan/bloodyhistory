@@ -17,7 +17,7 @@ public class OgameBot {
 
 	private void initializeContext() {
 		context = new Context();
-		context.setGameServer("uni13.ogame.tw");
+		context.setGameServer("uni108.ogame.tw");
 		context.setUser("bazinga");
 		context.setPass("11111111");
 //		context.setUser("albert");

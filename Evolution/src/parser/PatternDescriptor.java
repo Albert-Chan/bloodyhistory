@@ -34,15 +34,17 @@ public class PatternDescriptor {
 	}
 
 	public void appendContent(String str) {
+		str = escape(str);
 		patternContent.append(str).append("\n");
 		extractOrderedParameters(str);
 	}
-	
+
 	public String getPattern() {
 		String patternString = getContent();
 
 		for (Parameter p : parameters) {
-			patternString = patternString.replaceAll(p.name, "(" + p.value + ")");
+			patternString = patternString.replaceAll(p.name, "(" + p.value
+					+ ")");
 		}
 		return patternString;
 	}
@@ -50,15 +52,23 @@ public class PatternDescriptor {
 	private String getContent() {
 		return patternContent.toString();
 	}
-	
-	private void extractOrderedParameters(String str)
-	{
+
+	private void extractOrderedParameters(String str) {
 		Pattern pattern = Pattern.compile("@@.*?@");
 		Matcher matcher = pattern.matcher(str);
 		while (matcher.find())
 			orderedParameters.add(matcher.group(0));
 	}
 
+	private static final String escapeCharacters = "\\.^$*+?{}[]|";
+	//FIXME handle regexp comment (?#comment)
+
+	private String escape(String str) {
+		for (char c : escapeCharacters.toCharArray()) {
+			str = str.replace("" + c, "\\" + c);
+		}
+		return str;
+	}
 }
 
 class Parameter {

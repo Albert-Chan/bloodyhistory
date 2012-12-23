@@ -1,12 +1,12 @@
 package gamelogic;
 
 public class Resource {
-	int metal;
+	private int metal;
+	private int crystal;
+	private int deuterium;
 
-	int crystal;
-
-	int deuterium;
-
+	public static final Resource NO_RESOURCE = new Resource(0, 0, 0);
+	
 	public Resource(int metal, int crystal, int deuterium) {
 		this.metal = metal;
 		this.crystal = crystal;

@@ -7,7 +7,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import core.Context;
 
 public abstract class AbstractAction implements IAction {
-	private static ReentrantLock lock = new ReentrantLock();
+	private static final ReentrantLock lock = new ReentrantLock();
 
 	protected Context context;
 

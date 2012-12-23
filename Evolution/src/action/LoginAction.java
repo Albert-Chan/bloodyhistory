@@ -3,7 +3,7 @@ package action;
 import gamelogic.Coordinate;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import messenger.PackageGenerator;
@@ -14,7 +14,7 @@ import parser.Inspector;
 import core.Context;
 
 /**
- * Login and get cp map.
+ * Login to initialize cookie and get colonies list.
  * 
  * @author Albert
  * 
@@ -43,22 +43,22 @@ public class LoginAction extends AbstractAction {
 		Parameter user = new Parameter("@@user@", context.getUser());
 		Parameter pass = new Parameter("@@password@", context.getPass());
 
-		String msg1 = generator.generate("login1", server, user, pass);
-		Response response = client.send(msg1);
+		String login1 = generator.generate("login1", server, user, pass);
+		Response response = client.send(login1);
 		parseCookie(response);
 
 		Parameter phpSession = new Parameter("@@PHPSESSID@",
 				context.getPhpSession());
 		Parameter cookie = new Parameter("@@cookie@", context.getCookie());
 
-		String msg2 = generator.generate("login2", server, phpSession, cookie);
-		response = client.send(msg2);
-		// System.out.println(response.getHttpHeader());
-		// System.out.println(new String(response.getHttpContent(), "utf-8"));
+		String login2 = generator
+				.generate("login2", server, phpSession, cookie);
+		response = client.send(login2);
 
-		HashMap<String, Coordinate> cpMap = inspector.getCPMap(new String(
-				response.getHttpContent(), "utf-8"));
-		context.setCpMap(cpMap);
+		List<Coordinate> colonies = inspector.getColonies(new String(response
+				.getHttpContent(), "utf-8"));
+		context.setColonies(colonies);
+		context.loginSucceed();
 	}
 
 	private void parseCookie(Response response) {

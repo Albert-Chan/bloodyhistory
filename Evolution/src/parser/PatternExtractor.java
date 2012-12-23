@@ -28,8 +28,6 @@ public class PatternExtractor {
 		List<String> parameterNames = pDescriptor.getOrderedParameterNames();
 
 		Pattern pattern = Pattern.compile(pDescriptor.getPattern());
-		String pstr = "<div class=\"smallplanet\" id=\"planet-([0-9]{8})\">\n                        <a href=\"http://(uni\\d*\\.ogame\\.tw)/game/index\\.php\\?page=overview&cp=([0-9]{8})\"\n";
-		pattern = Pattern.compile(pstr);
 		Matcher matcher = pattern.matcher(input);
 
 		ArrayList<HashMap<String, String>> extractedObjects = new ArrayList<>();
@@ -37,7 +35,7 @@ public class PatternExtractor {
 		while (matcher.find()) {
 			HashMap<String, String> keyValueOfParams = new HashMap<>();
 			String matched = matcher.group(0);
-			for (int i = 1; i < matcher.groupCount(); i++) {
+			for (int i = 1; i <= matcher.groupCount(); i++) {
 				String paramName = parameterNames.get(i - 1);
 				if (!paramName.startsWith("@@!")) {
 					keyValueOfParams.put(paramName, matcher.group(i));

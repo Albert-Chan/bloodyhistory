@@ -38,6 +38,10 @@ public class PackagesReader {
 				startPackage(line);
 			} else if (line.startsWith("/[")) {
 				endPackage(line);
+			} else if (line.startsWith("#")) {
+				startContent();
+			} else if (line.startsWith("/#")) {
+				endContent();
 			} else if (line.startsWith("@@")) {
 				handleParam(line);
 			} else {
@@ -67,8 +71,25 @@ public class PackagesReader {
 				currentPackageName = null;
 				currentPackage = null;
 			} else {
-				System.err.println("package name does not match: " + packageName );
+				System.err.println("package name does not match: "
+						+ packageName);
 			}
+		}
+
+		boolean isInContent = false;
+
+		private void startContent() {
+			if (!isInContent)
+				isInContent = true;
+			else
+				System.err.println("cotent does not match: ");
+		}
+
+		private void endContent() {
+			if (isInContent)
+				isInContent = false;
+			else
+				System.err.println("cotent does not match: ");
 		}
 
 		private void handleParam(String line) {
@@ -85,7 +106,10 @@ public class PackagesReader {
 				System.err.println("Not in a package.");
 				return;
 			}
-			currentPackage.appendContent(line);
+			if (isInContent)
+				currentPackage.appendContent(line);
+			else
+				currentPackage.appendHeader(line);
 		}
 
 	}
