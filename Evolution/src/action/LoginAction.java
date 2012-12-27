@@ -3,6 +3,7 @@ package action;
 import gamelogic.Coordinate;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -57,7 +58,13 @@ public class LoginAction extends AbstractAction {
 
 		List<Coordinate> colonies = inspector.getColonies(new String(response
 				.getHttpContent(), "utf-8"));
-		context.setColonies(colonies);
+		List<Coordinate> moons = inspector.getMoons(new String(response
+				.getHttpContent(), "utf-8"));
+		List<Coordinate> myCoordinates = new ArrayList<Coordinate>();
+		myCoordinates.addAll(colonies);
+		myCoordinates.addAll(moons);
+		context.setMyCoordinates(myCoordinates);
+		
 		context.loginSucceed();
 	}
 

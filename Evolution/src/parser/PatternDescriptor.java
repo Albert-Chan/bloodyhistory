@@ -35,7 +35,9 @@ public class PatternDescriptor {
 
 	public void appendContent(String str) {
 		str = escape(str);
-		patternContent.append(str).append("\n");
+		if (patternContent.length() > 0)
+			patternContent.append("\n");
+		patternContent.append(str);
 		extractOrderedParameters(str);
 	}
 
@@ -61,7 +63,8 @@ public class PatternDescriptor {
 	}
 
 	private static final String escapeCharacters = "\\.^$*+?{}[]|";
-	//FIXME handle regexp comment (?#comment)
+
+	// FIXME handle regexp comment (?#comment)
 
 	private String escape(String str) {
 		for (char c : escapeCharacters.toCharArray()) {

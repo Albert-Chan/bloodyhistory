@@ -16,10 +16,22 @@ public class Inspector {
 		List<Coordinate> colonies = new ArrayList<Coordinate>();
 
 		for (HashMap<String, String> planetPropMap : planets) {
-			Coordinate planet = new Coordinate(planetPropMap);
+			Coordinate planet = new Coordinate(planetPropMap, Coordinate.TYPE_PLANET);
 			colonies.add(planet);
 		}
 		return colonies;
+	}
+	
+	public List<Coordinate> getMoons(String html) {
+		ArrayList<HashMap<String, String>> moons = extractor.extract(html,
+				"moon");
+		List<Coordinate> moonList = new ArrayList<Coordinate>();
+
+		for (HashMap<String, String> planetPropMap : moons) {
+			Coordinate moon = new Coordinate(planetPropMap, Coordinate.TYPE_MOON);
+			moonList.add(moon);
+		}
+		return moonList;
 	}
 
 	public boolean attackAlert(String html) {

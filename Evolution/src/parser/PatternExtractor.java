@@ -30,6 +30,9 @@ public class PatternExtractor {
 		Pattern pattern = Pattern.compile(pDescriptor.getPattern());
 		Matcher matcher = pattern.matcher(input);
 
+//		Pattern pattern1 = Pattern.compile("<a class=\"moonlink   tooltipLeft js_hideTipOnMobile\"");
+//		Matcher matcher = pattern1.matcher(input);
+		
 		ArrayList<HashMap<String, String>> extractedObjects = new ArrayList<>();
 
 		while (matcher.find()) {

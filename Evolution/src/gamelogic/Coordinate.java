@@ -16,14 +16,19 @@ public class Coordinate {
 	private int type = TYPE_PLANET;
 
 	private String belongTo;
-	private String planetName;
+	private String name;
 	private String cp = null;
 
 	public Coordinate(HashMap<String, String> propMap) {
+		this(propMap, TYPE_PLANET);
+	}
+
+	public Coordinate(HashMap<String, String> propMap, int type) {
 		String coordStr = propMap.get("@@coord@");
 		parse(coordStr);
+		this.type = type;
 		this.cp = propMap.get("@@cp@");
-		this.planetName = propMap.get("@@planetName@");
+		this.name = propMap.get("@@name@");
 	}
 
 	public Coordinate(String planetCoord) {
@@ -84,11 +89,11 @@ public class Coordinate {
 	}
 
 	public String getPlanetName() {
-		return planetName;
+		return name;
 	}
 
 	public void setPlanetName(String planetName) {
-		this.planetName = planetName;
+		this.name = planetName;
 	}
 
 	public String toString() {

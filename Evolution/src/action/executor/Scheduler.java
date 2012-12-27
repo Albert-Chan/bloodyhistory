@@ -94,10 +94,10 @@ public class Scheduler {
 	public void run() {
 		LoginAction login = new LoginAction(context);
 		addAction(login);
-//		context.waitForLogin();
+		context.waitForLogin();
 		
-		List<Coordinate> colonies = context.getColonies();
-		Coordinate source = colonies.get(0);
+		List<Coordinate> myCoordinates = context.getMyCoordinates();
+		Coordinate source = myCoordinates.get(0);
 		Coordinate target = new Coordinate("[1:271:10]");
 		Fleet fleet = new Fleet();
 		fleet.add(203, 1);

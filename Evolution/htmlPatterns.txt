@@ -3,7 +3,7 @@
 @@!QuotedString@=".*"
 @@GameServer@=uni\\d*\\.ogame\\.tw
 @@coord@=\\[[1-9]{1}:[0-9]{1,3}:[0-9]{1,2}\\]
-@@PlanetName@=.*
+@@name@=.*
 <div class="smallplanet" id="planet-@@cp@">
                         <a href="http://@@GameServer@/game/index.php?page=overview&cp=@@cp@"
                            title=@@!QuotedString@
@@ -11,15 +11,21 @@
                                                        <img class=@@!QuotedString@
                                  src=@@!QuotedString@
                                                                   width=@@!QuotedString@ height=@@!QuotedString@ />
-                            <span class="planet-name  ">@@PlanetName@</span>
+                            <span class="planet-name  ">@@name@</span>
                             <span class="planet-koords  ">@@coord@</span>
                         </a>
-                                                            
-            (<a class="constructionIcon tooltip js_hideTipOnMobile" href=@@!QuotedString@ title=@@!QuotedString@>
-                        <span class=@@!QuotedString@></span>
-                    </a>)?
-                            </div>
 /[planet]
+[moon]
+@@cp@=[0-9]{8}
+@@!QuotedString@=".*"
+@@GameServer@=uni\\d*\\.ogame\\.tw
+@@coord@=\\[[1-9]{1}:[0-9]{1,3}:[0-9]{1,2}\\]
+@@!someChars@=.*
+@@name@=.*
+<a class="moonlink   tooltipLeft js_hideTipOnMobile"
+                               title="&lt;B&gt;@@name@ @@coord@&lt;/B&gt;&lt;BR&gt;@@!someChars@"
+                               href="http://@@GameServer@/game/index.php?page=overview&cp=@@cp@">
+/[moon]
 [attackAlert]
 <div id="attack_alert" style="visibility:visible;">
 /[attackAlert]

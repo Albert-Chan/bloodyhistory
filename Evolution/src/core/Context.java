@@ -5,7 +5,7 @@ import gamelogic.Coordinate;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.TimeZone;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.Semaphore;
 
 import messenger.PackageGenerator;
 import network.HttpClient;
@@ -26,7 +26,7 @@ public class Context {
 	private PackageGenerator generator = new PackageGenerator();
 	private Inspector inspector = new Inspector();
 
-	private List<Coordinate> colonies;
+	private List<Coordinate> myCoordinates;
 
 	public int routeLimit;
 
@@ -86,34 +86,26 @@ public class Context {
 		this.pass = pass;
 	}
 
-	private boolean logined = Boolean.FALSE;
-	private Object monitor = new Object();
+	private Semaphore logined = new Semaphore(0);
 
 	public void loginSucceed() {
-		synchronized (monitor) {
-			logined = true;
-			monitor.notifyAll();
-		}
+		logined.release();
 	}
 
 	public void waitForLogin() {
-		synchronized (monitor) {
-			try {
-				while (!logined)
-					monitor.wait();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+		try {
+			logined.acquire();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
 
-	public List<Coordinate> getColonies() {
-
-		return colonies;
+	public List<Coordinate> getMyCoordinates() {
+		return myCoordinates;
 	}
 
-	public void setColonies(List<Coordinate> colonies) {
-		this.colonies = colonies;
+	public void setMyCoordinates(List<Coordinate> myCoordinates) {
+		this.myCoordinates = myCoordinates;
 	}
 
 	public String getCurrentDateTime() {
