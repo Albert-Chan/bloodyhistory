@@ -47,15 +47,15 @@ public class SimpleTacticsGenerator {
 					tactics.setTarget(new Coordinate(strArray[0]));
 					if (strArray.length == 1) {
 						Fleet fleet = new Fleet();
-						fleet.add("Small Cargo Ship", 10);
+						//fleet.add("Small Cargo Ship", 10);
 						tactics.setFleet(fleet);
 					} else {
 						strArray = strArray[1].split(",");
 						Fleet fleet = new Fleet();
 						for (int i = 0; i < strArray.length; i++) {
 							String[] fleetInfo = strArray[i].split("=");
-							fleet.add(fleetInfo[0], Integer
-									.parseInt(fleetInfo[1]));
+//							fleet.add(fleetInfo[0], Integer
+//									.parseInt(fleetInfo[1]));
 						}
 						tactics.setFleet(fleet);
 					}

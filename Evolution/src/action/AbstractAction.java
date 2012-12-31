@@ -40,12 +40,13 @@ public abstract class AbstractAction implements IAction {
 		lock.lock();
 		try {
 			exec();
-		} catch (IOException e) {
+		} catch (IOException ioe) {
+		} catch (ActionFailureException afe) {
 		} finally {
 			lock.unlock();
 		}
 	}
 
-	protected abstract void exec() throws IOException;
+	protected abstract void exec() throws IOException, ActionFailureException;
 
 }

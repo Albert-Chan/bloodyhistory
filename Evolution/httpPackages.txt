@@ -29,12 +29,12 @@ Cookie: @@cookie@
 @@GameServer@
 @@cp@
 @@cookie@
-GET http://@@GameServer@/game/index.php?page=fleet1 HTTP/1.1
+GET http://@@GameServer@/game/index.php?page=fleet1&cp=@@cp@ HTTP/1.1
 Host: @@GameServer@
 Connection: keep-alive
 User-Agent: Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.1 Safari/537.11
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
-Referer: http://@@GameServer@/game/index.php?page=overview&cp=@@cp@
+Referer: http://@@GameServer@/game/index.php?page=fleet1
 Accept-Encoding: gzip,deflate,sdch
 Accept-Language: en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4,zh-TW;q=0.2
 Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
@@ -43,12 +43,10 @@ Cookie: @@cookie@
 [fleet2]
 @@GameServer@
 @@cookie@
-@@g@
-@@s@
-@@p@
-@@t@
-@@mission@
-@@speed@
+@@source_g@
+@@source_s@
+@@source_p@
+@@source_t@
 @@ships@
 @@length@
 POST http://@@GameServer@/game/index.php?page=fleet2 HTTP/1.1
@@ -66,16 +64,16 @@ Accept-Language: en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4,zh-TW;q=0.2
 Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
 Cookie: @@cookie@
 #
-galaxy=@@g@&system=@@s@&position=@@p@&type=@@t@&mission=@@mission@&speed=@@speed@&@@ships@
+galaxy=@@source_g@&system=@@source_s@&position=@@source_p@&type=@@source_t@&mission=0&speed=10&@@ships@
 /#
 /[fleet2]
 [fleetcheck]
 @@GameServer@
 @@cookie@
-@@g@
-@@s@
-@@p@
-@@t@
+@@target_g@
+@@target_s@
+@@target_p@
+@@target_t@
 @@length@
 POST http://@@GameServer@/game/index.php?page=fleetcheck&ajax=1&espionage=0 HTTP/1.1
 Host: @@GameServer@
@@ -92,17 +90,16 @@ Accept-Language: en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4,zh-TW;q=0.2
 Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
 Cookie: @@cookie@
 #
-galaxy=@@g@&system=@@s@&planet=@@p@&type=@@t@
+galaxy=@@target_g@&system=@@target_s@&planet=@@target_p@&type=@@target_t@
 /#
 /[fleetcheck]
 [fleet3]
 @@GameServer@
 @@cookie@
-@@g@
-@@s@
-@@p@
-@@t@
-@@mission@
+@@target_g@
+@@target_s@
+@@target_p@
+@@target_t@
 @@union@
 @@speed@
 @@ships@
@@ -122,7 +119,7 @@ Accept-Language: en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4,zh-TW;q=0.2
 Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
 Cookie: @@cookie@
 #
-type=@@t@&mission=@@mission@&union=@@union@&@@ships@&galaxy=@@g@&system=@@s@&position=@@p@&speed=@@speed@
+type=@@target_t@&mission=0&union=@@union@&@@ships@&galaxy=@@target_g@&system=@@target_s@&position=@@target_p@&speed=@@speed@
 /#
 /[fleet3]
 [movement]
@@ -131,10 +128,10 @@ type=@@t@&mission=@@mission@&union=@@union@&@@ships@&galaxy=@@g@&system=@@s@&pos
 @@holding@
 @@expedition@
 @@token@
-@@g@
-@@s@
-@@p@
-@@t@
+@@target_g@
+@@target_s@
+@@target_p@
+@@target_t@
 @@mission@
 @@union2@
 @@holdOrExp@
@@ -159,6 +156,6 @@ Accept-Language: en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4,zh-TW;q=0.2
 Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
 Cookie: @@cookie@
 #
-holdingtime=@@holding@&expeditiontime=@@expedition@&token=@@token@&galaxy=@@g@&system=@@s@&position=@@p@&type=@@t@&mission=@@mission@&union2=@@union2@&holdingOrExpTime=@@holdOrExp@&speed=@@speed@&@@ships@&metal=@@m@&crystal=@@c@&deuterium=@@d@
+holdingtime=@@holding@&expeditiontime=@@expedition@&token=@@token@&galaxy=@@target_g@&system=@@target_s@&position=@@target_p@&type=@@target_t@&mission=@@mission@&union2=@@union2@&holdingOrExpTime=@@holdOrExp@&speed=@@speed@&@@ships@&metal=@@m@&crystal=@@c@&deuterium=@@d@
 /#
 /[movement]

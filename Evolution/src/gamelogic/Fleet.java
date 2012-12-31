@@ -21,8 +21,19 @@ public class Fleet {
 		return shipList;
 	}
 
-	public String serialize() {
-		return null;
+	public String toString() {
+		// am213=&am203=221&am209=
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < shipList.size(); i++) {
+			ShipBuddle buddle = shipList.get(i);
+			sb.append("am").append(buddle.getType());
+			sb.append("=");
+			sb.append(buddle.getNumber());
+			if (i != shipList.size() - 1) {
+				sb.append("&");
+			}
+		}
+		return sb.toString();
 	}
 }
 

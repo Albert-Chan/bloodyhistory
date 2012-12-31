@@ -62,7 +62,7 @@ public class PatternDescriptor {
 			orderedParameters.add(matcher.group(0));
 	}
 
-	private static final String escapeCharacters = "\\.^$*+?{}[]|";
+	private static final String escapeCharacters = "\\.^$*+?{}[]|()";
 
 	// FIXME handle regexp comment (?#comment)
 

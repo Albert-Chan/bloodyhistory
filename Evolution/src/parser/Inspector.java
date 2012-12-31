@@ -16,19 +16,21 @@ public class Inspector {
 		List<Coordinate> colonies = new ArrayList<Coordinate>();
 
 		for (HashMap<String, String> planetPropMap : planets) {
-			Coordinate planet = new Coordinate(planetPropMap, Coordinate.TYPE_PLANET);
+			Coordinate planet = new Coordinate(planetPropMap,
+					Coordinate.TYPE_PLANET);
 			colonies.add(planet);
 		}
 		return colonies;
 	}
-	
+
 	public List<Coordinate> getMoons(String html) {
 		ArrayList<HashMap<String, String>> moons = extractor.extract(html,
 				"moon");
 		List<Coordinate> moonList = new ArrayList<Coordinate>();
 
 		for (HashMap<String, String> planetPropMap : moons) {
-			Coordinate moon = new Coordinate(planetPropMap, Coordinate.TYPE_MOON);
+			Coordinate moon = new Coordinate(planetPropMap,
+					Coordinate.TYPE_MOON);
 			moonList.add(moon);
 		}
 		return moonList;
@@ -46,4 +48,29 @@ public class Inspector {
 	public void getEvents(String html) {
 		extractor.extract(html, "event");
 	}
+
+	public String getAllShipsJson(String html) {
+		ArrayList<HashMap<String, String>> json = extractor.extract(html,
+				"allShipsJson");
+		if (json.size() != 1)
+			return null;
+		HashMap<String, String> propMap = json.get(0);
+
+		return propMap.get("@@shipsJson@");
+	}
+
+	public String getFleetToken(String html) {
+		ArrayList<HashMap<String, String>> token = extractor.extract(html,
+				"token");
+		if (token.size() != 1)
+			return null;
+		HashMap<String, String> propMap = token.get(0);
+
+		return propMap.get("@@token@");
+	}
+
+	public boolean isTargetExistent(String ajxReponse) {
+		return "0".equals(ajxReponse) ? true : false;
+	}
+
 }

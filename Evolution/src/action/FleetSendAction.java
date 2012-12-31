@@ -2,9 +2,10 @@ package action;
 
 import gamelogic.Coordinate;
 import gamelogic.Fleet;
+import gamelogic.Mission;
 import gamelogic.Resource;
 
-import java.util.HashMap;
+import java.io.IOException;
 
 import messenger.PackageGenerator;
 import messenger.Parameter;
@@ -14,38 +15,23 @@ import parser.Inspector;
 import core.Context;
 
 public class FleetSendAction extends AbstractAction {
-
-	public static final int MISSION_ATTACK = 1;
-	
-	public static final int SPEED_10_PERCENT = 1;
-	public static final int SPEED_20_PERCENT = 2;
-	public static final int SPEED_30_PERCENT = 3;
-	public static final int SPEED_40_PERCENT = 4;
-	public static final int SPEED_50_PERCENT = 5;
-	public static final int SPEED_60_PERCENT = 6;
-	public static final int SPEED_70_PERCENT = 7;
-	public static final int SPEED_80_PERCENT = 8;
-	public static final int SPEED_90_PERCENT = 9;
-	public static final int SPEED_100_PERCENT = 10;
-
 	private Coordinate source;
 	private Coordinate target;
 	private Resource resource;
 	private Fleet fleet;
-	private int speed;
+	private Mission mission;
 
 	public FleetSendAction(Context context, Coordinate source,
-			Coordinate target, Resource resource, Fleet fleet, int missionType,
-			int speed) {
+			Coordinate target, Resource resource, Fleet fleet, Mission mission) {
 		super(context);
 		this.source = source;
 		this.target = target;
 		this.resource = resource;
 		this.fleet = fleet;
-		this.speed = speed;
+		this.mission = mission;
 	}
 
-	protected void exec() {
+	protected void exec() throws IOException, ActionFailureException {
 		HttpClient client = context.getClient();
 		if (null == client)
 			return;
@@ -69,65 +55,85 @@ public class FleetSendAction extends AbstractAction {
 
 		String fleet1 = generator.generate("fleet1", server, cp, cookie);
 		Response response = client.send(fleet1);
-		// TODO handle(response);
+		String allShipsJson = inspector.getAllShipsJson(new String(response
+				.getHttpContent(), "utf-8"));
 
 		// [fleet2]
+		// source coodinate and type
+		// mission is always 0
+		// speed is always 10
 		// @@GameServer@
 		// @@cookie@
-		// @@g@
-		// @@s@
-		// @@p@
-		// @@t@
+		// @@source_g@
+		// @@source_s@
+		// @@source_p@
+		// @@source_t@
 		// @@mission@
 		// @@speed@
 		// @@ships@
 		// @@length@
-		Parameter g = new Parameter("@@g@",
-				Integer.toString(target.getGalaxy()));
-		Parameter s = new Parameter("@@s@",
-				Integer.toString(target.getSystem()));
-		Parameter p = new Parameter("@@p@", Integer.toString(target
-				.getPosition()));
-		Parameter t = new Parameter("@@t@", Integer.toString(target.getType()));
-		Parameter mission = new Parameter("@@mission@", context.getCookie());
-		Parameter speed = new Parameter("@@speed@", context.getCookie());
-		Parameter ships = new Parameter("@@ships@", context.getCookie());
+		Parameter source_g = new Parameter("@@source_g@",
+				Integer.toString(source.getGalaxy()));
+		Parameter source_s = new Parameter("@@source_s@",
+				Integer.toString(source.getSystem()));
+		Parameter source_p = new Parameter("@@source_p@",
+				Integer.toString(source.getPosition()));
+		Parameter source_t = new Parameter("@@source_t@",
+				Integer.toString(source.getType()));
+		Parameter missionType = new Parameter("@@mission@", mission.getType());
+		Parameter speed = new Parameter("@@speed@", mission.getSpeed());
+		Parameter ships = new Parameter("@@ships@", fleet.toString());
 
-		String fleet2 = generator.generate("fleet2", server, cookie, g, s, p,
-				t, mission, speed, ships);
+		String fleet2 = generator.generate("fleet2", server, cookie, source_g,
+				source_s, source_p, source_t, ships);
 		response = client.send(fleet2);
-		// TODO handle(response);
 
 		// [fleetcheck]
+		// this is check the target existence
 		// @@GameServer@
 		// @@cookie@
-		// @@g@
-		// @@s@
-		// @@p@
-		// @@t@
+		// @@target_g@
+		// @@target_s@
+		// @@target_p@
+		// @@target_t@
 		// @@length@
-		String fleetcheck = generator.generate("fleetcheck", server, cookie, g,
-				s, p, t);
+		Parameter target_g = new Parameter("@@target_g@",
+				Integer.toString(target.getGalaxy()));
+		Parameter target_s = new Parameter("@@target_s@",
+				Integer.toString(target.getSystem()));
+		Parameter target_p = new Parameter("@@target_p@",
+				Integer.toString(target.getPosition()));
+		Parameter target_t = new Parameter("@@target_t@",
+				Integer.toString(target.getType()));
+		String fleetcheck = generator.generate("fleetcheck", server, cookie,
+				target_g, target_s, target_p, target_t);
 		response = client.send(fleetcheck);
-		// TODO handle(response);
+		boolean isTargetExistent = inspector.isTargetExistent(new String(response
+				.getHttpContent(), "utf-8"));
+		if (!isTargetExistent)
+			throw new ActionFailureException();
 
 		// [fleet3]
+		// mission is always 0
 		// @@GameServer@
 		// @@cookie@
-		// @@g@
-		// @@s@
-		// @@p@
-		// @@t@
+		// @@target_g@
+		// @@target_s@
+		// @@target_p@
+		// @@target_t@
 		// @@mission@
 		// @@union@
 		// @@speed@
 		// @@ships@
 		// @@length@
-		Parameter union = new Parameter("@@union@", union_);
-		String fleet3 = generator.generate("fleet3", server, cookie, g, s, p,
-				t, mission, union, speed, ships);
+		Parameter union = new Parameter("@@union@", mission.getUnion());
+		String fleet3 = generator.generate("fleet3", server, cookie, target_g,
+				target_s, target_p, target_t, union, speed, ships);
 		response = client.send(fleet3);
-		// TODO handle(response);
+		String strToken = inspector.getFleetToken(new String(response
+				.getHttpContent(), "utf-8"));
+		if (strToken == null)
+			throw new ActionFailureException();
 
 		// [movement]
 		// @@GameServer@
@@ -135,10 +141,10 @@ public class FleetSendAction extends AbstractAction {
 		// @@holding@
 		// @@expedition@
 		// @@token@
-		// @@g@
-		// @@s@
-		// @@p@
-		// @@t@
+		// @@target_g@
+		// @@target_s@
+		// @@target_p@
+		// @@target_t@
 		// @@mission@
 		// @@union2@
 		// @@holdOrExp@
@@ -148,11 +154,14 @@ public class FleetSendAction extends AbstractAction {
 		// @@c@
 		// @@d@
 		// @@length@
-		Parameter holding = new Parameter("@@holding@", holding_);
-		Parameter expedition = new Parameter("@@expedition@", expedition_);
+		Parameter holding = new Parameter("@@holding@",
+				mission.getHoldingtime());
+		Parameter expedition = new Parameter("@@expedition@",
+				mission.getExpeditiontime());
 		Parameter token = new Parameter("@@token@", strToken);
-		Parameter union2 = new Parameter("@@union2@", union2_);
-		Parameter holdOrExp = new Parameter("@@holdOrExp@", holdOrExp_);
+		Parameter union2 = new Parameter("@@union2@", mission.getUnion2());
+		Parameter holdOrExp = new Parameter("@@holdOrExp@",
+				mission.getHoldingOrExpTime());
 		Parameter m = new Parameter("@@m@", Integer.toString(resource
 				.getMetal()));
 		Parameter c = new Parameter("@@c@", Integer.toString(resource
@@ -160,11 +169,14 @@ public class FleetSendAction extends AbstractAction {
 		Parameter d = new Parameter("@@d@", Integer.toString(resource
 				.getDeuterium()));
 
-		String movement = generator.generate("movement", server, cookie,
-				holding, expedition, token, g, s, p, t, mission, union2,
-				holdOrExp, speed, ships, m, c, d);
+		String movement = generator
+				.generate("movement", server, cookie, holding, expedition,
+						token, target_g, target_s, target_p, target_t,
+						missionType, union2, holdOrExp, speed, ships, m, c, d);
 		response = client.send(movement);
 		// TODO handle(response);
+		System.out.println(new String(response
+				.getHttpContent(), "utf-8"));
 	}
 
 }

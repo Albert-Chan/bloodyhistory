@@ -67,7 +67,6 @@ public class PackagesReader {
 			String packageName = line.substring(2, line.length() - 1);
 			if (currentPackageName != null
 					&& currentPackageName.equals(packageName)) {
-				currentPackage.appendContent("\r\n");
 				currentPackageName = null;
 				currentPackage = null;
 			} else {

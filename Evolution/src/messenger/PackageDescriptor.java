@@ -43,7 +43,7 @@ public class PackageDescriptor {
 		header = header.replaceAll("@@length@",
 				Integer.toString(content.length()));
 
-		String packageString = header + "\r\n" + content + "\r\n";
+		String packageString = header + "\r\n" + content;
 		return packageString;
 	}
 
