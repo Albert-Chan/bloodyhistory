@@ -1,42 +1,59 @@
 package gamelogic;
 
 public class Mission {
-	public static final int SPEED_10_PERCENT = 1;
-	public static final int SPEED_20_PERCENT = 2;
-	public static final int SPEED_30_PERCENT = 3;
-	public static final int SPEED_40_PERCENT = 4;
-	public static final int SPEED_50_PERCENT = 5;
-	public static final int SPEED_60_PERCENT = 6;
-	public static final int SPEED_70_PERCENT = 7;
-	public static final int SPEED_80_PERCENT = 8;
-	public static final int SPEED_90_PERCENT = 9;
-	public static final int SPEED_100_PERCENT = 10;
 
-	public static final int MISSION_ATTACK = 1;
-	public static final int MISSION_TRANSPORT = 3;
-	public static final int MISSION_DEPLOY = 4;
-	public static final int MISSION_ESPIAL = 6;
-	public static final int MISSION_RECYCLE = 8;
-	public static final int MISSION_EXPEDITION = 15;
+	public static final int TYPE_SHEEP_HUNTING = 0;
+	public static final int TYPE_FLEET_SAVING = 1;
+	public static final int TYPE_DEFEAT = 2;
+	public static final int TYPE_AMUSH = 3;
 
-	public int type;
+	private static final int SPEED_10_PERCENT = 1;
+	private static final int SPEED_20_PERCENT = 2;
+	private static final int SPEED_30_PERCENT = 3;
+	private static final int SPEED_40_PERCENT = 4;
+	private static final int SPEED_50_PERCENT = 5;
+	private static final int SPEED_60_PERCENT = 6;
+	private static final int SPEED_70_PERCENT = 7;
+	private static final int SPEED_80_PERCENT = 8;
+	private static final int SPEED_90_PERCENT = 9;
+	private static final int SPEED_FULL = 10;
 
-	public int union = 0;
+	private static final int MISSION_ATTACK = 1;
+	private static final int MISSION_TRANSPORT = 3;
+	private static final int MISSION_DEPLOY = 4;
+	private static final int MISSION_ESPIAL = 6;
+	private static final int MISSION_RECYCLE = 8;
+	private static final int MISSION_EXPEDITION = 15;
+
+	private int type;
 	
-	public int holdingtime = 1;
-	public int expeditiontime = 1;
-
-	public int union2 = 0;
-	public int holdingOrExpTime = 0;
-
-	public int speed = SPEED_100_PERCENT;
-
-	public String getType() {
-		return Integer.toString(type);
+	public Mission(int type) { 
+		// the mission type, not in game.
+		this.type = type;
 	}
 
-	public void setType(int type) {
-		this.type = type;
+	public int getType() {
+		return type;
+	}
+
+	private int mission;
+
+	private int union = 0;
+
+	private int holdingtime = 1;
+	private int expeditiontime = 1;
+
+	private int union2 = 0;
+	private int holdingOrExpTime = 0;
+
+	private int speed = SPEED_FULL;
+
+	public String getMission() {
+		return Integer.toString(mission);
+	}
+
+	public void setMission(int mission) {
+		this.mission = mission;
 	}
 
 	public String getUnion() {

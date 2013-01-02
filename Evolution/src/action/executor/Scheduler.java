@@ -100,13 +100,9 @@ public class Scheduler {
 		List<Coordinate> myCoordinates = context.getMyCoordinates();
 		Coordinate source = myCoordinates.get(0);
 		Coordinate target = new Coordinate("[1:193:6]");
-		Fleet fleet = new Fleet();
-		fleet.add(203, 3);
-		Mission mission = new Mission();
-		mission.setSpeed(10);
-		mission.setType(1);
+		Mission mission = new Mission(Mission.TYPE_FLEET_SAVING);
 		FleetSendAction fleetSend = new FleetSendAction(context, source,
-				target, Resource.NO_RESOURCE, fleet, mission);
+				target, mission);
 		addAction(fleetSend);
 
 		// retrevieRouteNumber();

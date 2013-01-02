@@ -17,17 +17,17 @@ import core.Context;
 public class FleetSendAction extends AbstractAction {
 	private Coordinate source;
 	private Coordinate target;
-	private Resource resource;
-	private Fleet fleet;
 	private Mission mission;
+	
+	private Fleet fleet;
+	private Resource resource;
+	
 
 	public FleetSendAction(Context context, Coordinate source,
-			Coordinate target, Resource resource, Fleet fleet, Mission mission) {
+			Coordinate target, Mission mission) {
 		super(context);
 		this.source = source;
 		this.target = target;
-		this.resource = resource;
-		this.fleet = fleet;
 		this.mission = mission;
 	}
 
@@ -57,6 +57,11 @@ public class FleetSendAction extends AbstractAction {
 		Response response = client.send(fleet1);
 		String allShipsJson = inspector.getAllShipsJson(new String(response
 				.getHttpContent(), "utf-8"));
+		
+		// Updates the map of coordinate - maxShips in context.
+		context.parseMaxShipsJSON(source, allShipsJson);
+		
+		fleet = new Fleet(context.coordinate2MaxShipsMap.get(source));
 
 		// [fleet2]
 		// source coodinate and type
@@ -80,7 +85,7 @@ public class FleetSendAction extends AbstractAction {
 				Integer.toString(source.getPosition()));
 		Parameter source_t = new Parameter("@@source_t@",
 				Integer.toString(source.getType()));
-		Parameter missionType = new Parameter("@@mission@", mission.getType());
+		Parameter missionType = new Parameter("@@mission@", mission.getMission());
 		Parameter speed = new Parameter("@@speed@", mission.getSpeed());
 		Parameter ships = new Parameter("@@ships@", fleet.toString());
 

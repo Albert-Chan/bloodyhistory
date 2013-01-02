@@ -3,9 +3,13 @@ package core;
 import gamelogic.Coordinate;
 
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
 import java.util.concurrent.Semaphore;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import messenger.PackageGenerator;
 import network.HttpClient;
@@ -27,6 +31,9 @@ public class Context {
 	private Inspector inspector = new Inspector();
 
 	private List<Coordinate> myCoordinates;
+
+	// max ships
+	public HashMap<Coordinate, HashMap<Integer, Integer>> coordinate2MaxShipsMap;
 
 	public int routeLimit;
 
@@ -114,5 +121,26 @@ public class Context {
 		java.text.SimpleDateFormat f = new java.text.SimpleDateFormat(
 				"yyyy-MM-dd HH:mm:ss");
 		return f.format(calendar.getTime());
+	}
+
+	public boolean parseMaxShipsJSON(Coordinate coord, String maxShipsJson) {
+		HashMap<Integer, Integer> maxShips = new HashMap<Integer, Integer>();
+		try {
+			JSONObject element = new JSONObject(maxShipsJson);
+			String[] shipTypes = JSONObject.getNames(element);
+			for (String type : shipTypes) {
+				int nType = Integer.parseInt(type);
+				int number = element.getInt(type);
+				maxShips.put(nType, number);
+			}
+			coordinate2MaxShipsMap.put(coord, maxShips);
+		} catch (NumberFormatException e) {
+			// logger?
+			return false;
+		} catch (JSONException e) {
+			// logger?
+			return false;
+		}
+		return true;
 	}
 }

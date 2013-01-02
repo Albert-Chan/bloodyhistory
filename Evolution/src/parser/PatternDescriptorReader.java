@@ -73,7 +73,7 @@ public class PatternDescriptorReader {
 
 		private void handleParam(String line) {
 			if (currentPattern == null) {
-				System.err.println("Not in a pattern.");
+				System.err.println("The parameter ["+ line + "] is not defined in a pattern.");
 				return;
 			}
 			line = line.trim();
@@ -84,7 +84,7 @@ public class PatternDescriptorReader {
 
 		private void handlePatternString(String line) {
 			if (currentPattern == null) {
-				System.err.println("Not in a pattern.");
+				return;
 			}
 			currentPattern.appendContent(line);
 		}

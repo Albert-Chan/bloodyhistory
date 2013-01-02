@@ -1,40 +1,60 @@
 package gamelogic;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public class Fleet {
-	private ArrayList<ShipBuddle> shipList = null;
+	private HashMap<Integer, Integer> ships = new HashMap<Integer, Integer>();
+	private HashMap<Integer, Integer> maxShips = null;
+
+	public Fleet(HashMap<Integer, Integer> maxShips) {
+		this.maxShips = maxShips;
+		for (int type : maxShips.keySet()) {
+			ships.put(type, 0);
+		}
+	}
 
 	/**
 	 * Adds a ship type into a fleet.
 	 * 
 	 */
-	public void add(int type, int number) {
-		if (shipList == null) {
-			shipList = new ArrayList<ShipBuddle>();
-		}
-		shipList.add(new ShipBuddle(type, number));
+	public boolean add(int type, int number) {
+		// if (ships.containsKey(type)) {
+		// int existNumber = ships.get(type);
+		// number += existNumber;
+		// }
+		if (!maxShips.containsKey(type) || maxShips.get(type) < number)
+			return false;
+		ships.put(type, number);
+		return true;
 	}
 
-	public List<ShipBuddle> getAllShips() {
-		return shipList;
+	public String allShips(String json) {
+		return serialize(maxShips);
 	}
 
 	public String toString() {
+		return serialize(ships);
+	}
+
+	private String serialize(HashMap<Integer, Integer> shipMap) {
 		// am213=&am203=221&am209=
 		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < shipList.size(); i++) {
-			ShipBuddle buddle = shipList.get(i);
-			sb.append("am").append(buddle.getType());
+		int counter = 0;
+		for (int type : shipMap.keySet()) {
+			int number = shipMap.get(type);
+			sb.append("am").append(type);
 			sb.append("=");
-			sb.append(buddle.getNumber());
-			if (i != shipList.size() - 1) {
+			if (number > 0) {
+				sb.append(number);
+			}
+			counter++;
+			if (counter != shipMap.size() - 1) {
 				sb.append("&");
 			}
 		}
 		return sb.toString();
 	}
+
 }
 
 class ShipBuddle {
