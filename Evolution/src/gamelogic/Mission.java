@@ -2,39 +2,23 @@ package gamelogic;
 
 public class Mission {
 
-	public static final int TYPE_SHEEP_HUNTING = 0;
-	public static final int TYPE_FLEET_SAVING = 1;
-	public static final int TYPE_DEFEAT = 2;
-	public static final int TYPE_AMUSH = 3;
+	public static final int SPEED_10_PERCENT = 1;
+	public static final int SPEED_20_PERCENT = 2;
+	public static final int SPEED_30_PERCENT = 3;
+	public static final int SPEED_40_PERCENT = 4;
+	public static final int SPEED_50_PERCENT = 5;
+	public static final int SPEED_60_PERCENT = 6;
+	public static final int SPEED_70_PERCENT = 7;
+	public static final int SPEED_80_PERCENT = 8;
+	public static final int SPEED_90_PERCENT = 9;
+	public static final int SPEED_FULL = 10;
 
-	private static final int SPEED_10_PERCENT = 1;
-	private static final int SPEED_20_PERCENT = 2;
-	private static final int SPEED_30_PERCENT = 3;
-	private static final int SPEED_40_PERCENT = 4;
-	private static final int SPEED_50_PERCENT = 5;
-	private static final int SPEED_60_PERCENT = 6;
-	private static final int SPEED_70_PERCENT = 7;
-	private static final int SPEED_80_PERCENT = 8;
-	private static final int SPEED_90_PERCENT = 9;
-	private static final int SPEED_FULL = 10;
-
-	private static final int MISSION_ATTACK = 1;
-	private static final int MISSION_TRANSPORT = 3;
-	private static final int MISSION_DEPLOY = 4;
-	private static final int MISSION_ESPIAL = 6;
-	private static final int MISSION_RECYCLE = 8;
-	private static final int MISSION_EXPEDITION = 15;
-
-	private int type;
-	
-	public Mission(int type) { 
-		// the mission type, not in game.
-		this.type = type;
-	}
-
-	public int getType() {
-		return type;
-	}
+	public static final int MISSION_ATTACK = 1;
+	public static final int MISSION_TRANSPORT = 3;
+	public static final int MISSION_DEPLOY = 4;
+	public static final int MISSION_ESPIAL = 6;
+	public static final int MISSION_RECYCLE = 8;
+	public static final int MISSION_EXPEDITION = 15;
 
 	private int mission;
 
@@ -47,6 +31,15 @@ public class Mission {
 	private int holdingOrExpTime = 0;
 
 	private int speed = SPEED_FULL;
+
+	public Mission(int mission) {
+		this.mission = mission;
+	}
+
+	public Mission(int mission, int speed) {
+		this.mission = mission;
+		this.speed = speed;
+	}
 
 	public String getMission() {
 		return Integer.toString(mission);

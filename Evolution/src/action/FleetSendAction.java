@@ -87,6 +87,8 @@ public class FleetSendAction extends AbstractAction {
 				Integer.toString(source.getType()));
 		Parameter missionType = new Parameter("@@mission@", mission.getMission());
 		Parameter speed = new Parameter("@@speed@", mission.getSpeed());
+
+		//"am206=54&am207=7&am203=50&am215=1&am213=106&am209=39"
 		Parameter ships = new Parameter("@@ships@", fleet.toString());
 
 		String fleet2 = generator.generate("fleet2", server, cookie, source_g,
