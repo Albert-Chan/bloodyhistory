@@ -1,6 +1,8 @@
 package core;
 
 import gamelogic.Coordinate;
+import gamelogic.Fleet;
+import gamelogic.Resource;
 
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -8,32 +10,38 @@ import java.util.List;
 import java.util.TimeZone;
 import java.util.concurrent.Semaphore;
 
+import messenger.PackageGenerator;
+import network.HttpClient;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import messenger.PackageGenerator;
-import network.HttpClient;
 import parser.Inspector;
 
 public class Context {
 
-	private HttpClient client;
+	public HttpClient client;
+	public PackageGenerator generator = new PackageGenerator();
+	public Inspector inspector = new Inspector();
 
 	private String gameServer;
-
 	private String cookie;
 	private String phpSession;
 
 	private String user;
 	private String pass;
 
-	private PackageGenerator generator = new PackageGenerator();
-	private Inspector inspector = new Inspector();
-
 	private List<Coordinate> myCoordinates;
 
-	// max ships
+	/**
+	 * max ships
+	 */
 	public HashMap<Coordinate, HashMap<Integer, Integer>> coordinate2MaxShipsMap;
+
+	/**
+	 * resources
+	 */
+	public HashMap<Coordinate, Resource> resources;
 
 	public int routeLimit;
 
@@ -67,14 +75,6 @@ public class Context {
 
 	public void setPhpSession(String phpSession) {
 		this.phpSession = phpSession;
-	}
-
-	public PackageGenerator getGenerator() {
-		return generator;
-	}
-
-	public Inspector getInspector() {
-		return inspector;
 	}
 
 	public String getUser() {
@@ -123,7 +123,7 @@ public class Context {
 		return f.format(calendar.getTime());
 	}
 
-	public boolean parseMaxShipsJSON(Coordinate coord, String maxShipsJson) {
+	public boolean updateMaxShips(Coordinate coord, String maxShipsJson) {
 		HashMap<Integer, Integer> maxShips = new HashMap<Integer, Integer>();
 		try {
 			JSONObject element = new JSONObject(maxShipsJson);
@@ -143,4 +143,33 @@ public class Context {
 		}
 		return true;
 	}
+
+	public void updateResource(Coordinate coord, Resource resource) {
+		resources.put(coord, resource);
+	}
+
+	public Resource getResource(Coordinate coord) {
+		return resources.get(coord);
+	}
+
+	private Fleet currentFleet;
+
+	public Fleet getCurrentFleet() {
+		return currentFleet;
+	}
+
+	public void setCurrentFleet(Fleet currentFleet) {
+		this.currentFleet = currentFleet;
+	}
+
+	private Coordinate currentFleetTarget;
+
+	public Coordinate getCurrentFleetTarget() {
+		return currentFleetTarget;
+	}
+
+	public void setCurrentFleetTarget(Coordinate currentFleetTarget) {
+		this.currentFleetTarget = currentFleetTarget;
+	}
+
 }

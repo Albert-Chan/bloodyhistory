@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.locks.ReentrantLock;
 
+import network.HttpClient;
 import core.Context;
 
 public abstract class AbstractAction implements IAction {
@@ -45,6 +46,12 @@ public abstract class AbstractAction implements IAction {
 		} finally {
 			lock.unlock();
 		}
+	}
+
+	protected void check() throws ActionFailureException {
+		HttpClient client = context.getClient();
+		if (null == client)
+			throw new ActionFailureException("Http client is not created!");
 	}
 
 	protected abstract void exec() throws IOException, ActionFailureException;

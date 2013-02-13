@@ -7,43 +7,29 @@ import gamelogic.Resource;
 
 import java.io.IOException;
 
-import messenger.PackageGenerator;
 import messenger.Parameter;
-import network.HttpClient;
 import network.Response;
-import parser.Inspector;
 import core.Context;
 
 public class FleetSendAction extends AbstractAction {
 	private Coordinate source;
 	private Coordinate target;
 	private Mission mission;
-	
+
 	private Fleet fleet;
 	private Resource resource;
-	
 
-	public FleetSendAction(Context context, Coordinate source,
-			Coordinate target, Mission mission) {
+	public FleetSendAction(Context context, Fleet fleet, Coordinate source,
+			Coordinate target, Mission mission, Resource resource) {
 		super(context);
 		this.source = source;
 		this.target = target;
 		this.mission = mission;
+		this.fleet = fleet;
+		this.resource = resource;
 	}
 
 	protected void exec() throws IOException, ActionFailureException {
-		HttpClient client = context.getClient();
-		if (null == client)
-			return;
-
-		PackageGenerator generator = context.getGenerator();
-		if (null == generator)
-			return;
-
-		Inspector inspector = context.getInspector();
-		if (null == inspector)
-			return;
-
 		// [fleet1]
 		// @@GameServer@
 		// @@cp@
@@ -53,14 +39,14 @@ public class FleetSendAction extends AbstractAction {
 		Parameter cp = new Parameter("@@cp@", source.getCp());
 		Parameter cookie = new Parameter("@@cookie@", context.getCookie());
 
-		String fleet1 = generator.generate("fleet1", server, cp, cookie);
-		Response response = client.send(fleet1);
-		String allShipsJson = inspector.getAllShipsJson(new String(response
+		String fleet1 = context.generator.generate("fleet1", server, cp, cookie);
+		Response response = context.client.send(fleet1);
+		String allShipsJson = context.inspector.getAllShipsJson(new String(response
 				.getHttpContent(), "utf-8"));
-		
+
 		// Updates the map of coordinate - maxShips in context.
-		context.parseMaxShipsJSON(source, allShipsJson);
-		
+		context.updateMaxShips(source, allShipsJson);
+
 		fleet = new Fleet(context.coordinate2MaxShipsMap.get(source));
 
 		// [fleet2]
@@ -85,15 +71,16 @@ public class FleetSendAction extends AbstractAction {
 				Integer.toString(source.getPosition()));
 		Parameter source_t = new Parameter("@@source_t@",
 				Integer.toString(source.getType()));
-		Parameter missionType = new Parameter("@@mission@", mission.getMission());
+		Parameter missionType = new Parameter("@@mission@",
+				mission.getMission());
 		Parameter speed = new Parameter("@@speed@", mission.getSpeed());
 
-		//"am206=54&am207=7&am203=50&am215=1&am213=106&am209=39"
+		// "am206=54&am207=7&am203=50&am215=1&am213=106&am209=39"
 		Parameter ships = new Parameter("@@ships@", fleet.toString());
 
-		String fleet2 = generator.generate("fleet2", server, cookie, source_g,
+		String fleet2 = context.generator.generate("fleet2", server, cookie, source_g,
 				source_s, source_p, source_t, ships);
-		response = client.send(fleet2);
+		response = context.client.send(fleet2);
 
 		// [fleetcheck]
 		// this is check the target existence
@@ -112,11 +99,12 @@ public class FleetSendAction extends AbstractAction {
 				Integer.toString(target.getPosition()));
 		Parameter target_t = new Parameter("@@target_t@",
 				Integer.toString(target.getType()));
-		String fleetcheck = generator.generate("fleetcheck", server, cookie,
+		String fleetcheck = context.generator.generate("fleetcheck", server, cookie,
 				target_g, target_s, target_p, target_t);
-		response = client.send(fleetcheck);
-		boolean isTargetExistent = inspector.isTargetExistent(new String(response
-				.getHttpContent(), "utf-8"));
+		response = context.client.send(fleetcheck);
+		boolean isTargetExistent = context.inspector.isTargetExistent(new String(
+				response.getHttpContent(), "utf-8"));
+
 		if (!isTargetExistent)
 			throw new ActionFailureException();
 
@@ -134,10 +122,10 @@ public class FleetSendAction extends AbstractAction {
 		// @@ships@
 		// @@length@
 		Parameter union = new Parameter("@@union@", mission.getUnion());
-		String fleet3 = generator.generate("fleet3", server, cookie, target_g,
+		String fleet3 = context.generator.generate("fleet3", server, cookie, target_g,
 				target_s, target_p, target_t, union, speed, ships);
-		response = client.send(fleet3);
-		String strToken = inspector.getFleetToken(new String(response
+		response = context.client.send(fleet3);
+		String strToken = context.inspector.getFleetToken(new String(response
 				.getHttpContent(), "utf-8"));
 		if (strToken == null)
 			throw new ActionFailureException();
@@ -176,14 +164,13 @@ public class FleetSendAction extends AbstractAction {
 		Parameter d = new Parameter("@@d@", Integer.toString(resource
 				.getDeuterium()));
 
-		String movement = generator
+		String movement = context.generator
 				.generate("movement", server, cookie, holding, expedition,
 						token, target_g, target_s, target_p, target_t,
 						missionType, union2, holdOrExp, speed, ships, m, c, d);
-		response = client.send(movement);
+		response = context.client.send(movement);
 		// TODO handle(response);
-		System.out.println(new String(response
-				.getHttpContent(), "utf-8"));
+		System.out.println(new String(response.getHttpContent(), "utf-8"));
 	}
 
 }

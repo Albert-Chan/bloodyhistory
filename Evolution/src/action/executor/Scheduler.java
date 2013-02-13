@@ -14,6 +14,7 @@ import core.Context;
 import event.IEvent;
 import gamelogic.Coordinate;
 import gamelogic.Mission;
+import gamelogic.Resource;
 
 public class Scheduler {
 
@@ -95,13 +96,13 @@ public class Scheduler {
 		addAction(login);
 		context.waitForLogin();
 
-		//List<Coordinate> myCoordinates = context.getMyCoordinates();
-		//Coordinate source = new Coordinate("[1:297:8]");
+		// List<Coordinate> myCoordinates = context.getMyCoordinates();
+		// Coordinate source = new Coordinate("[1:297:8]");
 		Coordinate source = new Coordinate("[1:297:8]");
 		Coordinate target = new Coordinate("[1:297:7]");
 		Mission mission = new Mission(Mission.MISSION_ATTACK);
-		FleetSendAction fleetSend = new FleetSendAction(context, source,
-				target, mission);
+		FleetSendAction fleetSend = new FleetSendAction(context, fleet, source,
+				target, mission, Resource.NO_RESOURCE);
 		addAction(fleetSend);
 
 		// retrevieRouteNumber();

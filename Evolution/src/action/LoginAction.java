@@ -7,11 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import messenger.PackageGenerator;
 import messenger.Parameter;
-import network.HttpClient;
 import network.Response;
-import parser.Inspector;
 import core.Context;
 
 /**
@@ -27,38 +24,26 @@ public class LoginAction extends AbstractAction {
 	}
 
 	protected void exec() throws IOException {
-		HttpClient client = context.getClient();
-		if (null == client)
-			return;
-
-		PackageGenerator generator = context.getGenerator();
-		if (null == generator)
-			return;
-
-		Inspector inspector = context.getInspector();
-		if (null == inspector)
-			return;
-
 		Parameter server = new Parameter("@@GameServer@",
 				context.getGameServer());
 		Parameter user = new Parameter("@@user@", context.getUser());
 		Parameter pass = new Parameter("@@password@", context.getPass());
 
-		String login1 = generator.generate("login1", server, user, pass);
-		Response response = client.send(login1);
+		String login1 = context.generator.generate("login1", server, user, pass);
+		Response response = context.client.send(login1);
 		parseCookie(response);
 
 		Parameter phpSession = new Parameter("@@PHPSESSID@",
 				context.getPhpSession());
 		Parameter cookie = new Parameter("@@cookie@", context.getCookie());
 
-		String login2 = generator
+		String login2 = context.generator
 				.generate("login2", server, phpSession, cookie);
-		response = client.send(login2);
+		response = context.client.send(login2);
 
-		List<Coordinate> colonies = inspector.getColonies(new String(response
+		List<Coordinate> colonies = context.inspector.getColonies(new String(response
 				.getHttpContent(), "utf-8"));
-		List<Coordinate> moons = inspector.getMoons(new String(response
+		List<Coordinate> moons = context.inspector.getMoons(new String(response
 				.getHttpContent(), "utf-8"));
 		List<Coordinate> myCoordinates = new ArrayList<Coordinate>();
 		myCoordinates.addAll(colonies);
