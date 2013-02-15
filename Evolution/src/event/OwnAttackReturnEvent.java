@@ -6,7 +6,7 @@ import core.Context;
 public class OwnAttackReturnEvent extends MinaryEvent {
 
 	@Override
-	public IAction handle(Context context) {
+	public IAction trigger(Context context) {
 		return null;
 	}
 

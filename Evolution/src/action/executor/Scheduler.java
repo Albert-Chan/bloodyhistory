@@ -32,7 +32,7 @@ public class Scheduler {
 
 	public void addEvent(IEvent event) {
 		eventList.add(event);
-		IAction action = event.handle(context);
+		IAction action = event.trigger(context);
 		addAction(action);
 	}
 

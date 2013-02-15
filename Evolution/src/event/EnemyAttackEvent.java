@@ -15,7 +15,7 @@ import core.Context;
 public class EnemyAttackEvent extends MinaryEvent {
 
 	@Override
-	public IAction handle(Context context) {
+	public IAction trigger(Context context) {
 		// decide to ambush or FS
 
 		// FS

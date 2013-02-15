@@ -21,5 +21,5 @@ public interface IEvent {
 	boolean attachAction(IAction action);
 	boolean attachActions(List<IAction> actions);
 
-	IAction handle(Context context);
+	IAction trigger(Context context);
 }
