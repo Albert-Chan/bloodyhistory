@@ -1,5 +1,7 @@
 package parser;
 
+import event.EventFactory;
+import event.IEvent;
 import gamelogic.Coordinate;
 
 import java.util.ArrayList;
@@ -45,8 +47,16 @@ public class Inspector {
 			return true;
 	}
 
-	public void getEvents(String html) {
-		extractor.extract(html, "event");
+	public List<IEvent> getEvents(String html) {
+		ArrayList<HashMap<String, String>> events = extractor.extract(html,
+				"event");
+		List<IEvent> eventList = new ArrayList<IEvent>();
+
+		for (HashMap<String, String> e : events) {
+			IEvent event = EventFactory.createEvent(e);
+			eventList.add(event);
+		}
+		return eventList;
 	}
 
 	public String getAllShipsJson(String html) {

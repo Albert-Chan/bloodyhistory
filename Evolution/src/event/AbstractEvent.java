@@ -7,7 +7,17 @@ import action.IAction;
 
 public abstract class AbstractEvent implements IEvent {
 
+	private String id;
+
 	private LinkedList<IAction> actions = new LinkedList<IAction>();
+
+	public String getId() {
+		return this.id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public boolean equals(IEvent e) {
 		return false;

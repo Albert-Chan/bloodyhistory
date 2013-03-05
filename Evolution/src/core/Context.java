@@ -1,9 +1,11 @@
 package core;
 
+import event.IEvent;
 import gamelogic.Coordinate;
 import gamelogic.Fleet;
 import gamelogic.Resource;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
@@ -121,6 +123,39 @@ public class Context {
 		java.text.SimpleDateFormat f = new java.text.SimpleDateFormat(
 				"yyyy-MM-dd HH:mm:ss");
 		return f.format(calendar.getTime());
+	}
+
+	/**
+	 * The "events" is the eventList displayed on the game's overview. They are
+	 * the currently existing events.
+	 */
+	private HashMap<String, IEvent> events = new HashMap<String, IEvent>();
+	/**
+	 * The "newEvents" need to be used with the events. They are the events
+	 * spring out from the last webpage exaction.
+	 */
+	private List<IEvent> newEvents = new ArrayList<IEvent>();
+
+	// TODO
+	private List<IEvent> vanishedEvents = new ArrayList<IEvent>();
+
+	public void updateEvents(List<IEvent> eventList) {
+		for (IEvent event : eventList) {
+			// TODO need to check when a fleet joins a union attack will a new
+			// id be used or not.
+			if (!events.containsKey(event.getId())) {
+				newEvents.add(event);
+			}
+			events.put(event.getId(), event);
+		}
+	}
+
+	public List<IEvent> getNewEvents() {
+		return this.newEvents;
+	}
+
+	public List<IEvent> getVanishedEvents() {
+		return this.vanishedEvents;
 	}
 
 	public boolean updateMaxShips(Coordinate coord, String maxShipsJson) {

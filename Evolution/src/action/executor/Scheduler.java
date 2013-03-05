@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import action.EventCheckAction;
 import action.FleetSendAction;
 import action.IAction;
 import action.LoginAction;
@@ -57,7 +58,12 @@ public class Scheduler {
 		actionQueue.put(action, actionThread);
 
 		long delay = action.getWhen() - System.currentTimeMillis();
-		timer.schedule(actionThread, delay < 0 ? 0 : delay);
+		long period = action.getPeriod();
+		if (period <= 0) {
+			timer.schedule(actionThread, delay < 0 ? 0 : delay);
+		} else {
+			timer.schedule(actionThread, delay < 0 ? 0 : delay, period);
+		}
 	}
 
 	public void removeAction(IAction action) {
@@ -91,19 +97,29 @@ public class Scheduler {
 	ArrayList<Coordinate> sheepList = null;
 	int cursor = 0;
 
+	/**
+	 * The interval of checking events, 5min.
+	 */
+	private static final long CHECK_INTERVAL = 5 * 60 * 1000;
+
 	public void run() {
 		LoginAction login = new LoginAction(context);
 		addAction(login);
 		context.waitForLogin();
 
-		// List<Coordinate> myCoordinates = context.getMyCoordinates();
+		List<Coordinate> myCoordinates = context.getMyCoordinates();
+
+		EventCheckAction eventCheck = new EventCheckAction(context);
+		eventCheck.setPeriod(CHECK_INTERVAL);
+		addAction(eventCheck);
+
 		// Coordinate source = new Coordinate("[1:297:8]");
-		Coordinate source = new Coordinate("[1:297:8]");
-		Coordinate target = new Coordinate("[1:297:7]");
-		Mission mission = new Mission(Mission.MISSION_ATTACK);
-		FleetSendAction fleetSend = new FleetSendAction(context, fleet, source,
-				target, mission, Resource.NO_RESOURCE);
-		addAction(fleetSend);
+//		Coordinate source = new Coordinate("[1:297:8]");
+//		Coordinate target = new Coordinate("[1:297:7]");
+//		Mission mission = new Mission(Mission.MISSION_ATTACK);
+//		FleetSendAction fleetSend = new FleetSendAction(context, fleet, source,
+//				target, mission, Resource.NO_RESOURCE);
+//		addAction(fleetSend);
 
 		// retrevieRouteNumber();
 		//

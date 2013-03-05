@@ -13,4 +13,8 @@ public class ConnectionLostEvent extends AbstractEvent {
 		return login;
 	}
 
+	public void dismiss(Context context) {
+		throw new UnsupportedOperationException();
+	}
+
 }

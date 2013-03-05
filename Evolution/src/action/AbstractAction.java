@@ -11,6 +11,8 @@ public abstract class AbstractAction implements IAction {
 	private static final ReentrantLock lock = new ReentrantLock();
 
 	protected Context context;
+	private long when;
+	private long period = 0;
 
 	private ArrayList<IAction> preActions = new ArrayList<IAction>();
 
@@ -19,14 +21,20 @@ public abstract class AbstractAction implements IAction {
 		setWhen(System.currentTimeMillis());
 	}
 
-	private long when;
-
 	public long getWhen() {
 		return this.when;
 	}
 
 	public void setWhen(long when) {
 		this.when = when;
+	}
+
+	public long getPeriod() {
+		return period;
+	}
+
+	public void setPeriod(long period) {
+		this.period = period;
 	}
 
 	public void addPreAction(IAction action) {

@@ -159,3 +159,18 @@ Cookie: @@cookie@
 holdingtime=@@holding@&expeditiontime=@@expedition@&token=@@token@&galaxy=@@target_g@&system=@@target_s@&position=@@target_p@&type=@@target_t@&mission=@@mission@&union2=@@union2@&holdingOrExpTime=@@holdOrExp@&speed=@@speed@&@@ships@&metal=@@m@&crystal=@@c@&deuterium=@@d@
 /#
 /[movement]
+[eventList]
+@@GameServer@
+@@cookie@
+GET http://@@GameServer@/game/index.php?page=eventList&ajax=1 HTTP/1.1
+Host: @@GameServer@
+Connection: keep-alive
+Accept: */*
+X-Requested-With: XMLHttpRequest
+User-Agent: Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.97 Safari/537.22
+Referer: http://@@GameServer@/game/index.php?page=resources
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4,zh-TW;q=0.2
+Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
+Cookie: @@cookie@
+/[eventList]
