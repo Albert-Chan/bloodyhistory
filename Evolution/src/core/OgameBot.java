@@ -21,7 +21,7 @@ public class OgameBot {
 //		context.setUser("oops");
 //		context.setPass("11111111");
 		context.setUser("albert");
-		context.setPass("fuckfuck");
+		context.setPass("11111111");
 	}
 
 	private HttpClient createHttpClient() {

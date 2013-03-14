@@ -1,5 +1,6 @@
 package parser;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +15,7 @@ public class PatternExtractor {
 
 		try {
 			PatternDescriptorReader reader = new PatternDescriptorReader(
-					"htmlPatterns.txt");
+					"D:/htmlPatterns.txt");
 			map = reader.getPatternMap();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -24,14 +25,18 @@ public class PatternExtractor {
 
 	public ArrayList<HashMap<String, String>> extract(String input,
 			String patternName) {
+//		try {
+//			FileWriter writer = new FileWriter("attachedEvent.html");
+//			writer.write(input);
+//			writer.close();
+//		} catch (IOException e) {
+//		}
+		
 		PatternDescriptor pDescriptor = map.get(patternName);
 		List<String> parameterNames = pDescriptor.getOrderedParameterNames();
 
 		Pattern pattern = Pattern.compile(pDescriptor.getPattern());
 		Matcher matcher = pattern.matcher(input);
-
-//		Pattern pattern1 = Pattern.compile("<a class=\"moonlink   tooltipLeft js_hideTipOnMobile\"");
-//		Matcher matcher = pattern1.matcher(input);
 		
 		ArrayList<HashMap<String, String>> extractedObjects = new ArrayList<>();
 

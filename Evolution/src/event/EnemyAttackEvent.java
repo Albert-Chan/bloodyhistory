@@ -14,7 +14,7 @@ import core.Context;
 
 public class EnemyAttackEvent extends MinaryEvent {
 
-	private IAction
+	
 	
 	@Override
 	public IAction trigger(Context context) {

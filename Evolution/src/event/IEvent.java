@@ -29,5 +29,5 @@ public interface IEvent {
 
 	IAction trigger(Context context);
 
-	void dismiss(Context context);
+//	void dismiss(Context context);
 }

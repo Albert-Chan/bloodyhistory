@@ -31,13 +31,26 @@ public class Coordinate {
 		this.name = propMap.get("@@name@");
 	}
 
-	public Coordinate(String planetCoord) {
-		this(planetCoord, TYPE_PLANET);
+	public Coordinate(String coord) {
+		this(coord, TYPE_PLANET);
 	}
 
-	public Coordinate(String planetCoord, int type) {
-		parse(planetCoord);
+	public Coordinate(String coord, int type) {
+		parse(coord);
 		this.type = type;
+	}
+
+	public Coordinate(String coord, String type) {
+		parse(coord);
+		if ("planet".equalsIgnoreCase(type)) {
+			this.type = TYPE_PLANET;
+		}
+		if ("tf".equalsIgnoreCase(type)) {
+			this.type = TYPE_DF;
+		}
+		if ("moon".equalsIgnoreCase(type)) {
+			this.type = TYPE_MOON;
+		}
 	}
 
 	public String getBelongTo() {
@@ -88,12 +101,12 @@ public class Coordinate {
 		this.cp = cp;
 	}
 
-	public String getPlanetName() {
+	public String getName() {
 		return name;
 	}
 
-	public void setPlanetName(String planetName) {
-		this.name = planetName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String toString() {
@@ -103,6 +116,10 @@ public class Coordinate {
 		sb.append(system);
 		sb.append(":");
 		sb.append(position);
+		if (type == TYPE_MOON)
+			sb.append("M");
+		if (type == TYPE_DF)
+			sb.append("DF");
 		return sb.toString();
 	}
 

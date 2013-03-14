@@ -51,14 +51,37 @@
 @@eventType@=.*
 @@eventTitle@=.*
 @@eventTime@=[0-9]{2}:[0-9]{2}:[0-9]{2}
-@@messageToURL@=.*
 @@originPlayer@=.*
-@@coord@=\\[[1-9]{1}:[0-9]{1,3}:[0-9]{1,2}\\]
+@@originCoordName@=.*
+@@originType@=.*
+@@originCoord@=\\[[1-9]{1}:[0-9]{1,3}:[0-9]{1,2}\\]
+@@destCoordName@=.*
+@@destType@=.*
+@@destCoord@=\\[[1-9]{1}:[0-9]{1,3}:[0-9]{1,2}\\]
+@@fleetTotalNumber@=.*
+@@fleetDetail@=[\\S\\s]*
 @@!someChars@=.*
 @@!QuotedString@=".*"
-<tr class="eventFleet" id="eventRow-@@eventId@">
+[event]
+@@eventId@=[0-9]*
+@@eventType@=.*
+@@eventTitle@=.*
+@@eventTime@=[0-9]{2}:[0-9]{2}:[0-9]{2}
+@@originPlayer@=.*
+@@originCoordName@=.*
+@@originType@=.*
+@@originCoord@=\\[[1-9]{1}:[0-9]{1,3}:[0-9]{1,2}\\]
+@@destCoordName@=.*
+@@destType@=.*
+@@destCoord@=\\[[1-9]{1}:[0-9]{1,3}:[0-9]{1,2}\\]
+@@fleetTotalNumber@=.*
+@@fleetDetail@=[\\S\\s]*
+@@!someChars@=.*
+@@!QuotedString@=".*"
+<tr class="@@!someChars@" id="eventRow-@@eventId@"    data-mission-type="1"
+    data-return-flight="false">
 
-    <td class="@@eventType@" id="counter-eventlist-3922281">
+    <td class="@@eventType@" id="counter-eventlist-@@eventId@">
         載入中...    </td>
             <td class="arrivalTime">@@eventTime@ 小時</td>
     
@@ -70,58 +93,33 @@
     </td>
 
             <td class="originFleet">
-                            <a class="overlay tooltipHTML tooltipBottom"
-                   href="@@messageToURL@"
+                            <a class=@@!QuotedString@
+                   href=@@!QuotedString@
                    title=@@!QuotedString@
                    data-player-name="@@originPlayer@">
-                    <figure class=@@!QuotedString@ title=@@!QuotedString@></figure>@@!someChars@</a>
+                    <figure class="planetIcon @@originType@ tooltip js_hideTipOnMobile" title=@@!QuotedString@></figure>@@originCoordName@</a>
                     </td>
         <td class="coordsOrigin">
             <a href=@@!QuotedString@ target="_top">
-                @@coord@            </a>
+                @@originCoord@            </a>
         </td>
     
 
     <td class="detailsFleet">
-                    <span>1,000</span>
+                    <span>@@fleetTotalNumber@</span>
             </td>
     <td class="icon_movement">
-                <span class="tooltip tooltipRight tooltipClose"
-                title="&lt;div class=&quot;htmlTooltip&quot;&gt;
-    &lt;h1&gt;艦隊詳細資料:&lt;/h1&gt;
-    &lt;div class=&quot;splitLine&quot;&gt;&lt;/div&gt;
-&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; class=&quot;fleetinfo&quot;&gt;
-    &lt;tr&gt;
-        &lt;th colspan=&quot;2&quot;&gt;艦船數:&lt;/th&gt;
-    &lt;/tr&gt;
-            &lt;tr&gt;
-        &lt;td&gt;輕型戰鬥機:&lt;/td&gt;
-        &lt;td class=&quot;value&quot;&gt;1,000&lt;/td&gt;
-    &lt;/tr&gt;
-            &lt;/table&gt;
-&lt;/div&gt;
-" data-federation-user-id="">&nbsp;</span>
+                @@fleetDetail@
             </td>
     <td class="destFleet">
-        <figure class="planetIcon planet tooltip js_hideTipOnMobile" title="行星"></figure>Virgon    </td>
+                    <span class="tooltip" title="@@destCoordName@">
+            <figure class="planetIcon @@destType@ tooltip js_hideTipOnMobile" title=@@!QuotedString@></figure>@@destCoordName@</span>
+            </td>
 
     <td class="destCoords">
-        <a href="http://uni108.ogame.tw/game/index.php?page=galaxy&galaxy=1&system=211" target="_top">
-            [1:211:8]        </a>
+        <a href=@@!QuotedString@ target="_top">
+            @@destCoord@        </a>
     </td>
-
-
-    <td class="sendProbe">
-            </td>
-    <td class="sendMail">
-                    <a class="tooltipRight js_hideTipOnMobile overlay icon_link"
-               href="http://uni108.ogame.tw/game/index.php?page=writemessage&to=101817&ajax=1"
-               title="發送訊息給 bxin1598 ."
-               data-player-name="bxin1598">
-                <span class="icon icon_mail"></span>
-            </a>
-            </td>
-</tr>
 /[event]
 
 

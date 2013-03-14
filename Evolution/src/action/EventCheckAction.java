@@ -38,7 +38,7 @@ public class EventCheckAction extends AbstractAction {
 		
 		List<IEvent> vanishedEvents = context.getVanishedEvents();
 		for (IEvent event : vanishedEvents) {
-			event.dismiss(context);
+	//		event.dismiss(context);
 		}
 	}
 }
