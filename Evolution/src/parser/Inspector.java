@@ -37,6 +37,10 @@ public class Inspector {
 		}
 		return moonList;
 	}
+	
+	public String getDateTime(String html) {
+		
+	}
 
 	public boolean attackAlert(String html) {
 		ArrayList<HashMap<String, String>> alert = extractor.extract(html,

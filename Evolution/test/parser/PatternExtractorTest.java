@@ -16,7 +16,7 @@ public class PatternExtractorTest extends TestCase {
 		String html = null;
 		char[] cbuf = new char[1024];
 		try {
-			FileReader reader = new FileReader("attackedEvent.html");
+			FileReader reader = new FileReader("attackedEvent2.html");
 			StringBuilder sb = new StringBuilder();
 			while (reader.read(cbuf) != -1) {
 				sb.append(cbuf);

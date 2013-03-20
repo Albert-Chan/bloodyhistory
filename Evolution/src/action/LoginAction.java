@@ -29,7 +29,8 @@ public class LoginAction extends AbstractAction {
 		Parameter user = new Parameter("@@user@", context.getUser());
 		Parameter pass = new Parameter("@@password@", context.getPass());
 
-		String login1 = context.generator.generate("login1", server, user, pass);
+		String login1 = context.generator
+				.generate("login1", server, user, pass);
 		Response response = context.client.send(login1);
 		parseCookie(response);
 
@@ -37,19 +38,20 @@ public class LoginAction extends AbstractAction {
 				context.getPhpSession());
 		Parameter cookie = new Parameter("@@cookie@", context.getCookie());
 
-		String login2 = context.generator
-				.generate("login2", server, phpSession, cookie);
+		String login2 = context.generator.generate("login2", server,
+				phpSession, cookie);
 		response = context.client.send(login2);
+		String respString = new String(response.getHttpContent(), "utf-8");
 
-		List<Coordinate> colonies = context.inspector.getColonies(new String(response
-				.getHttpContent(), "utf-8"));
-		List<Coordinate> moons = context.inspector.getMoons(new String(response
-				.getHttpContent(), "utf-8"));
+		List<Coordinate> colonies = context.inspector.getColonies(respString);
+		List<Coordinate> moons = context.inspector.getMoons(respString);
 		List<Coordinate> myCoordinates = new ArrayList<Coordinate>();
 		myCoordinates.addAll(colonies);
 		myCoordinates.addAll(moons);
 		context.setMyCoordinates(myCoordinates);
 		
+		context.inspector.getDateTime(respString);
+
 		context.loginSucceed();
 	}
 

@@ -15,7 +15,7 @@ public class PatternExtractor {
 
 		try {
 			PatternDescriptorReader reader = new PatternDescriptorReader(
-					"D:/htmlPatterns.txt");
+					"htmlPatterns.txt");
 			map = reader.getPatternMap();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -26,7 +26,7 @@ public class PatternExtractor {
 	public ArrayList<HashMap<String, String>> extract(String input,
 			String patternName) {
 //		try {
-//			FileWriter writer = new FileWriter("attachedEvent.html");
+//			FileWriter writer = new FileWriter("attackedEvent.html");
 //			writer.write(input);
 //			writer.close();
 //		} catch (IOException e) {
