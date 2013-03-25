@@ -50,7 +50,8 @@ public class LoginAction extends AbstractAction {
 		myCoordinates.addAll(moons);
 		context.setMyCoordinates(myCoordinates);
 		
-		context.inspector.getDateTime(respString);
+		long serverTime = context.inspector.getServerTime(respString);
+		context.setServerTime(serverTime);
 
 		context.loginSucceed();
 	}

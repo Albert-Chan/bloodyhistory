@@ -35,6 +35,8 @@ public class Context {
 
 	private List<Coordinate> myCoordinates;
 
+	private long serverTime;
+
 	/**
 	 * max ships
 	 */
@@ -131,23 +133,37 @@ public class Context {
 	 */
 	private HashMap<String, IEvent> events = new HashMap<String, IEvent>();
 	/**
-	 * The "newEvents" need to be used with the events. They are the events
-	 * spring out from the last webpage exaction.
+	 * The "newEvents" is used with the events. They are the events spring out
+	 * from the last web page extraction.
 	 */
 	private List<IEvent> newEvents = new ArrayList<IEvent>();
 
-	// TODO
+	/**
+	 * The "vanishedEvents" are the events disappeared from the last web page
+	 * extraction. The cause may be the time is just running out or the
+	 * user/enemy canceled the action.
+	 */
 	private List<IEvent> vanishedEvents = new ArrayList<IEvent>();
 
 	public void updateEvents(List<IEvent> eventList) {
+		newEvents.clear();
+		vanishedEvents.clear();
+		HashMap<String, IEvent> tmpEvents = new HashMap<String, IEvent>();
 		for (IEvent event : eventList) {
 			// TODO need to check when a fleet joins a union attack will a new
 			// id be used or not.
 			if (!events.containsKey(event.getId())) {
 				newEvents.add(event);
 			}
-			events.put(event.getId(), event);
+			tmpEvents.put(event.getId(), event);
 		}
+
+		for (IEvent event : events.values()) {
+			if (!tmpEvents.containsKey(event.getId())) {
+				vanishedEvents.add(event);
+			}
+		}
+		events = tmpEvents;
 	}
 
 	public List<IEvent> getNewEvents() {
@@ -205,6 +221,14 @@ public class Context {
 
 	public void setCurrentFleetTarget(Coordinate currentFleetTarget) {
 		this.currentFleetTarget = currentFleetTarget;
+	}
+
+	public long getServerTime() {
+		return serverTime;
+	}
+
+	public void setServerTime(long serverTime) {
+		this.serverTime = serverTime;
 	}
 
 }

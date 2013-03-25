@@ -29,11 +29,5 @@ public class PatternExtractorTest extends TestCase {
 		ArrayList<HashMap<String, String>> events = new PatternExtractor()
 				.extract(html, "event");
 		List<IEvent> eventList = new ArrayList<IEvent>();
-
-		for (HashMap<String, String> e : events) {
-			IEvent event = EventFactory.createEvent(e);
-			eventList.add(event);
-		}
-		// return eventList;
 	}
 }

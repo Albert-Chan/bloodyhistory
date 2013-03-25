@@ -4,7 +4,10 @@ import event.EventFactory;
 import event.IEvent;
 import gamelogic.Coordinate;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -37,9 +40,23 @@ public class Inspector {
 		}
 		return moonList;
 	}
-	
-	public String getDateTime(String html) {
-		
+
+	private static SimpleDateFormat dateTimeFormat = new SimpleDateFormat(
+			"dd.MM.yyyy HH:mm:ss");
+	public long getServerTime(String html) {
+		ArrayList<HashMap<String, String>> clock = extractor.extract(html,
+				"clock");
+		if (clock.size() != 1)
+			return -1;
+		HashMap<String, String> propMap = clock.get(0);
+		String strDateTime = propMap.get("@@date@") + " "
+				+ propMap.get("@@time@");
+		try {
+			Date time = dateTimeFormat.parse(strDateTime);
+			return time.getTime();
+		} catch (ParseException e) {
+			return -1;
+		}
 	}
 
 	public boolean attackAlert(String html) {

@@ -2,10 +2,19 @@ package event;
 
 import gamelogic.Coordinate;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 public class EventFactory {
-	public static IEvent createEvent(HashMap<String, String> eventProperties) {
+
+	private static final SimpleDateFormat dateTimeFormat = new SimpleDateFormat(
+			"dd.MM.yyyy HH:mm:ss");
+	private static final SimpleDateFormat timeFormat = new SimpleDateFormat(
+			"HH:mm:ss");
+
+	public static IEvent createEvent(HashMap<String, String> eventProperties) throws EventGenerationException {
 		// @@eventId@=[0-9]*
 		// @@eventType@=.*
 		// @@eventTitle@=.*
@@ -33,7 +42,7 @@ public class EventFactory {
 			Coordinate subject = new Coordinate(originCoord, originType);
 			subject.setName(eventProperties.get("originCoordName"));
 			subject.setBelongTo(originPlayer);
-			
+
 			String destCoord = eventProperties.get("destCoord");
 			String destType = eventProperties.get("destType");
 			Coordinate object = new Coordinate(destCoord, destType);
@@ -43,8 +52,13 @@ public class EventFactory {
 
 		}
 		event.setId(eventProperties.get("eventId"));
-		event.setWhen(eventProperties.get("eventTime"));
-
+		String strTime = eventProperties.get("eventTime");
+		try {
+			Date time = timeFormat.parse(strTime);
+			event.setWhen(time.getTime());
+		} catch (ParseException e) {
+			throw new EventGenerationException(e);
+		}
 		return event;
 	}
 
