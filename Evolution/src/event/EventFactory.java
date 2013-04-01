@@ -14,7 +14,7 @@ public class EventFactory {
 	private static final SimpleDateFormat timeFormat = new SimpleDateFormat(
 			"HH:mm:ss");
 
-	public static IEvent createEvent(HashMap<String, String> eventProperties) throws EventGenerationException {
+	public static IEvent createEvent(HashMap<String, String> eventProperties) {
 		// @@eventId@=[0-9]*
 		// @@eventType@=.*
 		// @@eventTitle@=.*
@@ -57,7 +57,8 @@ public class EventFactory {
 			Date time = timeFormat.parse(strTime);
 			event.setWhen(time.getTime());
 		} catch (ParseException e) {
-			throw new EventGenerationException(e);
+			//throw new EventGenerationException(e);
+			//TODO: log this event.
 		}
 		return event;
 	}

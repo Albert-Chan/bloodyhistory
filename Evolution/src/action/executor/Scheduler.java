@@ -33,16 +33,16 @@ public class Scheduler {
 
 	public void addEvent(IEvent event) {
 		eventList.add(event);
-		IAction action = event.trigger(context);
-		addAction(action);
+//		IAction action = event.trigger(context);
+//		addAction(action);
 	}
 
 	public void removeEvent(IEvent event) {
 		eventList.remove(event);
-		List<IAction> actions = event.removeActions();
-		for (IAction action : actions) {
-			removeAction(action);
-		}
+//		List<IAction> actions = event.removeActions();
+//		for (IAction action : actions) {
+//			removeAction(action);
+//		}
 	}
 
 	public void addAction(IAction action) {

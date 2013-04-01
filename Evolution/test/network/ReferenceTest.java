@@ -20,7 +20,7 @@ public class ReferenceTest {
 		barrier = new CyclicBarrier(N, new BarrierDeamon(c.str));
 		for (int i = 0; i < N; ++i)
 			new Thread(new Worker(c, context)).start();
-
+		System.out.println("end");
 	}
 
 	class BarrierDeamon implements Runnable {
@@ -49,6 +49,12 @@ public class ReferenceTest {
 
 		public void run() {
 			// while (!done()) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			c.str = "processed.";
 			contextString = "str processed.";
 			try {

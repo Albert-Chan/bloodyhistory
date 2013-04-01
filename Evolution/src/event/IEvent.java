@@ -3,7 +3,6 @@ package event;
 import java.util.List;
 
 import action.IAction;
-import core.Context;
 
 public interface IEvent {
 
@@ -26,8 +25,4 @@ public interface IEvent {
 	boolean attachAction(IAction action);
 
 	boolean attachActions(List<IAction> actions);
-
-	IAction trigger(Context context);
-
-//	void dismiss(Context context);
 }
