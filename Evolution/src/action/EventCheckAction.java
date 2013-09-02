@@ -33,7 +33,7 @@ public class EventCheckAction extends AbstractAction {
 		context.updateEvents(eventList);
 		List<IEvent> newEvents = context.getNewEvents();
 		for (IEvent event : newEvents) {
-			event.trigger(context);
+//			event.trigger(context);
 		}
 		
 		List<IEvent> vanishedEvents = context.getVanishedEvents();
