@@ -1,8 +1,10 @@
 package crawler;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -11,6 +13,7 @@ import connection.HttpConnection;
 import data.Auction;
 
 public class Crawler {
+	
 
 	/**
 	 * 
@@ -48,6 +51,11 @@ public class Crawler {
 			return null;
 		try {
 			String jsonText = HttpConnection.getData(url, "utf-8");
+			
+			PrintWriter writer = new PrintWriter(String.valueOf(lastModified));
+			writer.write(jsonText);
+			writer.close();
+			
 			JSONObject json = new JSONObject(jsonText);
 			JSONObject alliance = json.getJSONObject("alliance");
 			// {
@@ -72,23 +80,41 @@ public class Crawler {
 			}
 			return aucs;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
 	}
 
 	public static void main(String[] args) {
-		Crawler crawler = new Crawler();
-		HashMap<String, Long> urls = crawler.getAuctionURLs();
 		String url = null;
 		long lastModified = -1;
-		for (Entry<String, Long> e : urls.entrySet()) {
-			url = e.getKey();
-			lastModified = e.getValue();
-			break;
+		while (true) {
+			try {
+				// 5min
+				TimeUnit.MILLISECONDS.sleep(1000 * 60 * 5);
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
+			Crawler crawler = new Crawler();
+			HashMap<String, Long> urls = crawler.getAuctionURLs();
+			String newUrl = null;
+			long newLastModified = -1;
+			for (Entry<String, Long> e : urls.entrySet()) {
+				newUrl = e.getKey();
+				newLastModified = e.getValue();
+				break;
+			}
+
+			if (url != null && lastModified != -1 && url.equals(newUrl)
+					&& lastModified == newLastModified) {
+				continue;
+			}
+			url = newUrl;
+			lastModified = newLastModified;
+			System.out.println(url);
+			System.out.println(lastModified);
+			crawler.crawle(url, lastModified);
 		}
-		crawler.crawle(url, lastModified);
 	}
 
 }
