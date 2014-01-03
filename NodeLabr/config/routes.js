@@ -78,5 +78,6 @@ module.exports = function(app, passport, auth) {
 
     var todo = require('../app/controllers/todo');
     app.get('/todo', todo.all);
+    app.get('/renderTodo', todo.render);
 
 };

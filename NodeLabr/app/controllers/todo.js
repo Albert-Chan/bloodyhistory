@@ -89,7 +89,7 @@ exports.show = function(req, res) {
  * List of Todo
  */
 exports.all = function(req, res) {
-    Todo.find().sort('-created').populate('user', 'name username').exec(function(err, todos) {
+    Todo.find().sort('-createdTime').populate('user', 'name username').exec(function(err, todos) {
         if (err) {
             res.render('error', {
                 status: 500
